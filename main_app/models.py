@@ -47,6 +47,7 @@ class Supplier(models.Model):
     def __str__(self):
         return self.name
     
+
 # Asset Model
 class Asset(models.Model):
     STATUS_CHOICES = [
@@ -62,9 +63,20 @@ class Asset(models.Model):
     purchase_date = models.DateField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
 
+    def __str__(self):
+        return self.name
+    
 
 # Inventory Model
+class Inventory(models.Model):
+    name = models.CharField(max_length=200)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    unit_price = models.DecimalField(max_digits=20, decimal_places=2)
 
+    def __str__(self):
+        return self.name
 
 
 
