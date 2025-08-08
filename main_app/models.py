@@ -29,6 +29,8 @@ class Category(models.Model):
 
 # Location Model
 class Location(models.Model):
+    name = models.CharField(max_length=50)
+    address = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
