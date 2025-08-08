@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<div class="asset-list-container">
+  <h2>Assets</h2>
+
+  {% if assets %}
+    <table class="asset-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Quantity</th>
+          <th>Location</th>
+          <th>Purchase Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for asset in assets %}
+          <tr>
+            <td>{{ asset.id }}</td>
+            <td>{{ asset.name }}</td>
+            <td>{{ asset.category }}</td>
+            <td>{{ asset.quantity }}</td>
+            <td>{{ asset.location }}</td>
+            <td>{{ asset.purchase_date|date:"Y-m-d" }}</td>
+            <td>
+              <a href="{% url 'asset_detail' asset.id %}" class="btn btn-info">View</a>
+              <a href="{% url 'asset_edit' asset.id %}" class="btn btn-warning">Edit</a>
+              <a href="{% url 'asset_delete' asset.id %}" class="btn btn-danger"
+                 onclick="return confirm('Are you sure you want to delete this asset?');">
+                Delete
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No assets found.</p>
+  {% endif %}
+
+  <div class="actions">
+    <a href="{% url 'asset_create' %}" class="btn btn-primary">+ Add Asset</a>
+  </div>
+</div>
+{% endblock %}
