@@ -11,9 +11,14 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+TEMPLATES[0]["DIRS"] = [BASE_DIR / "templates"]  # optional global folder
+# you already have app templates; APP_DIRS=True handles main_app/templates
+
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "dashboard"       # change to your dashboard route name
+LOGOUT_REDIRECT_URL = "login"
 
 
 # Quick-start development settings - unsuitable for production
@@ -79,7 +84,6 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'your_db_name',
         'USER': 'your_db_user',
-        'PASSWORD': 'your_db_password',
         'HOST': 'localhost',
         'PORT': '5432',
     }
