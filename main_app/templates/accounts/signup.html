@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Register · SAM-ARIZE{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 style="text-align:center;margin-bottom:22px;">Create Account</h1>
+  <div class="card">
+    <form method="post">{% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="field"><label>Username</label>{{ form.username }}</div>
+      <div class="field"><label>Email</label>{{ form.email }}</div>
+      <div class="field"><label>Password</label>{{ form.password1 }}</div>
+      <div class="field"><label>Confirm Password</label>{{ form.password2 }}</div>
+      <div style="text-align:center;margin-top:10px">
+        <button class="btn btn-primary" type="submit">SIGN UP</button>
+        <a class="btn" href="{% url 'login' %}">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
