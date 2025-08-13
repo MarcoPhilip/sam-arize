@@ -82,10 +82,7 @@ WSGI_APPLICATION = 'samarize.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'your_db_name',
-        'USER': 'your_db_user',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': 'sam-arize',
     }
 }
 
