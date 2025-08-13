@@ -1,9 +1,9 @@
-# FUNKOLECTOR APP (Front End)
+# SAM-ARIZE APP
 
 ![Samurai Logo]()
 
 ## Overview
-
+Welcome to the SAM-ARIZE App, where asset and inventory management made simpler.
 
 
 ## 🎮 Features
