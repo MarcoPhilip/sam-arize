@@ -2,9 +2,46 @@
 {% load static %}
 
 {% block head %}
-
+<link
+  rel="stylesheet"
+  href="{% static 'css/home.css' %}"
+/>
 {% endblock %}
 
 {% block content %}
-<h1>Home Page is loading!</h1>
+<section class="home-section">
+    <div class="home-container">
+
+        <div class="">
+            <h2>Goals</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <div class="image">
+                <img src="" alt="img-sample">
+                <img src="" alt="img-sample">
+                <img src="" alt="img-sample">
+            </div>
+        </div>
+
+        <div class="">
+            <h2>Mission and Vision</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <div class="image">
+                <img src="" alt="img-sample">
+                <img src="" alt="img-sample">
+                <img src="" alt="img-sample">
+            </div>
+        </div>
+
+        <div class="">
+            <h2>Why SAM-ARIZE?</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <div class="image">
+                <img src="" alt="img-sample">
+                <img src="" alt="img-sample">
+                <img src="" alt="img-sample">
+            </div>
+        </div>
+
+    </div>
+</section>
 {% endblock %}
