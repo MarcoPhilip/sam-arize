@@ -6,27 +6,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link
-    rel="shortcut icon"
-    type="image/jpg"
-    href="{% static 'images/samurai-logo.jpg' %}"
-    />
-    <link rel="shortcut icon" type="image/jpg" href="" />
+    
+    <link rel="icon" type="image/png" href="{% static 'images/samarize-favicon.png' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/samarize-favicon.png' %}">
     
     <link rel="stylesheet" href="{% static 'css/base/base.css' %}" />
+
     <title>Samarize</title>
     {% block head %} 
     {% endblock %}
 </head>
 <body>
-    <header>
+    <header class="header-content">
     <div class="header-logo-container">
         <a href="/">
-            <img src="{% static 'images/samurai-logo.jpg' %}" alt="Samurai Logo" />
+            <img src="{% static 'images/samarize-favicon.png' %}" alt="Samurai Logo" />
         </a>
     </div>
     <nav>
         <ul>
+            <li><a href="{% url 'dashboard' %}">Home</a></li>
+            <li><a href="{% url 'dashboard' %}">Home</a></li>
+            <li><a href="{% url 'dashboard' %}">Home</a></li>
+            <li><a href="{% url 'dashboard' %}">Home</a></li>
+            <li><a href="{% url 'dashboard' %}">Home</a></li>
             <li><a href="{% url 'dashboard' %}">Home</a></li>
         </ul>
       </nav>

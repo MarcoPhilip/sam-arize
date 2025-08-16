@@ -2,43 +2,53 @@ html {
   box-sizing: border-box;
 }
 
+*, *::before, *::after {
+    box-sizing: inherit;
+}
 :root {
     font-size: 62.5%;
 }
 
 body{
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    font-family: sans-serif;
+    outline: 4px solid salmon;
 }
+
 header {
+    background-color: #322d2d;
+}
+
+.header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 40px;
-    background-color: #322d2d;
 }
-header img{
+
+.header-content img{
     width: 70px;
     height: auto;
 }
-.header-logo-container {
-    margin: auto;
+
+nav {
+    margin-left: auto;
 }
 
-nav ul li a {
-    color: white;
-    text-decoration: none;
+nav ul {
+    display: flex;
+    align-items: center;
     list-style: none;
-    text-transform: uppercase;
-    font-size: 1.5rem;
+    margin: 0;
+    padding: 0;
+    gap: 3rem;
+    flex-wrap: nowrap;
+    white-space: nowrap;
 }
 
-nav ul li a:hover{
-    color: #45da5b;
+nav li {
+    display: block;
 }
-
 footer {
     background-color: #322d2d;
     color: white;
