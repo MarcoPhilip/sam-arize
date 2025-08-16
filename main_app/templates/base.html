@@ -12,7 +12,8 @@
     
     <link rel="stylesheet" href="{% static 'css/base/base.css' %}" />
 
-    <title>Samarize</title>
+    <title>{% block title %} Samarize {% endblock %} </title>
+
     {% block head %} 
     {% endblock %}
 </head>
