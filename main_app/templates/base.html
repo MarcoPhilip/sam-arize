@@ -26,12 +26,18 @@
     </div>
     <nav>
         <ul>
-            <li><a href="{% url 'dashboard' %}">Home</a></li>
-            <li><a href="{% url 'dashboard' %}">Home</a></li>
-            <li><a href="{% url 'dashboard' %}">Home</a></li>
-            <li><a href="{% url 'dashboard' %}">Home</a></li>
-            <li><a href="{% url 'dashboard' %}">Home</a></li>
-            <li><a href="{% url 'dashboard' %}">Home</a></li>
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'inventory_list' %}">Inventory</a></li>
+            <li><a href="{% url 'inventory_list' %}">Categories</a></li>
+            <li><a href="{% url 'inventory_list' %}">Suppliers</a></li>
+            
+            {% if user.is_authenticated %}
+                <li>Welcome, {{ user.username }}!</li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            {% endif %}
         </ul>
       </nav>
     </header>
