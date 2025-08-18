@@ -13,7 +13,7 @@ def home(request):
 @login_required
 def dashboard(request):
     # TODO: pull real counts for cards
-    return render(request, 'inventory/dashboard.html')
+    return render(request, 'dashboard.html')
 
 class SignupForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
