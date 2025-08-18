@@ -15,10 +15,9 @@ urlpatterns = [
     
     #purchase order
     
-    urlpatterns = [
+  
     path("purchase-order/", views.purchase_order_create, name="purchase_order"),
     path("purchase-orders/", views.purchase_order_list, name="purchase_order_list"),
-]
 
     # TODO: Dashboard route needs to be protected. Home page('') route isnt protected. If logged in, send the user to dashboard. Else, send to home. 
     path('dashboard/', dashboard, name='dashboard'),

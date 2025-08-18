@@ -21,7 +21,7 @@ def home(request):
 @login_required
 def dashboard(request):
     # Public / user dashboard (leave as-is or fill with user-facing stats)
-    return render(request, 'inventory/dashboard.html')
+    return render(request, 'dashboard.html')
 
 
 # STAFF-ONLY ADMIN DASHBOARD
