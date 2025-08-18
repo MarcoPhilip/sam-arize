@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Inventory List · SAM-ARIZE{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 style="text-align:center;margin-bottom:20px;">Inventory List</h1>
+  <div style="text-align:right;margin-bottom:10px;">
+    <a class="btn btn-primary" href="{% url 'inventory_add' %}">Add New Item</a>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Location</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in inventory %}
+      <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.category.name }}</td>
+        <td>{{ item.location.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.unit_price }}</td>
+        <td>
+          <a class="btn btn-sm btn-warning" href="{% url 'inventory_edit' item.id %}">Edit</a>
+          <a class="btn btn-sm btn-danger" href="{% url 'inventory_delete' item.id %}">Delete</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="6" style="text-align:center;">No inventory items found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
