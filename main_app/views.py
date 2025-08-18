@@ -15,6 +15,8 @@ from .models import PurchaseOrder
 
 User = get_user_model()
 
+def home(request):
+    return render(request, 'home.html') 
 
 @login_required
 def dashboard(request):

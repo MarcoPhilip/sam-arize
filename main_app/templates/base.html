@@ -5,21 +5,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Samarize</title>
+
+    
+    <link rel="icon" type="image/png" href="{% static 'images/samarize-favicon.png' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/samarize-favicon.png' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/base/base.css' %}" />
+
+    <title>{% block title %} Samarize {% endblock %} </title>
+
     {% block head %} 
     {% endblock %}
 </head>
 <body>
-    <header>
+    <header class="header-content">
+    <div class="header-logo-container">
+        <a href="/">
+            <img src="{% static 'images/samarize-favicon.png' %}" alt="Samurai Logo" />
+        </a>
+    </div>
     <nav>
         <ul>
-            <!-- <li><a href="{% url 'cat-index' %}">Home</a></li> -->
-            <!-- <li><a href="{% url 'toy-index' %}">Assets</a></li>
-            <li><a href="{% url 'cat-create' %}">Inventory</a></li>
-            <li><a href="{% url 'toy-create' %}">Reports</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'home' %}">Login</a></li>
-            <li><a href="{% url 'signup' %}">Sign Up</a></li> -->
+            <li><a href="{% url 'dashboard' %}">Home</a></li>
+            <li><a href="{% url 'dashboard' %}">Home</a></li>
+            <li><a href="{% url 'dashboard' %}">Home</a></li>
+            <li><a href="{% url 'dashboard' %}">Home</a></li>
+            <li><a href="{% url 'dashboard' %}">Home</a></li>
+            <li><a href="{% url 'dashboard' %}">Home</a></li>
         </ul>
       </nav>
     </header>
@@ -28,7 +40,7 @@
         {% endblock %}
     </main>
     <footer>
-
+        <p>COPYRIGHT @ 2025</p>
     </footer>
 </body>
 </html>
