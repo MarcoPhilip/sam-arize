@@ -17,11 +17,71 @@ from .models import Inventory
 from .forms import InventoryForm, CategoryForm, LocationForm
 from .models import Category
 from .models import Location
+from .models import PurchaseOrder
+from .forms import PurchaseOrderForm
+from .models import Supplier
+from .forms import SupplierForm
 
 # Models Imports
 from .models import Asset
 
 User = get_user_model()
+
+def purchase_order_create(request):
+    if request.method == "POST":
+        supplier = request.POST.get("supplier")
+        item = request.POST.get("item")
+        quantity = request.POST.get("quantity")
+        price = request.POST.get("price")
+
+        PurchaseOrder.objects.create(
+            supplier=supplier,
+            item=item,
+            quantity=quantity,
+            price=price
+        )
+        return redirect("purchase_order_list")
+
+    return render(request, "purchase_order/purchase_order.html")
+
+def purchase_order_list(request):
+    orders = PurchaseOrder.objects.all().order_by("-created_at")
+    return render(request, "purchase_order/purchase_order_list.html", {"orders": orders})
+def purchase_order_list(request):
+    orders = PurchaseOrder.objects.all().order_by("-created_at")
+    return render(request, "purchase_order/purchase_order_list.html", {"orders": orders})
+
+def purchase_order_detail(request, pk):
+    order = get_object_or_404(PurchaseOrder, pk=pk)
+    return render(request, "purchase_order/purchase_order_detail.html", {"order": order})
+
+def purchase_order_create(request):
+    if request.method == "POST":
+        form = PurchaseOrderForm(request.POST)
+        if form.is_valid():
+            order = form.save()
+            return redirect("purchase_order/purchase_order_detail", pk=order.pk)
+    else:
+        form = PurchaseOrderForm()
+    return render(request, "purchase_order/purchase_order_form.html", {"form": form, "mode": "create"})
+
+def purchase_order_edit(request, pk):
+    order = get_object_or_404(PurchaseOrder, pk=pk)
+    if request.method == "POST":
+        form = PurchaseOrderForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect("purchase_order_detail", pk=order.pk)
+    else:
+        form = PurchaseOrderForm(instance=order)
+    return render(request, "purchase_order//purchase_order_form.html", {"form": form, "mode": "edit", "order": order})
+
+def purchase_order_delete(request, pk):
+    order = get_object_or_404(PurchaseOrder, pk=pk)
+    if request.method == "POST":
+        order.delete()
+        return redirect("purchase_order_list")
+    return render(request, "purchase_order/purchase_order_confirm_delete.html", {"order": order})
 
 def home(request):
     return render(request, 'home.html') 
@@ -29,7 +89,7 @@ def home(request):
 @login_required
 def dashboard(request):
     # TODO: pull real counts for cards
-    return render(request, 'inventory/dashboard.html')
+    return render(request, 'dashboard.html')
     return render(request, 'dashboard.html')
 
 @login_required
@@ -164,3 +224,39 @@ class SignupView(CreateView):
 class AssetCreate(CreateView):
     model = Asset
     fields = ["name", "category", "supplier", "cost", ]
+
+def supplier_list(request):
+    suppliers = Supplier.objects.order_by("name")
+    return render(request, "supplier/supplier_list.html", {"suppliers": suppliers})
+
+def supplier_detail(request, pk):
+    supplier = get_object_or_404(Supplier, pk=pk)
+    return render(request, "supplier/supplier_detail.html", {"supplier": supplier})
+
+def supplier_create(request):
+    if request.method == "POST":
+        form = SupplierForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("supplier_list")
+    else:
+        form = SupplierForm()
+    return render(request, "supplier/supplier_form.html", {"form": form, "mode": "create"})
+
+def supplier_edit(request, pk):
+    supplier = get_object_or_404(Supplier, pk=pk)
+    if request.method == "POST":
+        form = SupplierForm(request.POST, instance=supplier)
+        if form.is_valid():
+            form.save()
+            return redirect("supplier_detail", pk=supplier.pk)
+    else:
+        form = SupplierForm(instance=supplier)
+    return render(request, "supplier/supplier_form.html", {"form": form, "mode": "edit", "supplier": supplier})
+
+def supplier_delete(request, pk):
+    supplier = get_object_or_404(Supplier, pk=pk)
+    if request.method == "POST":
+        supplier.delete()
+        return redirect("supplier_list")
+    return render(request, "supplier/supplier_confirm_delete.html", {"supplier": supplier})

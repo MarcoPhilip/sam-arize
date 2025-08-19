@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h2>Suppliers</h2>
+  <p><a class="btn btn-success" href="{% url 'supplier_create' %}">+ New Supplier</a></p>
+  <table class="table table-striped">
+    <thead><tr><th>Name</th><th>Contact</th><th>Email</th><th>Phone</th><th></th></tr></thead>
+    <tbody>
+    {% for s in suppliers %}
+      <tr>
+        <td><a href="{% url 'supplier_detail' s.pk %}">{{ s.name }}</a></td>
+        <td>{{ s.contact_person }}</td>
+        <td>{{ s.email }}</td>
+        <td>{{ s.phone_number }}</td>
+        <td>
+          <a href="{% url 'supplier_edit' s.pk %}">Edit</a> |
+          <a href="{% url 'supplier_delete' s.pk %}">Delete</a>
+        </td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="5" class="text-center">No suppliers yet.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
