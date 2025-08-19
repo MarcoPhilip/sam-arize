@@ -1,12 +1,10 @@
 {% extends "base.html" %}
-{% block title %}Inventory List · SAM-ARIZE{% endblock %}
+{% block title %}Inventory · SAM-ARIZE{% endblock %}
 {% block content %}
 <div class="container">
-  <h1 style="text-align:center;margin-bottom:20px;">Inventory List</h1>
-  <div style="text-align:right;margin-bottom:10px;">
-    <a class="btn btn-primary" href="{% url 'inventory_add' %}">Add New Item</a>
-  </div>
-  <table class="table table-bordered">
+  <h1>Inventory</h1>
+  <a href="{% url 'inventory_add' %}" class="btn btn-primary mb-2">Add Inventory</a>
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>Name</th>
@@ -18,21 +16,21 @@
       </tr>
     </thead>
     <tbody>
-      {% for item in inventory %}
+      {% for inventory in inventories %}
       <tr>
-        <td>{{ item.name }}</td>
-        <td>{{ item.category.name }}</td>
-        <td>{{ item.location.name }}</td>
-        <td>{{ item.quantity }}</td>
-        <td>{{ item.unit_price }}</td>
+        <td>{{ inventory.name }}</td>
+        <td>{{ inventory.category.name }}</td>
+        <td>{{ inventory.location.name }}</td>
+        <td>{{ inventory.quantity }}</td>
+        <td>{{ inventory.unit_price }}</td>
         <td>
-          <a class="btn btn-sm btn-warning" href="{% url 'inventory_edit' item.id %}">Edit</a>
-          <a class="btn btn-sm btn-danger" href="{% url 'inventory_delete' item.id %}">Delete</a>
+          <a href="{% url 'inventory_edit' inventory.pk %}" class="btn btn-sm btn-warning">Edit</a>
+          <a href="{% url 'inventory_delete' inventory.pk %}" class="btn btn-sm btn-danger">Delete</a>
         </td>
       </tr>
       {% empty %}
       <tr>
-        <td colspan="6" style="text-align:center;">No inventory items found.</td>
+        <td colspan="6">No inventory items found.</td>
       </tr>
       {% endfor %}
     </tbody>
