@@ -30,8 +30,7 @@ def dashboard(request):
 @login_required
 def asset_index(request):
     assets = Asset.objects.all()
-    return render(request, "asset/index.html", {'assets': assets})
-    return render(request, 'dashboard.html')
+    return render(request, "asset/asset_list.html", {'assets': assets})
 
 @login_required
 def category_list(request):
@@ -158,13 +157,13 @@ class SignupView(CreateView):
 class AssetCreate(CreateView):
     model = Asset
     form_class = AssetForm
-    template_name = "asset/create.html"
+    template_name = "asset/asset_create.html"
     success_url = reverse_lazy("asset_index")
 
 class AssetUpdate(UpdateView):
     model = Asset
     form_class = AssetForm
-    template_name = "asset/edit.html"
+    template_name = "asset/asset_update.html"
     success_url = reverse_lazy("asset_index")
 
 class AssetDelete(DeleteView):
