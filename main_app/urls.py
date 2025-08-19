@@ -6,12 +6,23 @@ from .views import dashboard, home, SignupView, asset_index, AssetCreate, AssetU
 urlpatterns = [
     # Auth
     path('', home, name='home' ),
-    path('dashboard/', dashboard, name='dashboard'),
     path('login/',  LoginView.as_view(template_name='accounts/login.html'), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('signup/', SignupView.as_view(), name='signup'),
+    
+    #purchase order
+    
+  
+    path("purchase-order/", views.purchase_order_create, name="purchase_order"),
+    path("purchase-list/", views.purchase_order_list, name="purchase_order_list"),
+    path("purchase-orders/new/", views.purchase_order_create, name="purchase_order_create"),
+    path("purchase-orders/<int:pk>/", views.purchase_order_detail, name="purchase_order_detail"),
+    path("purchase-orders/<int:pk>/edit/", views.purchase_order_edit, name="purchase_order_edit"),
+    path("purchase-orders/<int:pk>/delete/", views.purchase_order_delete, name="purchase_order_delete"),
 
-    # TODO: Dashboard route needs to be protected. Home page('') route isnt protected. If logged in, send the user to dashboard. Else, send to home. 
+
+
+    # dashboard
     path('dashboard/', dashboard, name='dashboard'),
 
     # Asset URLS
@@ -37,4 +48,10 @@ urlpatterns = [
     path('locations/add/', views.location_add, name='location_add'),
     path('locations/<int:pk>/edit/', views.location_edit, name='location_edit'),
     path('locations/<int:pk>/delete/', views.location_delete, name='location_delete'),
+    
+    path("suppliers/", views.supplier_list, name="supplier_list"),
+    path("suppliers/new/", views.supplier_create, name="supplier_create"),
+    path("suppliers/<int:pk>/", views.supplier_detail, name="supplier_detail"),
+    path("suppliers/<int:pk>/edit/", views.supplier_edit, name="supplier_edit"),
+    path("suppliers/<int:pk>/delete/", views.supplier_delete, name="supplier_delete"),
 ]

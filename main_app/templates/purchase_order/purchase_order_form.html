@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h2>{% if mode == "edit" %}Edit{% else %}Create{% endif %} Purchase Order</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">
+      {% if mode == "edit" %}Save Changes{% else %}Create{% endif %}
+    </button>
+    <a class="btn btn-secondary" href="{% url 'purchase_order_list' %}">Cancel</a>
+  </form>
+</div>
+{% endblock %}
