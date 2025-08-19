@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from . import views
-from .views import dashboard, home, SignupView, asset_index, AssetCreate
+from .views import dashboard, home, SignupView, asset_index, AssetCreate, AssetUpdate, AssetDelete
 
 urlpatterns = [
     # Auth
@@ -17,6 +17,8 @@ urlpatterns = [
     # Asset URLS
     path('assets/', asset_index, name='asset_index'),
     path('assets/new/', AssetCreate.as_view(), name="asset_create"),
+    path("assets/<int:pk>/edit", AssetUpdate.as_view(), name='asset_update'),
+    path("assets/<int:pk>/delete", AssetDelete.as_view(), name='asset_delete'),
 
     # Inventory URLs
     path('inventory/', views.inventory_list, name='inventory_list'),
