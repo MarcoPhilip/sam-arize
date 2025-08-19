@@ -105,11 +105,13 @@ def inventory_delete(request, pk):
         return redirect('inventory_list')
     return render(request, 'inventory/inventory_delete_confirm.html', {'item': item})
 
+# Locations List
 @login_required
 def location_list(request):
     locations = Location.objects.all()
     return render(request, 'location/location_list.html', {'locations': locations})
 
+# Add a Location
 @login_required
 def location_add(request):
     if request.method == 'POST':
@@ -121,6 +123,7 @@ def location_add(request):
         form = LocationForm()
     return render(request, 'location/location_form.html', {'form': form, 'title': 'Add Location'})
 
+# Edit a Location
 @login_required
 def location_edit(request, pk):
     location = get_object_or_404(Location, pk=pk)
@@ -133,6 +136,7 @@ def location_edit(request, pk):
         form = LocationForm(instance=location)
     return render(request, 'location/location_form.html', {'form': form, 'title': 'Edit Location'})
 
+# Delete a Location
 @login_required
 def location_delete(request, pk):
     location = get_object_or_404(Location, pk=pk)
