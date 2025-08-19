@@ -1,8 +1,8 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from . import views
-from .views import dashboard, home, SignupView
 
+from .views import dashboard, home, SignupView, asset_index, AssetCreate
 
 urlpatterns = [
     # Auth
@@ -19,6 +19,13 @@ urlpatterns = [
   
     path("purchase-order/", views.purchase_order_create, name="purchase_order"),
     path("purchase-orders/", views.purchase_order_list, name="purchase_order_list"),
+
+    # TODO: Dashboard route needs to be protected. Home page('') route isnt protected. If logged in, send the user to dashboard. Else, send to home. 
+    path('dashboard/', dashboard, name='dashboard'),
+
+    # Asset URLS
+    path('assets/', asset_index, name='asset_index'),
+    path('assets/new/', AssetCreate.as_view(), name="asset_create"),
 
     # Inventory URLs
     path('inventory/', views.inventory_list, name='inventory_list'),

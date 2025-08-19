@@ -59,7 +59,7 @@ class Asset(models.Model):
     name = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    serial_number = models.CharField(100, unique=True)
+    serial_number = models.CharField(max_length=100, unique=True)
     purchase_date = models.DateField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
 
@@ -88,4 +88,4 @@ class PurchaseOrder(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.item} from {self.supplier}"
+        return f"PO-{self.pk}-{self.supplier.id}"
