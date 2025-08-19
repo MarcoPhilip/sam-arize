@@ -81,16 +81,11 @@ class Inventory(models.Model):
 
 # Purchase Order Model
 class PurchaseOrder(models.Model):
-    STATUS_CHOICES = [
-        ('pending', 'Pending Order'),
-        ('confirmed', 'Order Confirmed'),
-        ('shipped', 'Order Shipped'),
-        ('delivered', 'Delivered')
-    ]
-
-    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
-    order_date = models.DateField()
-    status = models.CharField(max_length=30, choices=STATUS_CHOICES)
+    supplier = models.CharField(max_length=200)
+    item = models.CharField(max_length=200)
+    quantity = models.IntegerField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.item} from {self.supplier}"

@@ -91,9 +91,9 @@ def purchase_order_create(request):
         )
         return redirect("purchase_order_list")
 
-    return render(request, "inventory/purchase_order.html")
+    return render(request, "purchase_order/purchase_order.html")
 
 
 def purchase_order_list(request):
     orders = PurchaseOrder.objects.all().order_by("-created_at")
-    return render(request, "inventory/purchase_order_list.html", {"orders": orders})
+    return render(request, "purchase_order/purchase_order_list.html", {"orders": orders})
