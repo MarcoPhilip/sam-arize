@@ -3,6 +3,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from . import views
 from .views import dashboard, home, SignupView
 
+
 urlpatterns = [
     # Auth
     path('', home, name='home' ),
@@ -19,6 +20,21 @@ urlpatterns = [
     path("purchase-order/", views.purchase_order_create, name="purchase_order"),
     path("purchase-orders/", views.purchase_order_list, name="purchase_order_list"),
 
-    # TODO: Dashboard route needs to be protected. Home page('') route isnt protected. If logged in, send the user to dashboard. Else, send to home. 
-    path('dashboard/', dashboard, name='dashboard'),
+    # Inventory URLs
+    path('inventory/', views.inventory_list, name='inventory_list'),
+    path('inventory/add/', views.inventory_add, name='inventory_add'),
+    path('inventory/<int:pk>/edit/', views.inventory_edit, name='inventory_edit'),
+    path('inventory/<int:pk>/delete/', views.inventory_delete, name='inventory_delete'),
+
+    # Category URLs
+    path('categories/', views.category_list, name='category_list'),
+    path('categories/add/', views.category_add, name='category_add'),
+    path('categories/edit/<int:pk>/', views.category_edit, name='category_edit'),
+    path('categories/delete/<int:pk>/', views.category_delete, name='category_delete'),
+    
+    # Location URLs
+    path('locations/', views.location_list, name='location_list'),
+    path('locations/add/', views.location_add, name='location_add'),
+    path('locations/<int:pk>/edit/', views.location_edit, name='location_edit'),
+    path('locations/<int:pk>/delete/', views.location_delete, name='location_delete'),
 ]

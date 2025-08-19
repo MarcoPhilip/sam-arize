@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} · SAM-ARIZE{% endblock %}
+{% block content %}
+<div class="container">
+  <h1>{{ title }}</h1>
+  <form method="post">{% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="mb-3">
+      <label>Name</label>
+      {{ form.name }}
+    </div>
+    <div class="mb-3">
+      <label>Description</label>
+      {{ form.description }}
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+    <a href="{% url 'category_list' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}
