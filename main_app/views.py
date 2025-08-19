@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Inventory
-from .forms import InventoryForm, CategoryForm, LocationForm
+from .forms import InventoryForm, CategoryForm, LocationForm, AssetForm
 from .models import Category
 from .models import Location
 
@@ -157,4 +157,17 @@ class SignupView(CreateView):
 
 class AssetCreate(CreateView):
     model = Asset
-    fields = ["name", "category", "supplier", "cost", ]
+    form_class = AssetForm
+    template_name = "asset/create.html"
+    success_url = reverse_lazy("asset_index")
+
+class AssetUpdate(UpdateView):
+    model = Asset
+    form_class = AssetForm
+    template_name = "asset/edit.html"
+    success_url = reverse_lazy("asset_index")
+
+class AssetDelete(DeleteView):
+    model = Asset
+    template_name = "asset/asset_delete_confirm.html"
+    success_url = reverse_lazy("asset_index")

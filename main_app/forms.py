@@ -1,5 +1,5 @@
 from django import forms
-from .models import Category, Location, Inventory
+from .models import Category, Location, Inventory, Asset
 
 class InventoryForm(forms.ModelForm):
     class Meta:
@@ -29,4 +29,16 @@ class LocationForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'address': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+        }
+
+class AssetForm(forms.ModelForm):
+    class Meta:
+        model = Asset
+        fields = ["name", "category", "location", "serial_number", "purchase_date", "status"]
+        widgets = {
+            "name": forms.TextInput(attrs={"class": "form-control"}),
+            "category": forms.Select(attrs={"class": "form-select"}),
+            "location": forms.Select(attrs={"class": "form-select"}),
+            "serial_number": forms.TextInput(attrs={"class": "form-control"}),
+            "status": forms.Select(attrs={"class": "form-select"}),
         }
