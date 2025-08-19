@@ -14,11 +14,10 @@ from django.shortcuts import render
 
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Inventory
-from .forms import InventoryForm, CategoryForm, LocationForm
+from .forms import InventoryForm, CategoryForm, LocationForm, PurchaseOrderForm
 from .models import Category
 from .models import Location
 from .models import PurchaseOrder
-from .forms import PurchaseOrderForm
 from .models import Supplier
 from .forms import SupplierForm
 
@@ -47,15 +46,12 @@ def purchase_order_create(request):
 def purchase_order_list(request):
     orders = PurchaseOrder.objects.all().order_by("-created_at")
     return render(request, "purchase_order/purchase_order_list.html", {"orders": orders})
-def purchase_order_list(request):
-    orders = PurchaseOrder.objects.all().order_by("-created_at")
-    return render(request, "purchase_order/purchase_order_list.html", {"orders": orders})
 
 def purchase_order_detail(request, pk):
     order = get_object_or_404(PurchaseOrder, pk=pk)
     return render(request, "purchase_order/purchase_order_detail.html", {"order": order})
 
-def purchase_order_create(request):
+def purchase_order_list_create(request):
     if request.method == "POST":
         form = PurchaseOrderForm(request.POST)
         if form.is_valid():
@@ -226,8 +222,19 @@ class AssetCreate(CreateView):
     fields = ["name", "category", "supplier", "cost", ]
 
 def supplier_list(request):
-    suppliers = Supplier.objects.order_by("name")
-    return render(request, "supplier/supplier_list.html", {"suppliers": suppliers})
+    query = request.GET.get('q')
+    if query:
+        suppliers = Supplier.objects.filter(
+            name__icontains=query
+        ) | Supplier.objects.filter(
+            contact_person__icontains=query
+        ) | Supplier.objects.filter(
+            email__icontains=query
+        )
+    else:
+        supplier = Supplier.objects.all()
+    
+    return render(request, 'supplier/supplier_list.html', {'supplier': supplier})
 
 def supplier_detail(request, pk):
     supplier = get_object_or_404(Supplier, pk=pk)
