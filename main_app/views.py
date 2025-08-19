@@ -14,12 +14,11 @@ from django.shortcuts import render
 
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Inventory
-from .forms import InventoryForm, CategoryForm, LocationForm, PurchaseOrderForm
+from .forms import InventoryForm, CategoryForm, LocationForm, PurchaseOrderForm, AssetForm, SupplierForm
 from .models import Category
 from .models import Location
 from .models import PurchaseOrder
 from .models import Supplier
-from .forms import SupplierForm
 
 # Models Imports
 from .models import Asset
@@ -91,8 +90,7 @@ def dashboard(request):
 @login_required
 def asset_index(request):
     assets = Asset.objects.all()
-    return render(request, "asset/index.html", {'assets': assets})
-    return render(request, 'dashboard.html')
+    return render(request, "asset/asset_list.html", {'assets': assets})
 
 @login_required
 def category_list(request):
@@ -206,21 +204,6 @@ def location_delete(request, pk):
         return redirect('location_list')
     return render(request, 'location/location_confirm_delete.html', {'location': location})
 
-class SignupForm(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
-        model = User
-        fields = ("username", "email")
-
-
-class SignupView(CreateView):
-    template_name = "accounts/signup.html"
-    form_class = SignupForm
-    success_url = reverse_lazy("login")
-
-class AssetCreate(CreateView):
-    model = Asset
-    fields = ["name", "category", "supplier", "cost", ]
-
 def supplier_list(request):
     query = request.GET.get('q')
     if query:
@@ -267,3 +250,36 @@ def supplier_delete(request, pk):
         supplier.delete()
         return redirect("supplier_list")
     return render(request, "supplier/supplier_confirm_delete.html", {"supplier": supplier})
+  
+  
+class SignupForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ("username", "email")
+
+
+class SignupView(CreateView):
+    template_name = "accounts/signup.html"
+    form_class = SignupForm
+    success_url = reverse_lazy("login")
+
+class AssetCreate(CreateView):
+    model = Asset
+
+    form_class = AssetForm
+    fields = ["name", "category", "supplier", "cost", ]
+    template_name = "asset/asset_create.html"
+    success_url = reverse_lazy("asset_index")
+
+class AssetUpdate(UpdateView):
+    model = Asset
+    form_class = AssetForm
+    template_name = "asset/asset_update.html"
+    success_url = reverse_lazy("asset_index")
+
+class AssetDelete(DeleteView):
+    model = Asset
+    template_name = "asset/asset_delete_confirm.html"
+    success_url = reverse_lazy("asset_index")
+
+
