@@ -28,8 +28,6 @@ def asset_index(request):
     assets = Asset.objects.all()
     return render(request, "asset/index.html", {'assets': assets})
 
-
-
 class SignupForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
@@ -40,3 +38,6 @@ class SignupView(CreateView):
     form_class = SignupForm
     success_url = reverse_lazy("login")
 
+class AssetCreate(CreateView):
+    model = Asset
+    fields = ["name", "category", "supplier", "cost", ]
