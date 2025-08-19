@@ -1,5 +1,5 @@
 from django import forms
-from .models import Category, Location, Inventory
+from .models import Category, Location, Inventory, PurchaseOrder, Supplier
 
 class InventoryForm(forms.ModelForm):
     class Meta:
@@ -30,3 +30,13 @@ class LocationForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'address': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
         }
+
+class PurchaseOrderForm(forms.ModelForm):
+    class Meta:
+        model = PurchaseOrder
+        fields = ["supplier", "item", "quantity", "price"]
+        
+class SupplierForm(forms.ModelForm):
+    class Meta:
+        model = Supplier
+        fields = ["name", "contact_person", "phone_number", "email", "address"]

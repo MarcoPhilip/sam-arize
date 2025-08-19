@@ -30,7 +30,7 @@
             <li><a href="{% url 'inventory_list' %}">Inventory</a></li>
             <li><a href="{% url 'category_list' %}">Categories</a></li>
             <li><a href="{% url 'location_list' %}">Location</a></li>
-            <li><a href="{% url 'inventory_list' %}">Suppliers</a></li>
+            <li><a href="{% url 'supplier_list' %}">Suppliers</a></li>
             
             {% if user.is_authenticated %}
                 <li>Welcome, {{ user.username }}!</li>

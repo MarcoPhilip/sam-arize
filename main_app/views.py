@@ -1,5 +1,8 @@
+from datetime import timedelta
+
 # Auth Imports
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
@@ -7,17 +10,74 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
 from django.urls import reverse_lazy
+from django.shortcuts import render
 
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Inventory
-from .forms import InventoryForm, CategoryForm, LocationForm
+from .forms import InventoryForm, CategoryForm, LocationForm, PurchaseOrderForm
 from .models import Category
 from .models import Location
+from .models import PurchaseOrder
+from .models import Supplier
+from .forms import SupplierForm
 
 # Models Imports
 from .models import Asset
 
 User = get_user_model()
+
+def purchase_order_create(request):
+    if request.method == "POST":
+        supplier = request.POST.get("supplier")
+        item = request.POST.get("item")
+        quantity = request.POST.get("quantity")
+        price = request.POST.get("price")
+
+        PurchaseOrder.objects.create(
+            supplier=supplier,
+            item=item,
+            quantity=quantity,
+            price=price
+        )
+        return redirect("purchase_order_list")
+
+    return render(request, "purchase_order/purchase_order.html")
+
+def purchase_order_list(request):
+    orders = PurchaseOrder.objects.all().order_by("-created_at")
+    return render(request, "purchase_order/purchase_order_list.html", {"orders": orders})
+
+def purchase_order_detail(request, pk):
+    order = get_object_or_404(PurchaseOrder, pk=pk)
+    return render(request, "purchase_order/purchase_order_detail.html", {"order": order})
+
+def purchase_order_list_create(request):
+    if request.method == "POST":
+        form = PurchaseOrderForm(request.POST)
+        if form.is_valid():
+            order = form.save()
+            return redirect("purchase_order/purchase_order_detail", pk=order.pk)
+    else:
+        form = PurchaseOrderForm()
+    return render(request, "purchase_order/purchase_order_form.html", {"form": form, "mode": "create"})
+
+def purchase_order_edit(request, pk):
+    order = get_object_or_404(PurchaseOrder, pk=pk)
+    if request.method == "POST":
+        form = PurchaseOrderForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect("purchase_order_detail", pk=order.pk)
+    else:
+        form = PurchaseOrderForm(instance=order)
+    return render(request, "purchase_order//purchase_order_form.html", {"form": form, "mode": "edit", "order": order})
+
+def purchase_order_delete(request, pk):
+    order = get_object_or_404(PurchaseOrder, pk=pk)
+    if request.method == "POST":
+        order.delete()
+        return redirect("purchase_order_list")
+    return render(request, "purchase_order/purchase_order_confirm_delete.html", {"order": order})
 
 def home(request):
     return render(request, 'home.html') 
@@ -25,6 +85,7 @@ def home(request):
 @login_required
 def dashboard(request):
     # TODO: pull real counts for cards
+    return render(request, 'dashboard.html')
     return render(request, 'dashboard.html')
 
 @login_required
@@ -150,6 +211,7 @@ class SignupForm(UserCreationForm):
         model = User
         fields = ("username", "email")
 
+
 class SignupView(CreateView):
     template_name = "accounts/signup.html"
     form_class = SignupForm
@@ -158,3 +220,50 @@ class SignupView(CreateView):
 class AssetCreate(CreateView):
     model = Asset
     fields = ["name", "category", "supplier", "cost", ]
+
+def supplier_list(request):
+    query = request.GET.get('q')
+    if query:
+        suppliers = Supplier.objects.filter(
+            name__icontains=query
+        ) | Supplier.objects.filter(
+            contact_person__icontains=query
+        ) | Supplier.objects.filter(
+            email__icontains=query
+        )
+    else:
+        supplier = Supplier.objects.all()
+    
+    return render(request, 'supplier/supplier_list.html', {'supplier': supplier})
+
+def supplier_detail(request, pk):
+    supplier = get_object_or_404(Supplier, pk=pk)
+    return render(request, "supplier/supplier_detail.html", {"supplier": supplier})
+
+def supplier_create(request):
+    if request.method == "POST":
+        form = SupplierForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("supplier_list")
+    else:
+        form = SupplierForm()
+    return render(request, "supplier/supplier_form.html", {"form": form, "mode": "create"})
+
+def supplier_edit(request, pk):
+    supplier = get_object_or_404(Supplier, pk=pk)
+    if request.method == "POST":
+        form = SupplierForm(request.POST, instance=supplier)
+        if form.is_valid():
+            form.save()
+            return redirect("supplier_detail", pk=supplier.pk)
+    else:
+        form = SupplierForm(instance=supplier)
+    return render(request, "supplier/supplier_form.html", {"form": form, "mode": "edit", "supplier": supplier})
+
+def supplier_delete(request, pk):
+    supplier = get_object_or_404(Supplier, pk=pk)
+    if request.method == "POST":
+        supplier.delete()
+        return redirect("supplier_list")
+    return render(request, "supplier/supplier_confirm_delete.html", {"supplier": supplier})
