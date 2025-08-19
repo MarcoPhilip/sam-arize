@@ -5,8 +5,9 @@ from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Inventory
-from .forms import InventoryForm, CategoryForm
+from .forms import InventoryForm, CategoryForm, LocationForm
 from .models import Category
+from .models import Location
 
 User = get_user_model()
 
@@ -89,6 +90,41 @@ def inventory_delete(request, pk):
         return redirect('inventory_list')
     return render(request, 'inventory/inventory_delete_confirm.html', {'item': item})
 
+@login_required
+def location_list(request):
+    locations = Location.objects.all()
+    return render(request, 'location/location_list.html', {'locations': locations})
+
+@login_required
+def location_add(request):
+    if request.method == 'POST':
+        form = LocationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('location_list')
+    else:
+        form = LocationForm()
+    return render(request, 'location/location_form.html', {'form': form, 'title': 'Add Location'})
+
+@login_required
+def location_edit(request, pk):
+    location = get_object_or_404(Location, pk=pk)
+    if request.method == 'POST':
+        form = LocationForm(request.POST, instance=location)
+        if form.is_valid():
+            form.save()
+            return redirect('location_list')
+    else:
+        form = LocationForm(instance=location)
+    return render(request, 'location/location_form.html', {'form': form, 'title': 'Edit Location'})
+
+@login_required
+def location_delete(request, pk):
+    location = get_object_or_404(Location, pk=pk)
+    if request.method == 'POST':
+        location.delete()
+        return redirect('location_list')
+    return render(request, 'location/location_confirm_delete.html', {'location': location})
 
 class SignupForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
