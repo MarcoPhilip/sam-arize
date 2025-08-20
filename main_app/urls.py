@@ -13,12 +13,11 @@ urlpatterns = [
     #purchase order
     
   
-    path("purchase-order/", views.purchase_order_create, name="purchase_order"),
     path("purchase-list/", views.purchase_order_list, name="purchase_order_list"),
-    path("purchase-orders/new/", views.purchase_order_create, name="purchase_order_create"),
-    path("purchase-orders/<int:pk>/", views.purchase_order_detail, name="purchase_order_detail"),
-    path("purchase-orders/<int:pk>/edit/", views.purchase_order_edit, name="purchase_order_edit"),
-    path("purchase-orders/<int:pk>/delete/", views.purchase_order_delete, name="purchase_order_delete"),
+    path("purchase/<int:pk>/", views.purchase_order_detail, name="purchase_order_detail"),
+    path("purchase/new/", views.purchase_order_create, name="purchase_order_create"),
+    path("purchase/<int:pk>/edit/", views.purchase_order_edit, name="purchase_order_edit"),
+    path("purchase/<int:pk>/delete/", views.purchase_order_delete, name="purchase_order_delete"),
 
 
 

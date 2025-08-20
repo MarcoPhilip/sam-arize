@@ -1,14 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
-  <h2>Purchase Order #{{ order.id }}</h2>
-  <p><b>Supplier:</b> {{ order.supplier }}</p>
-  <p><b>Item:</b> {{ order.item }}</p>
-  <p><b>Quantity:</b> {{ order.quantity }}</p>
-  <p><b>Price:</b> ${{ order.price }}</p>
-  <p><b>Created:</b> {{ order.created_at|date:"Y-m-d H:i" }}</p>
+  <h2>PO #{{ order.pk }}</h2>
+  <p><strong>Supplier:</strong> {{ order.supplier.name }}</p>
+  <p><strong>Order Date:</strong> {{ order.order_date }}</p>
+  <p><strong>Status:</strong> {{ order.get_status_display }}</p>
 
-  <a class="btn btn-primary" href="{% url 'purchase_order_edit' order.pk %}">Edit</a>
+  <a class="btn btn-warning" href="{% url 'purchase_order_edit' order.pk %}">Edit</a>
   <a class="btn btn-danger" href="{% url 'purchase_order_delete' order.pk %}">Delete</a>
   <a class="btn btn-secondary" href="{% url 'purchase_order_list' %}">Back</a>
 </div>

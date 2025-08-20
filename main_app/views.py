@@ -24,41 +24,23 @@ from .models import Supplier
 from .models import Asset
 
 User = get_user_model()
-
-def purchase_order_create(request):
-    if request.method == "POST":
-        supplier = request.POST.get("supplier")
-        item = request.POST.get("item")
-        quantity = request.POST.get("quantity")
-        price = request.POST.get("price")
-
-        PurchaseOrder.objects.create(
-            supplier=supplier,
-            item=item,
-            quantity=quantity,
-            price=price
-        )
-        return redirect("purchase_order_list")
-
-    return render(request, "purchase_order/purchase_order.html")
-
 def purchase_order_list(request):
-    orders = PurchaseOrder.objects.all().order_by("-created_at")
+    orders = PurchaseOrder.objects.select_related("supplier").order_by("-order_date", "-id")
     return render(request, "purchase_order/purchase_order_list.html", {"orders": orders})
 
 def purchase_order_detail(request, pk):
     order = get_object_or_404(PurchaseOrder, pk=pk)
     return render(request, "purchase_order/purchase_order_detail.html", {"order": order})
 
-def purchase_order_list_create(request):
+def purchase_order_create(request):
     if request.method == "POST":
         form = PurchaseOrderForm(request.POST)
         if form.is_valid():
-            order = form.save()
-            return redirect("purchase_order/purchase_order_detail", pk=order.pk)
+            form.save()
+            return redirect("purchase_order_list")
     else:
         form = PurchaseOrderForm()
-    return render(request, "purchase_order/purchase_order_form.html", {"form": form, "mode": "create"})
+    return render(request, "purchase_order/purchase_order_form.html", {"form": form})
 
 def purchase_order_edit(request, pk):
     order = get_object_or_404(PurchaseOrder, pk=pk)
@@ -69,7 +51,7 @@ def purchase_order_edit(request, pk):
             return redirect("purchase_order_detail", pk=order.pk)
     else:
         form = PurchaseOrderForm(instance=order)
-    return render(request, "purchase_order//purchase_order_form.html", {"form": form, "mode": "edit", "order": order})
+    return render(request, "purchase_order/purchase_order_form.html", {"form": form})
 
 def purchase_order_delete(request, pk):
     order = get_object_or_404(PurchaseOrder, pk=pk)
