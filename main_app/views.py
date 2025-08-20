@@ -265,11 +265,14 @@ class SignupView(CreateView):
 
 class AssetCreate(CreateView):
     model = Asset
-
     form_class = AssetForm
-    fields = ["name", "category", "supplier", "cost", ]
     template_name = "asset/asset_create.html"
     success_url = reverse_lazy("asset_index")
+
+class AssetDetail(DetailView):
+    model = Asset
+    template_name = "asset/asset_detail.html"
+    
 
 class AssetUpdate(UpdateView):
     model = Asset
