@@ -2,13 +2,14 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from . import views
 from .views import dashboard, home, SignupView, asset_index, AssetCreate
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     # Auth
     path('', home, name='home' ),
     path('dashboard/', dashboard, name='dashboard'),
     path('login/',  LoginView.as_view(template_name='accounts/login.html'), name='login'),
-    path('logout/', LogoutView.as_view(), name='logout'),
+    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path('signup/', SignupView.as_view(), name='signup'),
 
     # TODO: Dashboard route needs to be protected. Home page('') route isnt protected. If logged in, send the user to dashboard. Else, send to home. 
@@ -27,6 +28,7 @@ urlpatterns = [
     # Category URLs
     path('categories/', views.category_list, name='category_list'),
     path('categories/add/', views.category_add, name='category_add'),
+    path("categories/<int:pk>/", views.category_detail, name="category_detail"),
     path('categories/edit/<int:pk>/', views.category_edit, name='category_edit'),
     path('categories/delete/<int:pk>/', views.category_delete, name='category_delete'),
     

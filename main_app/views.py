@@ -32,12 +32,17 @@ def asset_index(request):
     assets = Asset.objects.all()
     return render(request, "asset/index.html", {'assets': assets})
     return render(request, 'dashboard.html')
-
+# List category
 @login_required
 def category_list(request):
     categories = Category.objects.all()
     return render(request, 'category/category_list.html', {'categories': categories})
+@login_required
+def category_detail(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    return render(request, "category/category_detail.html", {"category": category})
 
+# Add category
 @login_required
 def category_add(request):
     if request.method == 'POST':
@@ -48,7 +53,7 @@ def category_add(request):
     else:
         form = CategoryForm()
     return render(request, 'category/category_form.html', {'form': form, 'title': 'Add Category'})
-
+# Edit category
 @login_required
 def category_edit(request, pk):
     category = get_object_or_404(Category, pk=pk)
@@ -60,7 +65,7 @@ def category_edit(request, pk):
     else:
         form = CategoryForm(instance=category)
     return render(request, 'category/category_form.html', {'form': form, 'title': 'Edit Category'})
-
+# Delete category
 @login_required
 def category_delete(request, pk):
     category = get_object_or_404(Category, pk=pk)
