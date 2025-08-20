@@ -47,8 +47,13 @@ class AssetForm(forms.ModelForm):
 class PurchaseOrderForm(forms.ModelForm):
     class Meta:
         model = PurchaseOrder
-        fields = ["supplier", "item", "quantity", "price"]
-        
+        fields = ["supplier", "order_date", "status"]
+        widgets = {
+            "supplier": forms.Select(attrs={"class": "form-select"}),
+            "order_date": forms.DateInput(attrs={"type": "date", "class": "form-control"}),
+            "status": forms.Select(attrs={"class": "form-select"}),
+        }
+
 class SupplierForm(forms.ModelForm):
     class Meta:
         model = Supplier
