@@ -36,6 +36,7 @@ urlpatterns = [
     # Location URLs
     path('locations/', views.location_list, name='location_list'),
     path('locations/add/', views.location_add, name='location_add'),
+    path('locations/<int:pk>/', views.location_detail, name='location_detail'),
     path('locations/<int:pk>/edit/', views.location_edit, name='location_edit'),
     path('locations/<int:pk>/delete/', views.location_delete, name='location_delete'),
 ]

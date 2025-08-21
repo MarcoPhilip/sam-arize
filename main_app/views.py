@@ -133,6 +133,10 @@ def location_add(request):
     else:
         form = LocationForm()
     return render(request, 'location/location_form.html', {'form': form, 'title': 'Add Location'})
+# Location detail
+def location_detail(request, pk):
+    locations = get_object_or_404(Location, pk=pk)
+    return render(request, "location/location_detail.html", {"locations": locations})
 
 # Edit a Location
 @login_required
