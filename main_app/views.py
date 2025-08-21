@@ -21,6 +21,13 @@ from .models import Category
 from .models import Location
 from .models import PurchaseOrder
 from .models import Supplier
+#
+from django.shortcuts import render
+from django.db.models import Count, Sum, F
+from django.db.models.functions import TruncMonth
+from django.utils.timezone import now
+import json
+
 
 # Models Imports
 from .models import Asset
@@ -81,10 +88,39 @@ def home(request):
     return render(request, 'home.html') 
 
 @login_required
+
+
+
+#
 def dashboard(request):
-    # TODO: pull real counts for cards
-    return render(request, 'dashboard.html')
-    return render(request, 'dashboard.html')
+    # KPIs
+    kpi = {
+        "assets": Asset.objects.count(),
+        "suppliers": Supplier.objects.count(),
+        "pos_open": PurchaseOrder.objects.filter(status__in=["pending","confirmed"]).count(),
+        "pos_delivered": PurchaseOrder.objects.filter(status="delivered").count(),
+    }
+
+    
+    
+
+ 
+
+
+    # Tables
+    recent_pos = PurchaseOrder.objects.select_related("supplier").order_by("-order_date", "-id")[:5]
+    low_stock  = Inventory.objects.order_by("quantity")[:5] 
+
+    context = {
+        "kpi": kpi,
+        "recent_pos": recent_pos,
+        "low_stock": low_stock,
+
+
+    }
+    return render(request, "dashboard.html", context)
+
+#
 
 @login_required
 def asset_index(request):
@@ -270,7 +306,7 @@ def supplier_delete(request, pk):
         supplier.delete()
         return redirect("supplier_list")
     return render(request, "supplier/supplier_confirm_delete.html", {"supplier": supplier})
-  
+ 
 
 class AssetCreate(CreateView):
     model = Asset
