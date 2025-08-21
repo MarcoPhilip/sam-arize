@@ -1,12 +1,27 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Category, Location, Inventory, PurchaseOrder, Supplier, Asset, User
+from .models import Category, Location, Inventory, PurchaseOrder, Supplier, Asset
+from django.contrib.auth import get_user_model
+
+
+AuthUser = get_user_model()
 
 class SignupForm(UserCreationForm):
+    first_name = forms.CharField(required=False)
+    last_name = forms.CharField(required=False)
+
     class Meta(UserCreationForm.Meta):
-        model = User
-        fields = ('username', 'name', 'email', 'password1', 'password2')
+        model = AuthUser
+        fields = ("username", "email", "first_name", "last_name", "password1", "password2")
         
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.first_name = self.cleaned_data.get("first_name", "")
+        user.last_name  = self.cleaned_data.get("last_name", "")
+        if commit:
+            user.save()
+        return user
+    
 class InventoryForm(forms.ModelForm):
     class Meta:
         model = Inventory
@@ -64,4 +79,10 @@ class SupplierForm(forms.ModelForm):
     class Meta:
         model = Supplier
         fields = ["name", "contact_person", "phone_number", "email", "address"]
-
+        widgets = {
+           "name": forms.TextInput(attrs={"class": "form-control"}),
+           "contact_person": forms.TextInput(attrs={"class": "form-control"}),
+            "phone_number": forms.TextInput(attrs={"class": "form-control"}),
+            "email": forms.EmailInput(attrs={"class": "form-control"}),
+            "address": forms.Textarea(attrs={"class": "form-control", "rows": 3}),
+        }

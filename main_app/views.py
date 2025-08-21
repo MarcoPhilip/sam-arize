@@ -291,5 +291,5 @@ class AssetUpdate(UpdateView):
 
 class AssetDelete(DeleteView):
     model = Asset
-    template_name = "asset/asset_delete_confirm.html"
+    template_name = "asset/asset_confirm_delete.html"
     success_url = reverse_lazy("asset_index")
