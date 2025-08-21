@@ -1,5 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}{{ title }} · SAM-ARIZE{% endblock %}
+{% block head %} 
+<link rel="stylesheet" href="{% static 'css/form.css' %}" />
+{% endblock %}
 {% block content %}
 <div class="container">
   <h1>{{ title }}</h1>

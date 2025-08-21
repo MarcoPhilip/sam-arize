@@ -5,14 +5,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth import login
 # CBV Imports
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
-
 from django.urls import reverse_lazy
-from django.shortcuts import render
-
 from django.shortcuts import render, get_object_or_404, redirect
+
+# Form Imports
+from .forms import InventoryForm, CategoryForm, LocationForm, SignupForm
+
+# Models Imports
 from .models import Inventory
 from .forms import InventoryForm, CategoryForm, LocationForm, PurchaseOrderForm, AssetForm, SupplierForm
 from .models import Category
@@ -60,6 +62,21 @@ def purchase_order_delete(request, pk):
         return redirect("purchase_order_list")
     return render(request, "purchase_order/purchase_order_confirm_delete.html", {"order": order})
 
+def signup(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.role = 'Staff'
+            user.save()
+            login(request, user)
+            return redirect('dashboard')
+    else:
+        form = SignupForm()
+    
+    return render(request, 'accounts/signup.html', {'form': form})
+
+
 def home(request):
     return render(request, 'home.html') 
 
@@ -74,22 +91,39 @@ def asset_index(request):
     assets = Asset.objects.all()
     return render(request, "asset/asset_list.html", {'assets': assets})
 
+
+# List category
 @login_required
 def category_list(request):
     categories = Category.objects.all()
     return render(request, 'category/category_list.html', {'categories': categories})
+# Detail for category
+@login_required
+def category_detail(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    return render(request, "category/category_detail.html", {"category": category})
 
+# Add category
 @login_required
 def category_add(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
         if form.is_valid():
-            form.save()
+            # Don't save yet
+            category = form.save(commit=False)
+            # Set the created_by field
+            category.created_by = request.user
+            # Now save to DB
+            category.save()
             return redirect('category_list')
     else:
         form = CategoryForm()
     return render(request, 'category/category_form.html', {'form': form, 'title': 'Add Category'})
+def inventory_detail(request, pk):
+    inventory = get_object_or_404(Inventory, pk=pk)
+    return render(request, "inventory/inventory_detail.html", {"inventory": inventory})
 
+# Edit category
 @login_required
 def category_edit(request, pk):
     category = get_object_or_404(Category, pk=pk)
@@ -101,7 +135,7 @@ def category_edit(request, pk):
     else:
         form = CategoryForm(instance=category)
     return render(request, 'category/category_form.html', {'form': form, 'title': 'Edit Category'})
-
+# Delete category
 @login_required
 def category_delete(request, pk):
     category = get_object_or_404(Category, pk=pk)
@@ -163,6 +197,10 @@ def location_add(request):
     else:
         form = LocationForm()
     return render(request, 'location/location_form.html', {'form': form, 'title': 'Add Location'})
+# Location detail
+def location_detail(request, pk):
+    locations = get_object_or_404(Location, pk=pk)
+    return render(request, "location/location_detail.html", {"locations": locations})
 
 # Edit a Location
 @login_required
@@ -233,17 +271,6 @@ def supplier_delete(request, pk):
         return redirect("supplier_list")
     return render(request, "supplier/supplier_confirm_delete.html", {"supplier": supplier})
   
-  
-class SignupForm(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
-        model = User
-        fields = ("username", "email")
-
-
-class SignupView(CreateView):
-    template_name = "accounts/signup.html"
-    form_class = SignupForm
-    success_url = reverse_lazy("login")
 
 class AssetCreate(CreateView):
     model = Asset
@@ -266,5 +293,3 @@ class AssetDelete(DeleteView):
     model = Asset
     template_name = "asset/asset_confirm_delete.html"
     success_url = reverse_lazy("asset_index")
-
-
