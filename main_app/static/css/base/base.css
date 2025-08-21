@@ -80,5 +80,6 @@ footer {
     margin-top: 0;
 }
 
-
+.card { border-radius: 10px; }
+.card-header { font-weight: 600; }
 

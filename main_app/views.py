@@ -72,6 +72,8 @@ def home(request):
 
 @login_required
 
+
+
 #
 def dashboard(request):
     # KPIs
@@ -82,32 +84,11 @@ def dashboard(request):
         "pos_delivered": PurchaseOrder.objects.filter(status="delivered").count(),
     }
 
-    # Assets by category 
-    ac = (Asset.objects.values("category__name")
-                      .annotate(total=Count("id"))
-                      .order_by("-total"))
-    assets_by_category_labels = [r["category__name"] or "Uncategorized" for r in ac]
-    assets_by_category_data   = [r["total"] for r in ac]
+    
+    
 
-    # PO status mix
-    ps = (PurchaseOrder.objects.values("status")
-                             .annotate(total=Count("id"))
-                             .order_by("status"))
-    po_status_labels = [dict(PurchaseOrder.STATUS_CHOICES).get(r["status"], r["status"].title()) for r in ps]
-    po_status_data   = [r["total"] for r in ps]
+ 
 
-    # POs per month (last 6 months) – line chart
-    start = (now().date().replace(day=1))
-    # Pull ~6 months back
-    qs = (PurchaseOrder.objects
-            .filter(order_date__gte=start.replace(day=1))
-            .annotate(m=TruncMonth("order_date"))
-            .values("m")
-            .annotate(total=Count("id"))
-            .order_by("m"))
-
-    labels_month = [r["m"].strftime("%b %Y") for r in qs]
-    data_month   = [r["total"] for r in qs]
 
     # Tables
     recent_pos = PurchaseOrder.objects.select_related("supplier").order_by("-order_date", "-id")[:5]
@@ -287,6 +268,8 @@ def supplier_delete(request, pk):
         supplier.delete()
         return redirect("supplier_list")
     return render(request, "supplier/supplier_confirm_delete.html", {"supplier": supplier})
+  
+  
   
   
 class SignupForm(UserCreationForm):

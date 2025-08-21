@@ -3,6 +3,8 @@
 
 <h2 class="mb-4">Dashboard</h2>
 
+<h3>Welcome {{user.username}}</h3>
+
 <!-- KPI cards -->
 <div class="row g-3 mb-4">
   <div class="col-6 col-md-3">
@@ -39,30 +41,7 @@
   </div>
 </div>
 
-<!-- Charts -->
-<div class="row g-3 mb-4">
-  <div class="col-lg-6">
-    <div class="card shadow-sm h-100">
-      <div class="card-header bg-white fw-semibold">Assets by Category</div>
-      <div class="card-body"><canvas id="chartAssetsByCategory" height="150"></canvas></div>
-    </div>
-  </div>
-  <div class="col-lg-6">
-    <div class="card shadow-sm h-100">
-      <div class="card-header bg-white fw-semibold">PO Status Mix</div>
-      <div class="card-body"><canvas id="chartPoStatus" height="150"></canvas></div>
-    </div>
-  </div>
-</div>
 
-<div class="row g-3 mb-4">
-  <div class="col-12">
-    <div class="card shadow-sm h-100">
-      <div class="card-header bg-white fw-semibold">Purchase Orders per Month</div>
-      <div class="card-body"><canvas id="chartPoMonthly" height="120"></canvas></div>
-    </div>
-  </div>
-</div>
 
 <!-- Tables -->
 <div class="row g-3">
