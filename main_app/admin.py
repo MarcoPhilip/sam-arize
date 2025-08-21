@@ -1,10 +1,9 @@
 from django.contrib import admin
-from .models import User, Category, Location, Asset, Inventory, PurchaseOrder, Supplier
+from .models import Category, Location, Asset, Inventory, PurchaseOrder, Supplier
 
 # Register your models here.
 
-# User
-admin.site.register(User)
+
 # Category
 admin.site.register(Category)
 # Location

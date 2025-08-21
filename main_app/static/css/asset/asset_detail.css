@@ -1,0 +1,72 @@
+.asset-detail-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.asset-detail-container h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+.asset-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 2rem;
+}
+
+.asset-card p {
+  font-size: 1.5rem;
+  margin: 0.6rem 0;
+}
+
+.asset-card strong {
+  color: #222;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.actions .btn {
+  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.4rem;
+  transition: background 0.2s ease;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}

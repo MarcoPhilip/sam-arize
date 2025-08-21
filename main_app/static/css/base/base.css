@@ -80,6 +80,23 @@ footer {
     margin-top: 0;
 }
 
+
 .card { border-radius: 10px; }
 .card-header { font-weight: 600; }
+
+.logout {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: #fff;               
+    text-decoration: none;
+    text-transform: uppercase; 
+    cursor: pointer;
+    font: inherit;
+  }
+  
+.logout:hover {
+    color: #45da5b;
+  }
 
