@@ -19,6 +19,13 @@ from .models import Category
 from .models import Location
 from .models import PurchaseOrder
 from .models import Supplier
+#
+from django.shortcuts import render
+from django.db.models import Count, Sum, F
+from django.db.models.functions import TruncMonth
+from django.utils.timezone import now
+import json
+
 
 # Models Imports
 from .models import Asset
@@ -64,10 +71,58 @@ def home(request):
     return render(request, 'home.html') 
 
 @login_required
+
+#
 def dashboard(request):
-    # TODO: pull real counts for cards
-    return render(request, 'dashboard.html')
-    return render(request, 'dashboard.html')
+    # KPIs
+    kpi = {
+        "assets": Asset.objects.count(),
+        "suppliers": Supplier.objects.count(),
+        "pos_open": PurchaseOrder.objects.filter(status__in=["pending","confirmed"]).count(),
+        "pos_delivered": PurchaseOrder.objects.filter(status="delivered").count(),
+    }
+
+    # Assets by category 
+    ac = (Asset.objects.values("category__name")
+                      .annotate(total=Count("id"))
+                      .order_by("-total"))
+    assets_by_category_labels = [r["category__name"] or "Uncategorized" for r in ac]
+    assets_by_category_data   = [r["total"] for r in ac]
+
+    # PO status mix
+    ps = (PurchaseOrder.objects.values("status")
+                             .annotate(total=Count("id"))
+                             .order_by("status"))
+    po_status_labels = [dict(PurchaseOrder.STATUS_CHOICES).get(r["status"], r["status"].title()) for r in ps]
+    po_status_data   = [r["total"] for r in ps]
+
+    # POs per month (last 6 months) – line chart
+    start = (now().date().replace(day=1))
+    # Pull ~6 months back
+    qs = (PurchaseOrder.objects
+            .filter(order_date__gte=start.replace(day=1))
+            .annotate(m=TruncMonth("order_date"))
+            .values("m")
+            .annotate(total=Count("id"))
+            .order_by("m"))
+
+    labels_month = [r["m"].strftime("%b %Y") for r in qs]
+    data_month   = [r["total"] for r in qs]
+
+    # Tables
+    recent_pos = PurchaseOrder.objects.select_related("supplier").order_by("-order_date", "-id")[:5]
+    low_stock  = Inventory.objects.order_by("quantity")[:5] 
+
+    context = {
+        "kpi": kpi,
+        "recent_pos": recent_pos,
+        "low_stock": low_stock,
+
+
+    }
+    return render(request, "dashboard.html", context)
+
+#
 
 @login_required
 def asset_index(request):
