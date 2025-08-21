@@ -1,6 +1,6 @@
 from django import forms
-from .models import Category, Location, Inventory, User
 from django.contrib.auth.forms import UserCreationForm
+from .models import Category, Location, Inventory, PurchaseOrder, Supplier, Asset, User
 
 class SignupForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -36,3 +36,32 @@ class LocationForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'address': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
         }
+
+
+class AssetForm(forms.ModelForm):
+    class Meta:
+        model = Asset
+        fields = ["name", "category", "location", "serial_number", "purchase_date", "status"]
+        widgets = {
+            "name": forms.TextInput(attrs={"class": "form-control"}),
+            "category": forms.Select(attrs={"class": "form-select"}),
+            "location": forms.Select(attrs={"class": "form-select"}),
+            "serial_number": forms.TextInput(attrs={"class": "form-control"}),
+            "status": forms.Select(attrs={"class": "form-select"}),
+        }
+
+class PurchaseOrderForm(forms.ModelForm):
+    class Meta:
+        model = PurchaseOrder
+        fields = ["supplier", "order_date", "status"]
+        widgets = {
+            "supplier": forms.Select(attrs={"class": "form-select"}),
+            "order_date": forms.DateInput(attrs={"type": "date", "class": "form-control"}),
+            "status": forms.Select(attrs={"class": "form-select"}),
+        }
+
+class SupplierForm(forms.ModelForm):
+    class Meta:
+        model = Supplier
+        fields = ["name", "contact_person", "phone_number", "email", "address"]
+

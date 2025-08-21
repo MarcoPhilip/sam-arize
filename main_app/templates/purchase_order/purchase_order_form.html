@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <h2>{{ form.instance.pk|yesno:"Edit Purchase Order,New Purchase Order" }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">{{ form.supplier.label_tag }}{{ form.supplier }}</div>
+    <div class="mb-3">{{ form.order_date.label_tag }}{{ form.order_date }}</div>
+    <div class="mb-3">{{ form.status.label_tag }}{{ form.status }}</div>
+    <button class="btn btn-primary" type="submit">Save</button>
+    <a class="btn btn-secondary" href="{% url 'purchase_order_list' %}">Cancel</a>
+  </form>
+</div>
+{% endblock %}
