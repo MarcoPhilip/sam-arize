@@ -1,6 +1,5 @@
 from django.db import models
-
-# ! Create your models here.
+from django.conf import settings
 
 # User Model
 class User(models.Model):
@@ -13,16 +12,18 @@ class User(models.Model):
 
     name = models.CharField(max_length=20)
     email = models.EmailField(unique=True)
+    username = models.CharField(max_length=20, unique=True)
     password = models.CharField(max_length=100)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
 
     def __str__(self):
-        return self.name
+        return self.username
 
 # Category Model
 class Category(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -31,6 +32,7 @@ class Category(models.Model):
 class Location(models.Model):
     name = models.CharField(max_length=50)
     address = models.TextField(blank=True, null=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.name

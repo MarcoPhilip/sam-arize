@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}{{ category.name }} · SAM-ARIZE{% endblock %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/detail.css' %}" />
+{% endblock %}
+{% block content %}
+<div class="container">
+  <h1>{{ category.name }}</h1>
+  <p><strong>Description:</strong> {{ category.description }}</p>
+
+  {% if category.created_by %}
+    <p><strong>Added By:</strong> {{ category.created_by.username }}</p>
+  {% else %}
+    <p><strong>Added By:</strong> Unknown</p>
+  {% endif %}
+
+  <div class="actions">
+    <a href="{% url 'category_edit' category.pk %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'category_delete' category.pk %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'category_list' %}" class="btn btn-secondary">Back to List</a>
+  </div>
+</div>
+{% endblock %}

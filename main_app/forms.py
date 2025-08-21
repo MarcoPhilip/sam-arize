@@ -1,6 +1,12 @@
 from django import forms
-from .models import Category, Location, Inventory, PurchaseOrder, Supplier, Asset
+from django.contrib.auth.forms import UserCreationForm
+from .models import Category, Location, Inventory, PurchaseOrder, Supplier, Asset, User
 
+class SignupForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ('username', 'name', 'email', 'password1', 'password2')
+        
 class InventoryForm(forms.ModelForm):
     class Meta:
         model = Inventory

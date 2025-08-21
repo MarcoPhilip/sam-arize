@@ -22,7 +22,7 @@
     <tbody>
       {% for inventory in inventories %}
       <tr>
-        <td>{{ inventory.name }}</td>
+        <td><a href="{% url 'inventory_detail' inventory.pk %}" class="inventory-link">{{ inventory.name }}</a></td>
         <td>{{ inventory.category.name }}</td>
         <td>{{ inventory.location.name }}</td>
         <td>{{ inventory.quantity }}</td>

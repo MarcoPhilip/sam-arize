@@ -16,8 +16,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 LOGIN_URL = "login"
-LOGIN_REDIRECT_URL = "dashboard"       # change to your dashboard route name
-LOGOUT_REDIRECT_URL = "login"
+LOGIN_REDIRECT_URL = "dashboard"
+LOGOUT_REDIRECT_URL = "home"
 
 
 # Quick-start development settings - unsuitable for production
