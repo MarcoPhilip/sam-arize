@@ -2,22 +2,37 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth import login
 # CBV Imports
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
-
 from django.urls import reverse_lazy
-
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Inventory
-from .forms import InventoryForm, CategoryForm, LocationForm
-from .models import Category
-from .models import Location
+
+# Form Imports
+from .forms import InventoryForm, CategoryForm, LocationForm, SignupForm
 
 # Models Imports
+from .models import Inventory
+from .models import Category
+from .models import Location
 from .models import Asset
 
 User = get_user_model()
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.role = 'Staff'
+            user.save()
+            login(request, user)
+            return redirect('dashboard')
+    else:
+        form = SignupForm()
+    
+    return render(request, 'accounts/signup.html', {'form': form})
+
 
 def home(request):
     return render(request, 'home.html') 
@@ -49,12 +64,16 @@ def category_add(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
         if form.is_valid():
-            form.save()
+            # Don't save yet
+            category = form.save(commit=False)
+            # Set the created_by field
+            category.created_by = request.user
+            # Now save to DB
+            category.save()
             return redirect('category_list')
     else:
         form = CategoryForm()
     return render(request, 'category/category_form.html', {'form': form, 'title': 'Add Category'})
-
 def inventory_detail(request, pk):
     inventory = get_object_or_404(Inventory, pk=pk)
     return render(request, "inventory/inventory_detail.html", {"inventory": inventory})
@@ -160,15 +179,6 @@ def location_delete(request, pk):
         return redirect('location_list')
     return render(request, 'location/location_confirm_delete.html', {'location': location})
 
-class SignupForm(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
-        model = User
-        fields = ("username", "email")
-
-class SignupView(CreateView):
-    template_name = "accounts/signup.html"
-    form_class = SignupForm
-    success_url = reverse_lazy("login")
 
 class AssetCreate(CreateView):
     model = Asset

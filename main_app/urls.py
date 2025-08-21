@@ -1,18 +1,16 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from . import views
-from .views import dashboard, home, SignupView, asset_index, AssetCreate
+from .views import dashboard, home, signup, asset_index, AssetCreate
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     # Auth
     path('', home, name='home' ),
     path('dashboard/', dashboard, name='dashboard'),
+    path('signup/', signup, name='signup'),
     path('login/',  LoginView.as_view(template_name='accounts/login.html'), name='login'),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
-    path('signup/', SignupView.as_view(), name='signup'),
-
-    # TODO: Dashboard route needs to be protected. Home page('') route isnt protected. If logged in, send the user to dashboard. Else, send to home. 
     path('dashboard/', dashboard, name='dashboard'),
 
     # Asset URLS

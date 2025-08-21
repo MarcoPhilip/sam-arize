@@ -9,6 +9,12 @@
   <h1>{{ category.name }}</h1>
   <p><strong>Description:</strong> {{ category.description }}</p>
 
+  {% if category.created_by %}
+    <p><strong>Added By:</strong> {{ category.created_by.username }}</p>
+  {% else %}
+    <p><strong>Added By:</strong> Unknown</p>
+  {% endif %}
+
   <div class="actions">
     <a href="{% url 'category_edit' category.pk %}" class="btn btn-warning">Edit</a>
     <a href="{% url 'category_delete' category.pk %}" class="btn btn-danger">Delete</a>
