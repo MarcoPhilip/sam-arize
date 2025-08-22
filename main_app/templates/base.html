@@ -8,8 +8,13 @@
 
     <link rel="icon" type="image/png" href="{% static 'images/samarize-favicon.png' %}">
     <link rel="shortcut icon" type="image/png" href="{% static 'images/samarize-favicon.png' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Electrolize&family=Nova+Square&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="{% static 'css/base/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
 
     <title>{% block title %} Samarize {% endblock %} </title>
 
@@ -19,44 +24,45 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/app.css' %}">
-
     {% block head %} 
     {% endblock %}
 </head>
 <body>
+{% if request.resolver_match %}
+  {% if request.resolver_match.url_name != 'home' and request.resolver_match.url_name != 'login' and request.resolver_match.url_name != 'signup' %}
     <header class="header-content">
-    <div class="header-logo-container">
-        <a href="/">
-            <img src="{% static 'images/samarize-favicon.png' %}" alt="Samurai Logo" />
-        </a>
-    </div>
-    <nav>
+      <div class="header-logo-container">
+        <a href="/"><img src="{% static 'images/samarize-favicon.png' %}" alt="Samurai Logo" /></a>
+      </div>
+      <nav>
         <ul>
-            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-            <li><a href="{% url 'inventory_list' %}">Inventory</a></li>
-            <li><a href="{% url 'category_list' %}">Categories</a></li>
-            <li><a href="{% url 'location_list' %}">Location</a></li>
-            <li><a href="{% url 'purchase_order_list' %}">Purchase Order</a></li>
-            <li><a href="{% url 'asset_index' %}">Assets</a></li>
-            <li><a href="{% url 'supplier_list' %}">Suppliers</a></li>
-            
-            {% if user.is_authenticated %}
-                <li>Welcome, {{ user.username }}!</li>
-                <li>
-                    <form method="post" action="{% url 'logout' %}" style="display:inline;" >
-                        {% csrf_token %}
-                        <button type="submit" class="logout" >Logout</button>
-                    </form>
-                </li>
-            {% else %}
-                <li><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="{% url 'signup' %}">Sign Up</a></li>
-            {% endif %}
+          <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+          <li><a href="{% url 'inventory_list' %}">Inventory</a></li>
+          <li><a href="{% url 'category_list' %}">Categories</a></li>
+          <li><a href="{% url 'location_list' %}">Location</a></li>
+          <li><a href="{% url 'purchase_order_list' %}">Purchase Order</a></li>
+          <li><a href="{% url 'asset_index' %}">Assets</a></li>
+          <li><a href="{% url 'supplier_list' %}">Suppliers</a></li>
+
+          {% if user.is_authenticated %}
+            <li>Welcome, {{ user.username }}!</li>
+            <li>
+              <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="logout">Logout</button>
+              </form>
+            </li>
+          {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+          {% endif %}
         </ul>
       </nav>
     </header>
+  {% endif %}
+{% endif %}
+
+
     <main>
         {% block content %} 
         {% endblock %}

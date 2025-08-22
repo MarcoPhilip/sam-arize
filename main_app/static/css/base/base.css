@@ -7,16 +7,20 @@ html {
   box-sizing: inherit;
 }
 :root {
-  font-size: 62.5%;
+  font-size: 82.5%;
 }
 
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: 'Electrolize', sans-serif;
   height: 100%;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, li, button, input, textarea {
+  font-family: 'Electrolize', sans-serif;
 }
 
 header {
@@ -67,18 +71,22 @@ nav a:hover {
 }
 
 main {
-  padding-block: 2.4rem;
   flex: 1 0 auto;
+  padding: 0;
+  display: flow-root;
 }
 
+main > :first-child { margin-top: 0; }
+main > :last-child  { margin-bottom: 0; }
+
 footer {
-  background-color: #322d2d;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
-  flex: 0 0 auto;
-  margin-top: 0;
+    background-color: #ea9834;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;   
+    flex: 0 0 auto;
+    margin-top: 0;   
 }
 
 .card {
