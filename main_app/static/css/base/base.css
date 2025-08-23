@@ -80,7 +80,7 @@ main > :first-child { margin-top: 0; }
 main > :last-child  { margin-bottom: 0; }
 
 footer {
-    background-color: #ea9834;
+    background-color: #EC7F37;
     color: rgb(0, 0, 0);
     text-align: center;
     padding: 1rem;
