@@ -141,6 +141,26 @@ footer {
 }
 .logout:hover { color: var(--accent); }
 
+.navbar .nav-link {
+  color: var(--text) !important;
+  font-family: 'Electrolize', sans-serif;
+  text-transform: uppercase;
+  margin-left: 1rem;
+}
+.navbar .nav-link:hover {
+  color: var(--accent) !important;
+}
+.navbar .navbar-brand img:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 25px rgba(255, 90, 9, 1));
+}
+.navbar-toggler {
+  border-color: var(--accent); /* border of the button */
+}
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23FF5A09' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
 /* Responsive tweaks */
 @media (max-width: 1280px) {
   nav ul { gap: 2rem; font-size: 1.4rem; }
