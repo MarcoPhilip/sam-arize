@@ -88,9 +88,10 @@ class PurchaseOrder(models.Model):
         ('delivered', 'Delivered')
     ]
 
-    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
-    order_date = models.DateField()
-    status = models.CharField(max_length=30, choices=STATUS_CHOICES)
+    name = models.CharField(max_length=200),
+    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE),
+    order_date = models.DateField(),
+    status = models.CharField(max_length=30, choices=STATUS_CHOICES),
 
     def __str__(self):
         return self.name
