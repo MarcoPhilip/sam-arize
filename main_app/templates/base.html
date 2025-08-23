@@ -31,8 +31,12 @@
   {% if request.resolver_match.url_name != 'home' and request.resolver_match.url_name != 'login' and request.resolver_match.url_name != 'signup' %}
     <header class="header-content">
       <div class="header-logo-container">
-        <a href="/"><img src="{% static 'images/samarize-favicon.png' %}" alt="Samurai Logo" /></a>
+        <a href="/"><img src="{% static 'images/nav-img.png' %}" alt="Samurai Logo" /></a>
       </div>
+      <input id="nav-toggle" class="nav-toggle" type="checkbox" aria-label="Toggle navigation" />
+      <label for="nav-toggle" class="nav-toggle-btn" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </label>
       <nav>
         <ul>
           <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
