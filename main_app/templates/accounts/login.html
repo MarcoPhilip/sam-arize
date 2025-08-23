@@ -1,18 +1,50 @@
 {% extends "base.html" %}
-{% block title %}Sign In · SAM-ARIZE{% endblock %}
+{% block title %}LOG IN · SAM-ARIZE{% endblock %}
+{% load static %}
+{% block head %} 
+<link rel="stylesheet" href="{% static 'css/auth_forms.css' %}" />
+{% endblock %}
+
 {% block content %}
-<div class="container">
-  <h1 style="text-align:center;margin-bottom:22px;">Login</h1>
-  <div class="card">
-    <form method="post">{% csrf_token %}
+<div class="auth-container">
+
+  <!-- Logo + App Name -->
+  <div style="text-align:center; margin-bottom:24px;">
+    <img src="{% static 'images/nav-img.png' %}" alt="Samurai Logo" 
+         style="width:150px; height:150px; border-radius:50%;
+                filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7))
+                        drop-shadow(0 0 28px rgba(255, 255, 255, 0.5));
+                margin-bottom:10px;">
+    <h2 style="font-size:3rem; font-weight:800; color:var(--bg); text-transform:uppercase; margin:0; letter-spacing: 1px;">
+      SAM-ARIZE
+    </h2>
+  </div>
+
+  <!-- Title -->
+  <h1 class="auth-title" style="color:var(--bg);">LOG IN</h1>
+
+  <!-- Auth Card -->
+  <div class="auth-card">
+    <form method="post">
+      {% csrf_token %}
       {{ form.non_field_errors }}
-      <div class="field"><label>Username</label>{{ form.username }}</div>
-      <div class="field"><label>Password</label>{{ form.password }}</div>
-      <div style="text-align:center;margin-top:10px">
-        <button class="btn btn-primary" type="submit">LOGIN</button>
+      
+      <div class="auth-field">
+        <label for="id_username">Username</label>
+        {{ form.username }}
+      </div>
+      
+      <div class="auth-field">
+        <label for="id_password">Password</label>
+        {{ form.password }}
+      </div>
+      
+      <div class="auth-actions">
+        <button class="btn btn-primary" type="submit">Login</button>
       </div>
     </form>
-    <p style="text-align:center;margin-top:16px">
+    
+    <p class="auth-meta">
       Don’t have an account? <a href="{% url 'signup' %}">Register here</a>
     </p>
   </div>

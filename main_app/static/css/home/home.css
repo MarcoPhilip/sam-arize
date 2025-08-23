@@ -1,0 +1,137 @@
+
+
+/* Palette */
+:root{
+  --bg: #1f1f1f;
+  --text: #f3f3f3;
+  --muted: #cfcfcf;
+  --orange: #FF5A09;
+  --orange-2: #EC7F37;
+}
+
+
+/* .no-nav-page ~ * {} 
+.hero.no-nav-page { display:block; }
+.hero.no-nav-page ~ header,
+.hero.no-nav-page header,
+.hero.no-nav-page + header,
+.hero.no-nav-page ~ .site-header { display:none !important; }
+
+body .site-header, body header { }
+body .hero.no-nav-page ~ header { display:none !important; } */
+
+/* Page background */
+.hero{
+  min-height: 100vh;
+  background: radial-gradient(1100px 700px at 75% 30%, #3a3a3a 0%, #2c2c2c 40%, var(--bg) 100%);
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  padding: 48px 24px;
+}
+.hero__inner{
+  max-width: 1200px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(24px, 6vw, 64px);
+  align-items: center;
+}
+@media (max-width: 880px){
+  .hero__inner{ grid-template-columns: 1fr; }
+}
+
+/* Copy */
+.hero__title{
+  font-size: clamp(40px, 7vw, 76px);
+  line-height: 0.95;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+.hero__subtitle{
+  font-size: clamp(16px, 2.2vw, 18px);
+  color: var(--muted);
+  max-width: 56ch;
+  margin: 0 0 28px;
+}
+
+/* CTAs */
+.btn{
+  display: inline-block;
+  font-weight: 600;
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: transform .12s ease, box-shadow .12s ease, background .2s ease, color .2s ease;
+}
+.btn-primary{
+  background: linear-gradient(135deg, var(--orange), var(--orange-2));
+  color: #121212;
+  box-shadow: 0 6px 24px rgba(255, 90, 9, .25);
+}
+.btn-primary:hover{ transform: translateY(-1px); box-shadow: 0 10px 30px rgba(255, 90, 9, .35); }
+.btn-ghost{
+  margin-left: 14px;
+  color: var(--muted);
+  border: 1px solid #5a5a5a;
+  background: transparent;
+}
+.btn-ghost:hover{ color: #fff; border-color: #777; }
+
+/* Bullets */
+.hero__bullets{
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 18px;
+}
+.hero__bullets li{
+  font-size: 14px;
+  color: #ddd;
+  background: #2c2c2c;
+  padding: 8px 12px;
+  border: 1px solid #3a3a3a;
+  border-radius: 999px;
+}
+
+.hero__visual{
+  position: relative;
+  width: 100%;
+  height: min(64vh, 620px);
+  min-height: 360px;
+
+  /* remove box look */
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  overflow: visible;   /* don’t clip the glow */
+}
+
+/* show right half; to show left half use clip-path inset(0 50% 0 0) */
+.hero__visual::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  clip-path: inset(0 0 0 50%);  /* keep right half */
+}
+.visual__img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* keep logo shape */
+  filter: 
+    saturate(1.05) contrast(1.05)
+    drop-shadow(0 0 25px rgba(255, 90, 9, 0.6))   /* orange glow core */
+    drop-shadow(0 0 60px rgba(236, 127, 55, 0.4)); /* softer outer glow */
+  opacity: 1;
+  transform: none;
+  mix-blend-mode: normal; /* reset blend if logo looks washed */
+}
+
+
+/* Accessible focus */
+a:focus-visible{ outline: 2px solid var(--orange); outline-offset: 2px; }

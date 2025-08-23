@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Home · SAM-ARIZE
+{% endblock %}
+{% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/home/home.css' %}?v=1.0"
+/>
+{% endblock %}
+
+{% block content %}
+    <section class="hero no-nav-page">
+        <div class="hero__inner">
+            <div class="hero__copy">
+            <h1 class="hero__title">Welcome to the<br>SAM-ARIZE App,</h1>
+            <p class="hero__subtitle">
+                Get organized, track all assets and inventories. A focused toolkit for small teams
+                who dont want to ask each other "Where in the h*** is this!?".
+            </p>
+
+            <div class="hero__cta">
+                <a class="btn btn-primary" href="{% url 'signup' %}">SIGN UP →</a>
+                <a class="btn btn-ghost" href="{% url 'login' %}">I already have an account</a>
+            </div>
+
+            <ul class="hero__bullets" aria-label="Highlights">
+                <li>About Us</li>
+                <li>Contact Us</li>
+                <li>Review Our App</li>
+            </ul>
+            </div>
+
+            <div class="hero__visual" aria-hidden="true">
+            <img src="{% static 'images/samarize-home.png' %}" alt="" class="visual__img">
+            <div class="visual__glow"></div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,80 @@
+/* General container styling */
+.container {
+    max-width: 650px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Heading */
+  .container h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Form labels */
+  .container label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: block;
+    color: #444;
+  }
+  
+  /* Form inputs */
+  .container input[type="text"],
+  .container textarea,
+  .container select {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+    background-color: #fafafa;
+  }
+  
+  .container input:focus,
+  .container textarea:focus,
+  .container select:focus {
+    border-color: #f2b263; /* brand orange */
+    box-shadow: 0 0 6px rgba(242, 178, 99, 0.5);
+    background-color: #fff;
+  }
+  
+  /* Buttons */
+  .container .btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .container .btn-success {
+    background-color: #f2b263;
+    border: none;
+    color: #fff;
+  }
+  
+  .container .btn-success:hover {
+    background-color: #e09a42;
+  }
+  
+  .container .btn-secondary {
+    background-color: #6c757d;
+    border: none;
+  }
+  
+  .container .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+  
+  /* Space between buttons */
+  .container .btn + .btn {
+    margin-left: 10px;
+  }

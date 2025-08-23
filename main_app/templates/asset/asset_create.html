@@ -1,7 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block title %}
+Create Asset · SAM-ARIZE
+{% endblock %}
 {% block head %}
-{% endblock %} {% block content %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/asset/asset_create.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
 <div class="asset-create-container">
     <h2>Add New Asset</h2>
     
@@ -11,7 +21,7 @@
       
       <div class="form-actions">
         <button type="submit" class="btn btn-primary">Save Asset</button>
-        <a href="{% url 'asset_list' %}" class="btn btn-secondary">Cancel</a>
+        <a href="{% url 'asset_index' %}" class="btn btn-secondary">Cancel</a>
       </div>
     </form>
   </div>
