@@ -21,7 +21,8 @@ This application uses the following:
 
 * **Python** 
 * **Django** 
-* **PostgreSQL** 
+* **PostgreSQL**
+* **Django Bootstrap5** 
 
 
 
