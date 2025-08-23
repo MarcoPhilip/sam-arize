@@ -7,41 +7,36 @@ Home · SAM-ARIZE
 {% block head %}
 <link
   rel="stylesheet"
-  href="{% static 'css/home/home.css' %}"
+  href="{% static 'css/home/home.css' %}?v=1.0"
 />
 {% endblock %}
 
 {% block content %}
-    <div class="home-container">
-        <div class="home-content">
-            <h2>Goals</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <div class="image">
-                <img src="" alt="img-sample">
-                <img src="" alt="img-sample">
-                <img src="" alt="img-sample">
+    <section class="hero no-nav-page">
+        <div class="hero__inner">
+            <div class="hero__copy">
+            <h1 class="hero__title">Welcome to the<br>SAM-ARIZE App,</h1>
+            <p class="hero__subtitle">
+                Get organized, track all assets and inventories. A focused toolkit for small teams
+                who dont want to ask each other "Where in the h*** is this!?".
+            </p>
+
+            <div class="hero__cta">
+                <a class="btn btn-primary" href="{% url 'signup' %}">SIGN UP →</a>
+                <a class="btn btn-ghost" href="{% url 'login' %}">I already have an account</a>
+            </div>
+
+            <ul class="hero__bullets" aria-label="Highlights">
+                <li>About Us</li>
+                <li>Contact Us</li>
+                <li>Review Our App</li>
+            </ul>
+            </div>
+
+            <div class="hero__visual" aria-hidden="true">
+            <img src="{% static 'images/samarize-home.png' %}" alt="" class="visual__img">
+            <div class="visual__glow"></div>
             </div>
         </div>
-
-        <div class="home-content">
-            <h2>Mission and Vision</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <div class="image">
-                <img src="" alt="img-sample">
-                <img src="" alt="img-sample">
-                <img src="" alt="img-sample">
-            </div>
-        </div>
-
-        <div class="home-content">
-            <h2>Why SAM-ARIZE?</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <div class="image">
-                <img src="" alt="img-sample">
-                <img src="" alt="img-sample">
-                <img src="" alt="img-sample">
-            </div>
-        </div>
-    </div>
-
+    </section>
 {% endblock %}
