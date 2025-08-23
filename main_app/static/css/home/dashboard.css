@@ -1,0 +1,121 @@
+:root {
+  --bg-dark: #121212;
+  --bg-card: #1e1e1e;
+  --text-primary: #ffffff;
+  --text-secondary: #f9f4f4;
+  --accent-orange: #ff6b35;
+  --accent-orange-dark: #e55a2b;
+  --border-color: #eb5e06;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+}
+
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1rem rgba(255, 107, 0, 0.3) !important;
+  border-color: var(--accent-orange);
+}
+
+.card-header {
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.card-body {
+  color: var(--text-secondary);
+}
+
+.display-6 {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.badge {
+  color: white;
+  font-weight: 500;
+}
+
+.bg-warning {
+  background-color: var(--accent-orange) !important;
+}
+
+.bg-info {
+  background-color: var(--accent-orange-dark) !important;
+}
+
+.bg-primary {
+  background-color: var(--accent-orange) !important;
+}
+
+.bg-success {
+  background-color: #28a745 !important;
+}
+
+.bg-secondary {
+  background-color: #6c757d !important;
+}
+
+.table {
+  color: var(--text-primary);
+}
+
+.table-light {
+  --bs-table-bg: var(--bg-card);
+  --bs-table-accent-bg: var(--border-color);
+  --bs-table-striped-bg: rgba(255, 255, 255, 0.996);
+  --bs-table-striped-color: var(--text-primary);
+  --bs-table-active-bg: rgb(255, 255, 255);
+  --bs-table-hover-bg: rgb(255, 255, 255);
+  --bs-table-hover-color: var(--text-primary);
+}
+
+.table-responsive {
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+}
+
+a {
+  color: var(--accent-orange);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-orange-dark);
+  text-decoration: underline;
+}
+
+.i-icon {
+  color: var(--accent-orange);
+}
+
+.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(255, 107, 0, 0.2) !important;
+}
+
+.fw-semibold {
+  color: var(--text-primary);
+}
+
+.text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.small {
+  font-size: 0.875rem;
+}
+
+.text-decoration-none {
+  cursor: pointer;
+}
+
