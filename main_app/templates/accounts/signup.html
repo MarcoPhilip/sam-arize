@@ -1,19 +1,32 @@
 {% extends "base.html" %}
-{% load static %}
-
 {% block title %}Sign Up · SAM-ARIZE{% endblock %}
-
+{% load static %}
 {% block head %} 
 <link rel="stylesheet" href="{% static 'css/auth_forms.css' %}" />
 {% endblock %}
 
 {% block content %}
 <div class="auth-container">
-  <h1 class="auth-title">Sign Up</h1>
+
+  <!-- Logo + App Name -->
+  <div style="text-align:center; margin-bottom:24px;">
+    <img src="{% static 'images/nav-img.png' %}" alt="Samurai Logo" 
+         style="width:150px; height:150px; border-radius:50%;
+                filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7))
+                        drop-shadow(0 0 28px rgba(255, 255, 255, 0.5));
+                margin-bottom:10px;">
+    <h2 style="font-size:3rem; font-weight:800; color:var(--bg); text-transform:uppercase; margin:0; letter-spacing: 1px;">
+      SAM-ARIZE
+    </h2>
+  </div>
+
+  <!-- Title -->
+  <h1 class="auth-title" style="color:var(--bg);">SIGN UP</h1>
+
+  <!-- Auth Card -->
   <div class="auth-card">
     <form method="post">
       {% csrf_token %}
-
       {{ form.non_field_errors }}
 
       <div class="auth-field">
@@ -22,6 +35,16 @@
         {{ form.username.errors }}
       </div>
 
+      <div class="auth-field">
+        <label for="id_first_name">First Name</label>
+        {{ form.first_name }}
+      </div>
+
+      <div class="auth-field">
+        <label for="id_last_name">Last Name</label>
+        {{ form.last_name }}
+      </div>
+      
       <div class="auth-field">
         <label for="id_email">Email</label>
         {{ form.email }}
@@ -41,7 +64,7 @@
       </div>
 
       <div class="auth-actions">
-        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <button class="btn btn-primary" type="submit">Sign Up</button>
       </div>
     </form>
 

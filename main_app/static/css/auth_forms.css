@@ -8,99 +8,142 @@
   --accent-2: #EC7F37;
 }
 
+/* Fullscreen orange background */
+body {
+  background: rgba(236, 127, 55, .66);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Electrolize', sans-serif;
+  color: var(--text);
+}
+
+/* Container centers everything */
 .auth-container {
-  max-width: 500px;
-  margin: 60px auto;
-  padding: 20px;
-  color: var(--text);
+    max-width: 500px;
+    width: 100%;
+    padding: 20px;
+    color: var(--text);
+    text-align: center;
 }
 
-.auth-title {
-  text-align: center;
-  margin-bottom: 24px;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--accent);
+/* Logo + app name */
+.auth-container img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 12px rgba(255,90,9,0.7))
+            drop-shadow(0 0 28px rgba(236,127,55,0.5));
+}
+.auth-container h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin: 10px 0 20px;
 }
 
+/* Card */
 .auth-card {
-  background: var(--surface);
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-  border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    text-align: left;
 }
 
+/* Title */
+.auth-title {
+    margin-bottom: 24px;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-align: center;
+}
+
+/* Fields */
 .auth-field {
-  margin-bottom: 18px;
+    margin-bottom: 18px;
 }
-
 .auth-field label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 6px;
-  color: var(--muted);
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--muted);
 }
-
 .auth-field input {
-  width: 100%;
-  padding: 12px;
-  font-size: 1rem;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: #1f1f1f;
-  color: var(--text);
-  transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #1f1f1f;
+    color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
-
 .auth-field input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 6px rgba(255,90,9,0.5);
-  outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 6px rgba(255,90,9,0.5);
+    outline: none;
 }
 
+/* Errors */
 .auth-errors {
-  background: rgba(255,90,9,0.1);
-  border: 1px solid var(--accent);
-  padding: 10px;
-  margin-bottom: 16px;
-  border-radius: 8px;
-  color: var(--accent);
-  font-size: 0.95rem;
+    background: rgba(255,90,9,0.1);
+    border: 1px solid var(--accent);
+    padding: 10px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    color: var(--accent);
+    font-size: 0.95rem;
 }
 
+/* Buttons */
 .auth-actions {
-  text-align: center;
+    text-align: center;
 }
-
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: #121212;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #121212;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
 }
-
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(255,90,9,0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255,90,9,0.4);
 }
 
+/* Meta links */
 .auth-meta {
-  margin-top: 16px;
-  text-align: center;
-  color: var(--muted);
+    margin-top: 16px;
+    text-align: center;
+    color: var(--muted);
 }
-
 .auth-meta a {
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+.auth-meta a:hover {
+    text-decoration: underline;
 }
 
-.auth-meta a:hover {
-  text-decoration: underline;
+footer {
+    background: var(--border); 
+    color: var(--accent-2);
+    text-align: center;
+    padding: 1rem;
+    flex-shrink: 0;
+    margin-top: auto;
+
+    width: 100%;       
+    position: relative; 
+    left: 0;
 }
