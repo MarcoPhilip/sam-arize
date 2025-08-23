@@ -1,28 +1,12 @@
 from django.db import models
+from django.conf import settings
 
-# ! Create your models here.
-
-# User Model
-class User(models.Model):
-    # Define the roles
-    ROLE_CHOICES = [
-        ('Admin', 'Admin'),
-        ('Manager', 'Manager'),
-        ('Staff', 'Staff')
-    ]
-
-    name = models.CharField(max_length=20)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=100)
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES)
-
-    def __str__(self):
-        return self.name
 
 # Category Model
 class Category(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -31,6 +15,7 @@ class Category(models.Model):
 class Location(models.Model):
     name = models.CharField(max_length=50)
     address = models.TextField(blank=True, null=True)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -43,6 +28,7 @@ class Supplier(models.Model):
     phone_number = models.CharField(max_length=20)
     email = models.EmailField()
     address = models.TextField() 
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -58,11 +44,11 @@ class Asset(models.Model):
 
     name = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE),
-    quantity = models.IntegerField()
-    serial_number = models.CharField(100, unique=True)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    serial_number = models.CharField(max_length=100, unique=True)
     purchase_date = models.DateField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -75,6 +61,7 @@ class Inventory(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     unit_price = models.DecimalField(max_digits=20, decimal_places=2)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -89,10 +76,10 @@ class PurchaseOrder(models.Model):
         ('delivered', 'Delivered')
     ]
 
-    name = models.CharField(max_length=200),
-    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE),
-    order_date = models.DateField(),
-    status = models.CharField(max_length=30, choices=STATUS_CHOICES),
+    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
+    order_date = models.DateField()
+    status = models.CharField(max_length=30, choices=STATUS_CHOICES)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return f"PO-{self.pk}-{self.supplier.id}"

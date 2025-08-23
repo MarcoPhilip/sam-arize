@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Locations · SAM-ARIZE{% endblock %}
+{% load static %}
+{% block head %} 
+<link rel="stylesheet" href="{% static 'css/list.css' %}" />
+{% endblock %}
+{% block content %}
+<div class="container">
+  <h1>Locations</h1>
+  <a href="{% url 'location_add' %}" class="btn btn-primary mb-2">Add Location</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for location in locations %}
+      <tr>
+        <td><a href="{% url 'location_detail' location.pk %}">{{ location.name }}</a></td>
+        <td>{{ location.address }}</td>
+        <td>
+          <a href="{% url 'location_edit' location.pk %}" class="btn btn-sm btn-warning">Edit</a>
+          <a href="{% url 'location_delete' location.pk %}" class="btn btn-sm btn-danger">Delete</a>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="3" class="text-center">No locations found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

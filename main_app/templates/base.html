@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="icon" type="image/png" href="{% static 'images/samarize-favicon.png' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/samarize-favicon.png' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/base/base.css' %}" />
+
+    <title>{% block title %} Samarize {% endblock %} </title>
+
+    {% block head %} 
+    {% endblock %}
+</head>
+<body>
+    <header class="header-content">
+    <div class="header-logo-container">
+        <a href="/">
+            <img src="{% static 'images/samarize-favicon.png' %}" alt="Samurai Logo" />
+        </a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'inventory_list' %}">Inventory</a></li>
+            <li><a href="{% url 'category_list' %}">Categories</a></li>
+            <li><a href="{% url 'location_list' %}">Location</a></li>
+            <li><a href="{% url 'inventory_list' %}">Suppliers</a></li>
+            <li><a href="{% url 'asset_index' %}">Assets</a></li>
+            <li><a href="{% url 'supplier_list' %}">Suppliers</a></li>
+            
+            {% if user.is_authenticated %}
+                <li>Welcome, {{ user.username }}!</li>
+                <li>
+                    <form method="post" action="{% url 'logout' %}" style="display:inline;" >
+                        {% csrf_token %}
+                        <button type="submit" class="logout" >Logout</button>
+                    </form>
+                </li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            {% endif %}
+        </ul>
+      </nav>
+    </header>
+    <main>
+        {% block content %} 
+        {% endblock %}
+    </main>
+    <footer>
+        <p>COPYRIGHT @ 2025</p>
+    </footer>
+</body>
+</html>

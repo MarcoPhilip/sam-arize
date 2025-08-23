@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Delete Asset · SAM-ARIZE
+{% endblock %}
+
+{% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/asset/asset_confirm_delete.css' %}"
+/>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1 class="mb-3 text-danger">Delete Asset</h1>
+  <p>
+    Are you sure you want to delete the asset 
+    <strong>{{ object.name }}</strong> (ID: {{ object.id }})?
+  </p>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, delete</button>
+    <a href="{% url 'asset_index' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}
