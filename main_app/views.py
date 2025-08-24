@@ -6,6 +6,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
 # CBV Imports
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -181,11 +182,13 @@ def category_delete(request, pk):
     return render(request, 'category/category_confirm_delete.html', {'category': category})
 
 # List inventory
+@login_required
 def inventory_list(request):
     inventories = Inventory.objects.all()
     return render(request, 'inventory/inventory_list.html', {'inventories': inventories})
 
 # Add inventory
+@login_required
 def inventory_add(request):
     if request.method == 'POST':
         form = InventoryForm(request.POST)
@@ -197,6 +200,7 @@ def inventory_add(request):
     return render(request, 'inventory/inventory_form.html', {'form': form, 'title': 'Edit Inventory'})
 
 # Edit inventory
+@login_required
 def inventory_edit(request, pk):
     inventory = get_object_or_404(Inventory, pk=pk)
     if request.method == 'POST':
@@ -209,6 +213,7 @@ def inventory_edit(request, pk):
     return render(request, 'inventory/inventory_form.html', {'form': form, 'title': 'Edit Inventory'})
 
 # Delete inventory
+@login_required
 def inventory_delete(request, pk):
     item = get_object_or_404(Inventory, pk=pk)
     if request.method == 'POST':
@@ -260,6 +265,7 @@ def location_delete(request, pk):
         return redirect('location_list')
     return render(request, 'location/location_confirm_delete.html', {'location': location})
 
+@login_required
 def supplier_list(request):
     query = request.GET.get('q')
     if query:
@@ -275,6 +281,7 @@ def supplier_list(request):
     
     return render(request, 'supplier/supplier_list.html', {'supplier': supplier})
 
+@login_required
 def supplier_detail(request, pk):
     supplier = get_object_or_404(Supplier, pk=pk)
     return render(request, "supplier/supplier_detail.html", {"supplier": supplier})
@@ -289,6 +296,7 @@ def supplier_create(request):
         form = SupplierForm()
     return render(request, "supplier/supplier_form.html", {"form": form, "mode": "create"})
 
+@login_required
 def supplier_edit(request, pk):
     supplier = get_object_or_404(Supplier, pk=pk)
     if request.method == "POST":
@@ -300,6 +308,7 @@ def supplier_edit(request, pk):
         form = SupplierForm(instance=supplier)
     return render(request, "supplier/supplier_form.html", {"form": form, "mode": "edit", "supplier": supplier})
 
+@login_required
 def supplier_delete(request, pk):
     supplier = get_object_or_404(Supplier, pk=pk)
     if request.method == "POST":
@@ -308,24 +317,31 @@ def supplier_delete(request, pk):
     return render(request, "supplier/supplier_confirm_delete.html", {"supplier": supplier})
  
 
-class AssetCreate(CreateView):
+class AssetCreate(LoginRequiredMixin, CreateView):
     model = Asset
     form_class = AssetForm
     template_name = "asset/asset_create.html"
     success_url = reverse_lazy("asset_index")
 
-class AssetDetail(DetailView):
+    # Set user as owner
+    def form_valid(self, form):
+        # ensure the owner is set to the logged-in user
+        if not form.instance.owner_id:
+            form.instance.owner = self.request.user
+        return super().form_valid(form)
+
+class AssetDetail(LoginRequiredMixin, DetailView):
     model = Asset
     template_name = "asset/asset_detail.html"
     
 
-class AssetUpdate(UpdateView):
+class AssetUpdate(LoginRequiredMixin, UpdateView):
     model = Asset
     form_class = AssetForm
     template_name = "asset/asset_update.html"
     success_url = reverse_lazy("asset_index")
 
-class AssetDelete(DeleteView):
+class AssetDelete(LoginRequiredMixin, DeleteView):
     model = Asset
     template_name = "asset/asset_confirm_delete.html"
     success_url = reverse_lazy("asset_index")

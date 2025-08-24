@@ -4,11 +4,9 @@
 {% block title %}
 Asset Details · SAM-ARIZE
 {% endblock %}
+
 {% block head %}
-<link
-  rel="stylesheet"
-  href="{% static 'css/asset/asset_detail.css' %}"
-/>
+<link rel="stylesheet" href="{% static 'css/asset/asset_detail.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -20,9 +18,19 @@ Asset Details · SAM-ARIZE
     <p><strong>Name:</strong> {{ asset.name }}</p>
     <p><strong>Category:</strong> {{ asset.category }}</p>
     <p><strong>Location:</strong> {{ asset.location }}</p>
+    <p><strong>Quantity:</strong> {{ asset.quantity }}</p>
     <p><strong>Serial Number:</strong> {{ asset.serial_number }}</p>
     <p><strong>Purchase Date:</strong> {{ asset.purchase_date|date:"Y-m-d" }}</p>
     <p><strong>Status:</strong> {{ asset.status }}</p>
+    <p><strong>Owner:</strong> 
+      {% if asset.owner %}
+        {% firstof asset.owner.get_full_name asset.owner.username %}
+      {% else %}
+        — 
+      {% endif %}
+    </p>
+    <p><strong>Created At:</strong> {{ asset.created_at|date:"Y-m-d H:i" }}</p>
+    <p><strong>Updated At:</strong> {{ asset.updated_at|date:"Y-m-d H:i" }}</p>
   </div>
 
   <div class="actions">
@@ -31,7 +39,7 @@ Asset Details · SAM-ARIZE
        onclick="return confirm('Are you sure you want to delete this asset?');">
       Delete
     </a>
-    <a href="{% url 'asset_index' %}" class="btn btn-secondary">Back to List</a>
+    <a href="{% url 'asset_index' %}" class="btn btn-info">Back to List</a>
   </div>
 </div>
 {% endblock %}
