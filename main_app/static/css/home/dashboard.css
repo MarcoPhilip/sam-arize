@@ -8,9 +8,39 @@
   --border-color: #eb5e06;
 }
 
-body {
-  background-color: var(--bg-dark);
-  color: var(--text-primary);
+ body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+.dashboard-container {
+  margin: 20px auto;   
+  padding: 20px;       
+  max-width: 1200px;   
+}
+
+/* Dashboard header styling */
+.dashboard-header {
+  text-align: center;         
+  margin-bottom: 30px;       
+}
+
+.dashboard-header h2 {
+  font-size: 2.2rem;        
+  font-weight: bold;
+  color: #f5f5f5;            
+  margin-bottom: 8px;
+  border-bottom: 2px solid #ff6600; 
+  display: inline-block;     
+  padding-bottom: 5px;
+}
+
+.dashboard-header h3 {
+  font-size: 1.3rem;
+  font-style: italic;
+  color: #ff9966;            
+  margin: 0;
 }
 
 .card {
