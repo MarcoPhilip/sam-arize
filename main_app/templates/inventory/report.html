@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Inventory Report · SAM-ARIZE{% endblock %}
+{% block content %}
+<div class="container">
+  <h1>Inventory Report - {{ period }}</h1>
+  <a href="{% url 'inventory_list' %}" class="btn btn-secondary mb-3">Back to Inventory</a>
+
+  {% if inventories %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+            <th>ID</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Location</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for inventory in inventories %}
+        <tr>
+            <td>C - {{inventory.id}}</td>
+          <td>{{ inventory.name }}</td>
+          <td>{{ inventory.category.name }}</td>
+          <td>{{ inventory.location.name }}</td>
+          <td>{{ inventory.quantity }}</td>
+          <td>{{ inventory.unit_price }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No inventory items found for this period.</p>
+  {% endif %}
+</div>
+{% endblock %}

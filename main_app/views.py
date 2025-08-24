@@ -1,7 +1,8 @@
 from functools import wraps
 from django.contrib import messages
 from django.http import HttpResponseForbidden
-
+from django.utils import timezone
+from datetime import timedelta
 
 # Auth Imports
 from django.contrib.auth.decorators import login_required
@@ -266,6 +267,25 @@ def inventory_delete(request, pk):
         item.delete()
         return redirect('inventory_list')
     return render(request, 'inventory/inventory_delete_confirm.html', {'item': item})
+
+def inventory_report(request, period):
+    today = timezone.now().date()
+
+    if period == "week":
+        start_date = today - timedelta(days=7)
+    elif period == "month":
+        start_date = today.replace(day=1)
+    elif period == "year":
+        start_date = today.replace(month=1, day=1)
+    else:
+        start_date = today  # fallback
+
+    inventories = Inventory.objects.filter(created_at__gte=start_date)
+
+    return render(request, "inventory/report.html", {
+        "inventories": inventories,
+        "period": period.capitalize()
+    })
 
 # Locations List
 @login_required

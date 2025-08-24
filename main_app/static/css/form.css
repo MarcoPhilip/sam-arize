@@ -78,3 +78,59 @@
   .container .btn + .btn {
     margin-left: 10px;
   }
+
+  @media (max-width: 768px) {
+    .container {
+      margin: 20px;
+      padding: 20px;
+    }
+  
+    .container h1 {
+      font-size: 1.5rem;
+    }
+  
+    .container label {
+      font-size: 0.95rem;
+    }
+  
+    .container input[type="text"],
+    .container textarea,
+    .container select {
+      font-size: 0.95rem;
+      padding: 10px 12px;
+    }
+  
+    /* Stack buttons on small screens */
+    .container .btn {
+      display: block;
+      width: 100%;
+      margin: 8px 0 0 0; /* top spacing between buttons */
+    }
+  
+    .container .btn + .btn {
+      margin-left: 0; /* reset desktop spacing */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .container {
+      margin: 10px;
+      padding: 15px;
+      border-radius: 12px;
+    }
+  
+    .container h1 {
+      font-size: 1.3rem;
+    }
+  
+    .container label {
+      font-size: 0.9rem;
+    }
+  
+    .container input[type="text"],
+    .container textarea,
+    .container select {
+      font-size: 0.85rem;
+      padding: 8px 10px;
+    }
+  }

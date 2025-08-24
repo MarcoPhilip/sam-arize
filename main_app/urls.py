@@ -40,6 +40,7 @@ urlpatterns = [
     path("inventory/<int:pk>/", views.inventory_detail, name='inventory_detail'),
     path('inventory/<int:pk>/edit/', views.inventory_edit, name='inventory_edit'),
     path('inventory/<int:pk>/delete/', views.inventory_delete, name='inventory_delete'),
+    path("inventory/report/<str:period>/", views.inventory_report, name="inventory_report"),
 
     # Category URLs
     path('categories/', views.category_list, name='category_list'),

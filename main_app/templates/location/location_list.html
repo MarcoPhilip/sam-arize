@@ -11,6 +11,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
+        <th>Location ID</th>
         <th>Name</th>
         <th>Address</th>
         <th>Actions</th>
@@ -19,6 +20,7 @@
     <tbody>
       {% for location in locations %}
       <tr>
+        <td>L - {{ location.pk }}</td>
         <td><a href="{% url 'location_detail' location.pk %}">{{ location.name }}</a></td>
         <td>{{ location.address }}</td>
         <td>

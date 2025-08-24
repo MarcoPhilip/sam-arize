@@ -90,3 +90,55 @@
     font-style: italic;
     color: #777;
 }
+
+
+@media (max-width: 768px) {
+    .container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .container h1 {
+        font-size: 1.5rem;
+    }
+
+    /* Make table horizontally scrollable */
+    .table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .table th,
+    .table td {
+        padding: 10px 8px;
+        font-size: 0.9rem;
+    }
+
+    /* Stack buttons vertically on small screens */
+    .table .btn {
+        display: block;
+        width: 100%;
+        margin: 4px 0;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        margin: 10px;
+        padding: 15px;
+        border-radius: 12px;
+    }
+
+    .container h1 {
+        font-size: 1.2rem;
+    }
+
+    .table th,
+    .table td {
+        padding: 8px 6px;
+        font-size: 0.8rem;
+    }
+}
