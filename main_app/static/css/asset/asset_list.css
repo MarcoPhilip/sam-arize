@@ -230,4 +230,12 @@ body {
     margin-bottom: 4px;
     color: var(--accent);
   }
+  .asset-list-container {
+    background-color: var(--border);
+    
+  }
+  .asset-table {
+    background-color: var(--border);
+    border: none;
+  }
 }
