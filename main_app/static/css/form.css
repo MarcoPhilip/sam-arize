@@ -1,4 +1,7 @@
 /* General container styling */
+body {
+  background-color: #333;
+}
 .container {
     max-width: 650px;
     margin: 40px auto;
