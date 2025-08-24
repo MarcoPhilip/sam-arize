@@ -15,8 +15,16 @@ DASHBOARD · SAM-ARIZE
 {% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Dashboard</h2>
-<h3>Welcome {{ user.username }}</h3>
+
+ <div class="dashboard-header">
+  <h2>Dashboard</h2>
+  <h3>Welcome {{ user.username }}</h3>
+
+
+<div class="dashboard-container">
+<br>
+
+
 
 <!-- KPI cards -->
 <div class="row g-3 mb-4">
@@ -159,6 +167,9 @@ DASHBOARD · SAM-ARIZE
   </div>
 </div>
 
+
+<br> 
+
 <div class="col-6 col-md-3">
   <div class="card shadow-sm h-100">
     <div class="card-body">
@@ -175,6 +186,8 @@ DASHBOARD · SAM-ARIZE
     </div>
   </div>
 </div>
+
+<br>
 
 <div class="col-12 col-md-4">
   <div class="card shadow-sm h-100">
@@ -199,8 +212,7 @@ DASHBOARD · SAM-ARIZE
     </div>
   </div>
 </div>
-
-<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
+</div>
+</div>
 
 {% endblock %}
