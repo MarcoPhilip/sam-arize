@@ -39,22 +39,23 @@
 body {
   margin: 0;
   font-family: 'IBM Plex Serif', sans-serif;
-  background: var(--surface);    /* dark gray page background */
+  background: var(--surface);
   color: var(--text);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* Asset List Container (outer box) */
+/* Asset List Container */
 .asset-list-container {
   max-width: 1100px;
   margin: 2rem auto;
   padding: 1.5rem;
-  background: var(--text);              /* light container per your latest code */
+  background: var(--text);
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(255, 90, 9, .5);  /* orange glow */
+  box-shadow: 0 8px 24px rgba(255, 90, 9, .5);
   color: var(--text);
+  overflow-x: auto; 
 }
 
 /* Title */
@@ -66,47 +67,45 @@ body {
   color: var(--accent);
 }
 
-/* Table (inner card) */
+/* Table */
 .asset-table {
   width: 100%;
+  max-width: 1000px;   
+  margin: 0 auto;      
   border-collapse: collapse;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
   color: #121212;
-  border: 2px solid #000;     /* black border around whole table */
+  border: 2px solid #000;
   box-shadow: 0 4px 14px rgba(0,0,0,.25);
 }
 
-/* Table Head -> WHITE per your change */
+/* Table Head */
 .asset-table thead th {
-  background: rgb(236, 127, 55, .8);        /* white header row */
-  color: #121212;             /* dark text */
+  background: rgba(236, 127, 55, 0.8);
+  color: #121212;
   text-align: center;
   font-weight: 700;
   padding: 12px 14px;
   font-size: 1.4rem;
-  white-space: nowrap;
-  border-bottom: 2px solid #000; /* define the top separation clearly */
+  border-bottom: 2px solid #000;
 }
 
 /* Table Body */
 .asset-table tbody td {
   padding: 12px 14px;
-  border-bottom: 1px solid #000;  /* black row dividers */
+  border-bottom: 1px solid #000;
   font-size: 1.4rem;
   color: #121212;
   text-align: center;
 }
-
 .asset-table tbody tr:nth-child(even) {
   background: #f9f9f9;
 }
-
-/* No hover effect */
 .asset-table tbody tr:hover { background: inherit; }
 
-/* Links inside table */
+/* Links */
 .asset-table a {
   text-decoration: none;
   color: var(--accent);
@@ -114,7 +113,7 @@ body {
 }
 .asset-table a:hover { text-decoration: underline; }
 
-/* Base Button Styles */
+/* Buttons */
 .btn {
   display: inline-block;
   padding: 8px 12px;
@@ -130,8 +129,6 @@ body {
   outline: 2px solid #000;
   outline-offset: 2px;
 }
-
-/* Primary */
 .btn-primary {
   background: var(--btn-primary-bg);
   color: var(--btn-primary-text);
@@ -139,7 +136,6 @@ body {
 }
 .btn-primary:hover { background: var(--btn-primary-hover); }
 
-/* Success */
 .btn-success {
   background: var(--btn-success-bg);
   color: var(--btn-success-text);
@@ -147,7 +143,6 @@ body {
 }
 .btn-success:hover { background: var(--btn-success-hover); }
 
-/* Warning */
 .btn-warning {
   background: var(--btn-warning-bg);
   color: var(--btn-warning-text);
@@ -155,7 +150,6 @@ body {
 }
 .btn-warning:hover { background: var(--btn-warning-hover); }
 
-/* Danger */
 .btn-danger {
   background: var(--btn-danger-bg);
   color: var(--btn-danger-text);
@@ -163,7 +157,6 @@ body {
 }
 .btn-danger:hover { background: var(--btn-danger-hover); }
 
-/* Info */
 .btn-info {
   background: var(--btn-info-bg);
   color: var(--btn-info-text);
@@ -171,16 +164,14 @@ body {
 }
 .btn-info:hover { background: var(--btn-info-hover); }
 
-/* Button spacing */
 .asset-table .btn + .btn { margin-left: .5rem; }
 
-/* Actions section */
+/* Actions */
 .actions {
   margin-top: 1.5rem;
   display: flex;
   justify-content: center;
 }
-
 .actions .btn-primary {
   background: var(--btn-primary-bg);
   color: var(--btn-primary-text);
@@ -194,4 +185,49 @@ body {
 .actions .btn-primary:hover {
   background: var(--btn-primary-hover);
   border-color: var(--btn-primary-border);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .asset-table {
+    max-width: 90%;
+    font-size: 1.2rem;
+  }
+  .asset-table thead th,
+  .asset-table tbody td {
+    padding: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .asset-table {
+    max-width: 100%;
+    font-size: 1rem;
+  }
+  .asset-table thead {
+    display: none; /* hide header */
+  }
+  .asset-table, .asset-table tbody, .asset-table tr, .asset-table td {
+    display: block;
+    width: 100%;
+  }
+  .asset-table tr {
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: .5rem;
+    background: #fff;
+  }
+  .asset-table td {
+    text-align: left;
+    padding: 8px;
+    border: none;
+    position: relative;
+  }
+  .asset-table td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+    color: var(--accent);
+  }
 }
