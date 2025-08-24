@@ -13,14 +13,14 @@ Delete Asset · SAM-ARIZE
 {% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-  <h1 class="mb-3 text-danger">Delete Asset</h1>
+<div class="asset-delete-container">
+  <h2>Delete Asset</h2>
   <p>
     Are you sure you want to delete the asset 
     <strong>{{ object.name }}</strong> (ID: {{ object.id }})?
   </p>
 
-  <form method="post">
+  <form method="post" class="delete-form">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Yes, delete</button>
     <a href="{% url 'asset_index' %}" class="btn btn-secondary">Cancel</a>

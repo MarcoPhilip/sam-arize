@@ -10,7 +10,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Electrolize&family=Nova+Square&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Electrolize&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Nova+Square&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 
   <link rel="stylesheet" href="{% static 'css/base/base.css' %}" />
@@ -40,11 +40,9 @@
       <button class="navbar-toggler" type="button"
         data-bs-toggle="collapse" data-bs-target="#mainNavbar"
         aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation"
-        style="border: 2px solid #FF5A09;">
-          <span class="navbar-toggler-icon" 
-                style="background-image: url('data:image/svg+xml;charset=utf8,%3Csvg viewBox=%270 0 30 30%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cpath stroke=%27%23FF5A09%27 stroke-width=%272%27 stroke-linecap=%27round%27 d=%27M4 7h22M4 15h22M4 23h22%27/%3E%3C/svg%3E');">
-          </span>
-      </button>
+        style="border: 2px solid var(--accent);">
+  <span class="navbar-toggler-icon"></span>
+</button>
 
       <!-- Collapsible content -->
       <div class="collapse navbar-collapse" id="mainNavbar">
@@ -56,7 +54,7 @@
           <li class="nav-item"><a class="nav-link" href="{% url 'purchase_order_list' %}">Purchase Orders</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'asset_index' %}">Assets</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'supplier_list' %}">Suppliers</a></li>
-
+          <br>
           {% if user.is_authenticated %}
             <li class="nav-item">
               <a href="#" class="btn btn-link nav-link logout-btn p-0" 
@@ -81,7 +79,8 @@
 </main>
 
 <footer>
-  <p>COPYRIGHT @ 2025</p>
+  <p>&copy; {{ current_year }} SAM-ARIZE · Asset & Inventory Management</p>
+  <p>Created by Nesar Atayi, Marco Philip Agapito, and Yaya Sanyang</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
