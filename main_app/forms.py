@@ -25,12 +25,12 @@ class SignupForm(UserCreationForm):
 class InventoryForm(forms.ModelForm):
     class Meta:
         model = Inventory
-        fields = ['name', 'category', 'location', 'quantity', 'unit_price']
+        fields = ['name', 'category', 'location', 'quantity', 'unit_price', 'quantity']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'category': forms.Select(attrs={'class': 'form-control'}),
             'location': forms.Select(attrs={'class': 'form-control'}),
-            'quantity': forms.NumberInput(attrs={'class': 'form-control'}),
+            'quantity': forms.NumberInput(attrs={"class": "form-control", "min": "0"}),
             'unit_price': forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
@@ -56,23 +56,26 @@ class LocationForm(forms.ModelForm):
 class AssetForm(forms.ModelForm):
     class Meta:
         model = Asset
-        fields = ["name", "category", "location", "serial_number", "purchase_date", "status"]
+        fields = ["name", "category", "location", "serial_number", "purchase_date", "status", "quantity"]
         widgets = {
             "name": forms.TextInput(attrs={"class": "form-control"}),
             "category": forms.Select(attrs={"class": "form-select"}),
             "location": forms.Select(attrs={"class": "form-select"}),
+            "quantity":forms.NumberInput(attrs={"class": "form-control", "min": "0"}),
             "serial_number": forms.TextInput(attrs={"class": "form-control"}),
             "status": forms.Select(attrs={"class": "form-select"}),
+            
         }
 
 class PurchaseOrderForm(forms.ModelForm):
     class Meta:
         model = PurchaseOrder
-        fields = ["supplier", "order_date", "status"]
+        fields = ["supplier", "order_date", "status", "name"]
         widgets = {
             "supplier": forms.Select(attrs={"class": "form-select"}),
             "order_date": forms.DateInput(attrs={"type": "date", "class": "form-control"}),
             "status": forms.Select(attrs={"class": "form-select"}),
+            "name" : forms.TextInput(attrs={"class": "form-control"}),
         }
 
 class SupplierForm(forms.ModelForm):

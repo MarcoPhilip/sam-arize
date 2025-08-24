@@ -1,3 +1,8 @@
+body {
+    background-color: #333;
+
+
+}
 .container {
     max-width: 900px;
     margin: 40px auto;
