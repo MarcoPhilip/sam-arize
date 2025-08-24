@@ -1,7 +1,7 @@
 :root {
   --bg: #1f1f1f;
   --surface: #2c2c2c;
-  --border: #3a3a3a;
+  --border: rgb(58, 58, 58);
   --text: #f3f3f3;
   --accent: #FF5A09;
   --accent-2: #EC7F37;
@@ -137,4 +137,5 @@ footer {
   padding: 1rem;
   flex-shrink: 0;
   margin-top: auto;
+  border-top: 2px solid #484848;
 }
