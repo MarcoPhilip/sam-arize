@@ -1,4 +1,3 @@
-/* Base Button */
 .btn {
   display: inline-block;
   padding: 0.6rem 1.2rem;
@@ -10,72 +9,53 @@
   border: 1px solid transparent;
   transition: background 0.2s ease, transform 0.1s ease;
 }
+.btn:active { transform: scale(0.97); }
+.btn:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
 
-.btn:active {
-  transform: scale(0.97);
-}
-.btn:focus-visible {
-  outline: 2px solid #000;
-  outline-offset: 2px;
-}
+/* ===== Variants ===== */
+.btn-primary  { background: var(--btn-primary-bg);  color: var(--btn-primary-text);  border: 1px solid var(--btn-primary-border); }
+.btn-primary:hover { background: var(--btn-primary-hover); }
 
-/* Primary */
-.btn-primary {
-  background: var(--btn-primary-bg);
-  color: var(--btn-primary-text);
-  border: 1px solid var(--btn-primary-border);
-}
-.btn-primary:hover {
-  background: var(--btn-primary-hover);
-}
+.btn-success  { background: var(--btn-success-bg);  color: var(--btn-success-text);  border: 1px solid var(--btn-success-border); }
+.btn-success:hover { background: var(--btn-success-hover); }
 
-/* Success */
-.btn-success {
-  background: var(--btn-success-bg);
-  color: var(--btn-success-text);
-  border: 1px solid var(--btn-success-border);
-}
-.btn-success:hover {
-  background: var(--btn-success-hover);
-}
+.btn-warning  { background: var(--btn-warning-bg);  color: var(--btn-warning-text);  border: 1px solid var(--btn-warning-border); }
+.btn-warning:hover { background: var(--btn-warning-hover); }
 
-/* Add (special style for + Add Asset, Create, etc.) */
+.btn-danger   { background: var(--btn-danger-bg);   color: var(--btn-danger-text);   border: 1px solid var(--btn-danger-border); }
+.btn-danger:hover { background: var(--btn-danger-hover); }
+
+.btn-info     { background: var(--btn-info-bg);     color: var(--btn-info-text);     border: 1px solid var(--btn-info-border); }
+.btn-info:hover { background: var(--btn-info-hover); }
+
 .btn-add {
-  background: #28a745; /* clean green */
+  background: #28a745;
   color: #fff;
   border: 1px solid #1f7a36;
   font-weight: 600;
 }
-.btn-add:hover {
-  background: #218838;
-}
+.btn-add:hover { background: #218838; }
 
-/* Warning */
-.btn-warning {
-  background: var(--btn-warning-bg);
-  color: var(--btn-warning-text);
-  border: 1px solid var(--btn-warning-border);
-}
-.btn-warning:hover {
-  background: var(--btn-warning-hover);
-}
+/* ===== Aliases ===== */
+.btn-view   { background: var(--btn-info-bg);    color: var(--btn-info-text);    border: 1px solid var(--btn-info-border); }
+.btn-edit   { background: var(--btn-warning-bg); color: var(--btn-warning-text); border: 1px solid var(--btn-warning-border); }
+.btn-delete { background: var(--btn-danger-bg);  color: var(--btn-danger-text);  border: 1px solid var(--btn-danger-border); }
+.btn-view:hover   { background: var(--btn-info-hover); }
+.btn-edit:hover   { background: var(--btn-warning-hover); }
+.btn-delete:hover { background: var(--btn-danger-hover); }
 
-/* Danger */
-.btn-danger {
-  background: var(--btn-danger-bg);
-  color: var(--btn-danger-text);
-  border: 1px solid var(--btn-danger-border);
-}
-.btn-danger:hover {
-  background: var(--btn-danger-hover);
-}
-
-/* Info */
-.btn-info {
-  background: var(--btn-info-bg);
-  color: var(--btn-info-text);
-  border: 1px solid var(--btn-info-border);
-}
-.btn-info:hover {
-  background: var(--btn-info-hover);
+/* ===== Smartphone Buttons ===== */
+@media (max-width: 600px) {
+  .btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: transform 0.1s ease;
+  }
+  .btn:active { transform: scale(0.98); }
 }
