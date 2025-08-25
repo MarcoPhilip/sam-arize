@@ -1,218 +1,58 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block title %}Suppliers · SAM-ARIZE{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/list.css' %}">
+<link rel="stylesheet" href="{% static 'css/button.css' %}">
+{% endblock %}
+
 {% block content %}
-<style>
-  :root {
-    --bg-dark: #121212;
-    --bg-card: #1e1e1e;
-    --text-primary: #ffffff;
-    --text-secondary: #cccccc;
-    --accent-orange: #ff6b35;
-    --accent-orange-dark: #e55a2b;
-    --border-color: #333333;
-    --success-color: #28a745;
-    --success-color-dark: #218838;
-    --warning-color: #ffc107;
-    --danger-color: #dc3545;
-    --secondary-color: #6c757d;
-  }
+<div class="list-container">
+  <h2>Suppliers</h2>
 
-  body {
-    background-color: var(--bg-dark);
-    color: var(--text-primary);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
+  {% if supplier %}
+    <div class="table-wrap">
+      <table class="list-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th style="white-space: nowrap;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in supplier %}
+            <tr>
+              <td data-label="Name">
+                <a href="{% url 'supplier_detail' s.pk %}" class="list-link">
+                  {{ s.name }}
+                </a>
+              </td>
+              <td data-label="Contact">{{ s.contact_person|default:"—" }}</td>
+              <td data-label="Email">{{ s.email|default:"—" }}</td>
+              <td data-label="Phone">{{ s.phone_number|default:"—" }}</td>
+              <td data-label="Actions">
+                <a href="{% url 'supplier_detail' s.pk %}" class="btn btn-view">View</a>
+                <a href="{% url 'supplier_edit' s.pk %}" class="btn btn-edit">Edit</a>
+                <a href="{% url 'supplier_delete' s.pk %}" class="btn btn-delete">
+                  Delete
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p>No suppliers found.</p>
+  {% endif %}
 
-  .suppliers-container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-  }
-
-  .suppliers-title {
-    color: var(--text-primary);
-    margin-bottom: 1.5rem;
-    font-size: 1.75rem;
-    font-weight: 600;
-  }
-
-  /* Search Bar */
-  .search-form {
-    margin-bottom: 1.5rem;
-  }
-
-  .search-input {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: var(--bg-dark);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    color: var(--text-primary);
-    font-size: 1rem;
-  }
-
-  .search-input:focus {
-    outline: none;
-    border-color: var(--accent-orange);
-    box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
-  }
-
-  .search-input::placeholder {
-    color: var(--text-secondary);
-    opacity: 0.7;
-  }
-
-  /* New Supplier Button */
-  .btn-new {
-    background-color: var(--accent-orange-dark);
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 500;
-    display: inline-block;
-    margin-bottom: 1.5rem;
-    transition: background-color 0.2s;
-  }
-
-  .btn-new:hover {
-    background-color: var(--success-color-dark);
-  }
-
-  /* Table Container */
-  .table-container {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Table Styles */
-  .suppliers-table {
-    width: 100%;
-    border-collapse: collapse;
-    color: var(--text-primary);
-  }
-
-  .suppliers-table th {
-    background-color: var(--bg-card);
-    color: var(--text-secondary);
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid var(--border-color);
-    font-weight: 500;
-  }
-
-  .suppliers-table th:last-child {
-    text-align: right;
-  }
-
-  .suppliers-table td {
-    padding: 1rem;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .suppliers-table td:last-child {
-    text-align: right;
-  }
-
-  .suppliers-table tr:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-  }
-
-  /* Table Links */
-  .table-link {
-    color: var(--accent-orange);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .table-link:hover {
-    color: var(--accent-orange-dark);
-    text-decoration: underline;
-  }
-
-  /* Action Links */
-  .action-links {
-    display: inline-flex;
-    gap: 0.75rem;
-  }
-
-  .action-edit {
-    color: var(--warning-color);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .action-edit:hover {
-    color: #e0a800;
-    text-decoration: underline;
-  }
-
-  .action-delete {
-    color: var(--danger-color);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .action-delete:hover {
-    color: #c82333;
-    text-decoration: underline;
-  }
-
-  /* Empty State */
-  .empty-state {
-    text-align: center;
-    padding: 2rem;
-    color: var(--text-secondary);
-  }
-</style>
-
-<div class="suppliers-container">
-  <h2 class="suppliers-title">Suppliers</h2>
-
-  <!-- Search Bar -->
-  <form method="get" class="search-form">
-    <input type="text" name="q" class="search-input" placeholder="Search suppliers..." value="{{ request.GET.q }}">
-  </form>
-
-  <!-- New Supplier Button -->
-  <a class="btn-new" href="{% url 'supplier_create' %}">+ New Supplier</a>
-
-  <!-- Table Container -->
-  <div class="table-container">
-    <table class="suppliers-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Contact</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for s in supplier %}
-        <tr>
-          <td><a href="{% url 'supplier_detail' s.pk %}" class="table-link">{{ s.name }}</a></td>
-          <td>{{ s.contact_person }}</td>
-          <td>{{ s.email }}</td>
-          <td>{{ s.phone_number }}</td>
-          <td>
-            <div class="action-links">
-              <a href="{% url 'supplier_edit' s.pk %}" class="action-edit">Edit</a>
-              <a href="{% url 'supplier_delete' s.pk %}" class="action-delete">Delete</a>
-            </div>
-          </td>
-        </tr>
-        {% empty %}
-        <tr>
-          <td colspan="5" class="empty-state">No suppliers found.</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+  <div class="actions">
+    <a href="{% url 'supplier_create' %}" class="btn btn-add">+ Add Supplier</a>
   </div>
 </div>
 {% endblock %}

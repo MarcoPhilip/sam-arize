@@ -1,52 +1,60 @@
 {% extends "base.html" %}
-{% block title %}Inventory · SAM-ARIZE{% endblock %}
 {% load static %}
-{% block head %} 
-<link rel="stylesheet" href="{% static 'css/list.css' %}" />
+
+{% block title %}Inventory · SAM-ARIZE{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/list.css' %}">
+<link rel="stylesheet" href="{% static 'css/button.css' %}">
 {% endblock %}
+
 {% block content %}
-<div class="container">
-  <h1>Inventory</h1>
+<div class="list-container">
+  <h2>Inventory</h2>
 
-  <div class="mb-3 text-center">
-    <a href="{% url 'inventory_report' 'week' %}" class="btn btn-outline-primary">This Week</a>
-    <a href="{% url 'inventory_report' 'month' %}" class="btn btn-outline-primary">This Month</a>
-    <a href="{% url 'inventory_report' 'year' %}" class="btn btn-outline-primary">This Year</a>
+  {% if inventories %}
+    <div class="table-wrap">
+      <table class="list-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Location</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th style="white-space:nowrap;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for inventory in inventories %}
+            <tr>
+              <td data-label="Name">
+                <a href="{% url 'inventory_detail' inventory.pk %}" class="list-link">
+                  {{ inventory.name }}
+                </a>
+              </td>
+              <td data-label="Category">{{ inventory.category.name }}</td>
+              <td data-label="Location">{{ inventory.location.name }}</td>
+              <td data-label="Quantity">{{ inventory.quantity }}</td>
+              <td data-label="Unit Price">{{ inventory.unit_price }}</td>
+              <td data-label="Actions">
+                <a href="{% url 'inventory_detail' inventory.pk %}" class="btn btn-info">View</a>
+                <a href="{% url 'inventory_edit' inventory.pk %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'inventory_delete' inventory.pk %}">
+                  Delete
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p>No inventory items found.</p>
+  {% endif %}
+
+  <div class="actions">
+    <a href="{% url 'inventory_add' %}" class="btn btn-add">+ Add Inventory</a>
   </div>
-
-  <a href="{% url 'inventory_add' %}" class="btn btn-primary mb-2">Add Inventory</a>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Location</th>
-        <th>Quantity</th>
-        <th>Unit Price</th>
-        <th>Created Date</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for inventory in inventories %}
-      <tr>
-        <td><a href="{% url 'inventory_detail' inventory.pk %}" class="inventory-link">{{ inventory.name }}</a></td>
-        <td>{{ inventory.category.name }}</td>
-        <td>{{ inventory.location.name }}</td>
-        <td>{{ inventory.quantity }}</td>
-        <td>{{ inventory.unit_price }}</td>
-        <td>{{ inventory.created_at }}</td>
-        <td>
-          <a href="{% url 'inventory_edit' inventory.pk %}" class="btn btn-sm btn-warning">Edit</a>
-          <a href="{% url 'inventory_delete' inventory.pk %}" class="btn btn-sm btn-danger">Delete</a>
-        </td>
-      </tr>
-      {% empty %}
-      <tr>
-        <td colspan="6">No inventory items found.</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
 </div>
 {% endblock %}

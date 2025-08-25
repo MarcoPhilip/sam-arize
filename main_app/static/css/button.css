@@ -1,0 +1,81 @@
+/* Base Button */
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+.btn:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+/* Primary */
+.btn-primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border: 1px solid var(--btn-primary-border);
+}
+.btn-primary:hover {
+  background: var(--btn-primary-hover);
+}
+
+/* Success */
+.btn-success {
+  background: var(--btn-success-bg);
+  color: var(--btn-success-text);
+  border: 1px solid var(--btn-success-border);
+}
+.btn-success:hover {
+  background: var(--btn-success-hover);
+}
+
+/* Add (special style for + Add Asset, Create, etc.) */
+.btn-add {
+  background: #28a745; /* clean green */
+  color: #fff;
+  border: 1px solid #1f7a36;
+  font-weight: 600;
+}
+.btn-add:hover {
+  background: #218838;
+}
+
+/* Warning */
+.btn-warning {
+  background: var(--btn-warning-bg);
+  color: var(--btn-warning-text);
+  border: 1px solid var(--btn-warning-border);
+}
+.btn-warning:hover {
+  background: var(--btn-warning-hover);
+}
+
+/* Danger */
+.btn-danger {
+  background: var(--btn-danger-bg);
+  color: var(--btn-danger-text);
+  border: 1px solid var(--btn-danger-border);
+}
+.btn-danger:hover {
+  background: var(--btn-danger-hover);
+}
+
+/* Info */
+.btn-info {
+  background: var(--btn-info-bg);
+  color: var(--btn-info-text);
+  border: 1px solid var(--btn-info-border);
+}
+.btn-info:hover {
+  background: var(--btn-info-hover);
+}
