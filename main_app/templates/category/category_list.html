@@ -17,9 +17,9 @@
       <table class="list-table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th style="white-space: nowrap;">Actions</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col" class="col-actions">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -27,10 +27,10 @@
             <tr>
               <td data-label="Name">{{ category.name }}</td>
               <td data-label="Description">{{ category.description|default:"—" }}</td>
-              <td data-label="Actions">
+              <td data-label="Actions" class="col-actions">
                 <a href="{% url 'category_detail' category.pk %}" class="btn btn-view">View</a>
                 <a href="{% url 'category_edit' category.pk %}" class="btn btn-edit">Edit</a>
-                <a href="{% url 'category_delete' category.pk %}" class="btn btn-delete">
+                <a href="{% url 'category_delete' category.pk %}">
                   Delete
                 </a>
               </td>
@@ -40,7 +40,9 @@
       </table>
     </div>
   {% else %}
-    <p>No categories found.</p>
+    <div class="empty-state">
+      <p>No categories found.</p>
+    </div>
   {% endif %}
 
   <div class="actions">

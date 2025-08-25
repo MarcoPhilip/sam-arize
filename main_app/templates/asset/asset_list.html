@@ -19,26 +19,28 @@ Assets · SAM-ARIZE
     <table class="list-table">
       <thead>
         <tr>
-          <th>ID</th>
           <th>Name</th>
+          <th>ID</th>
           <th>Added By</th>
           <th>Status</th>
-          <th>Actions</th>
+          <th class="col-actions">Actions</th>
         </tr>
       </thead>
       <tbody>
         {% for asset in assets %}
           <tr>
-            <td data-label="ID">{{ asset.id }}</td>
             <td data-label="Name">{{ asset.name }}</td>
+            <td data-label="ID">{{ asset.id }}</td>
             <td data-label="Added By">{{ asset.owner|default:"—" }}</td>
             <td data-label="Status">{{ asset.status }}</td>
             <td data-label="Actions">
-              <a href="{% url 'asset_detail' asset.id %}" class="btn btn-info">View</a>
-              <a href="{% url 'asset_update' asset.id %}" class="btn btn-warning">Edit</a>
-              <a href="{% url 'asset_delete' asset.id %}" class="btn btn-danger">
-                Delete
-              </a>
+              <div class="btn-group">
+                <a href="{% url 'asset_detail' asset.id %}" class="btn btn-info btn-view">View</a>
+                <a href="{% url 'asset_update' asset.id %}" class="btn btn-warning btn-edit">Edit</a>
+                <a href="{% url 'asset_delete' asset.id %}" class="btn btn-danger btn-delete">
+                  Delete
+                </a>
+              </div>
             </td>
           </tr>
         {% endfor %}
@@ -46,7 +48,9 @@ Assets · SAM-ARIZE
     </table>
   </div>
   {% else %}
-    <p>No assets found.</p>
+    <div class="empty-state">
+      <p>No assets found.</p>
+    </div>
   {% endif %}
 
   <div class="actions">

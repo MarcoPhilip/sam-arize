@@ -17,30 +17,30 @@
       <table class="list-table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Address</th>
-            <th style="white-space: nowrap;">Actions</th>
+            <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col" class="col-actions">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {% for location in locations %}
-            <tr>
-              <td data-label="Name">{{ location.name }}</td>
-              <td data-label="Address">{{ location.address }}</td>
-              <td data-label="Actions">
-                <a href="{% url 'location_detail' location.pk %}" class="btn btn-view">View</a>
-                <a href="{% url 'location_edit' location.pk %}" class="btn btn-edit">Edit</a>
-                <a href="{% url 'location_delete' location.pk %}" class="btn btn-delete">
-                  Delete
-                </a>
-              </td>
-            </tr>
+          {% for loc in locations %}
+          <tr>
+            <td data-label="Name">{{ loc.name }}</td>
+            <td data-label="Address">{{ loc.address|default:"—" }}</td>
+            <td data-label="Actions" class="col-actions">
+              <a href="{% url 'location_detail' loc.pk %}" class="btn btn-view">View</a>
+              <a href="{% url 'location_edit' loc.pk %}" class="btn btn-edit">Edit</a>
+              <a href="{% url 'location_delete' loc.pk %}" class="btn btn-delete">Delete</a>
+            </td>
+          </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
   {% else %}
-    <p>No locations found.</p>
+    <div class="empty-state">
+      <p>No locations found.</p>
+    </div>
   {% endif %}
 
   <div class="actions">

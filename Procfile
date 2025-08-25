@@ -1,0 +1,1 @@
+web: gunicorn samarize.wsgi --log-file -

@@ -17,40 +17,36 @@
       <table class="list-table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Location</th>
-            <th>Quantity</th>
-            <th>Unit Price</th>
-            <th style="white-space:nowrap;">Actions</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Location</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Unit Price</th>
+            <th scope="col" class="col-actions">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {% for inventory in inventories %}
-            <tr>
-              <td data-label="Name">
-                <a href="{% url 'inventory_detail' inventory.pk %}" class="list-link">
-                  {{ inventory.name }}
-                </a>
-              </td>
-              <td data-label="Category">{{ inventory.category.name }}</td>
-              <td data-label="Location">{{ inventory.location.name }}</td>
-              <td data-label="Quantity">{{ inventory.quantity }}</td>
-              <td data-label="Unit Price">{{ inventory.unit_price }}</td>
-              <td data-label="Actions">
-                <a href="{% url 'inventory_detail' inventory.pk %}" class="btn btn-info">View</a>
-                <a href="{% url 'inventory_edit' inventory.pk %}" class="btn btn-warning">Edit</a>
-                <a href="{% url 'inventory_delete' inventory.pk %}">
-                  Delete
-                </a>
-              </td>
-            </tr>
+          {% for item in inventories %}
+          <tr>
+            <td data-label="Name">{{ item.name }}</td>
+            <td data-label="Category">{{ item.category.name }}</td>
+            <td data-label="Location">{{ item.location.name }}</td>
+            <td data-label="Quantity">{{ item.quantity }}</td>
+            <td data-label="Unit Price">{{ item.unit_price }}</td>
+            <td data-label="Actions" class="col-actions">
+              <a href="{% url 'inventory_detail' item.pk %}" class="btn btn-view">View</a>
+              <a href="{% url 'inventory_edit' item.pk %}" class="btn btn-edit">Edit</a>
+              <a href="{% url 'inventory_delete' item.pk %}">Delete</a>
+            </td>
+          </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
   {% else %}
-    <p>No inventory items found.</p>
+    <div class="empty-state">
+      <p>No inventories found.</p>
+    </div>
   {% endif %}
 
   <div class="actions">

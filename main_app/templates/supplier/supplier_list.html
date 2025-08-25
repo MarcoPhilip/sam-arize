@@ -17,38 +17,34 @@
       <table class="list-table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Contact</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th style="white-space: nowrap;">Actions</th>
+            <th scope="col">Name</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col" class="col-actions">Actions</th>
           </tr>
         </thead>
         <tbody>
           {% for s in supplier %}
-            <tr>
-              <td data-label="Name">
-                <a href="{% url 'supplier_detail' s.pk %}" class="list-link">
-                  {{ s.name }}
-                </a>
-              </td>
-              <td data-label="Contact">{{ s.contact_person|default:"—" }}</td>
-              <td data-label="Email">{{ s.email|default:"—" }}</td>
-              <td data-label="Phone">{{ s.phone_number|default:"—" }}</td>
-              <td data-label="Actions">
-                <a href="{% url 'supplier_detail' s.pk %}" class="btn btn-view">View</a>
-                <a href="{% url 'supplier_edit' s.pk %}" class="btn btn-edit">Edit</a>
-                <a href="{% url 'supplier_delete' s.pk %}" class="btn btn-delete">
-                  Delete
-                </a>
-              </td>
-            </tr>
+          <tr>
+            <td data-label="Name">{{ s.name }}</td>
+            <td data-label="Contact">{{ s.contact_person|default:"—" }}</td>
+            <td data-label="Email">{{ s.email|default:"—" }}</td>
+            <td data-label="Phone">{{ s.phone_number|default:"—" }}</td>
+            <td data-label="Actions" class="col-actions">
+              <a href="{% url 'supplier_detail' s.pk %}" class="btn btn-view">View</a>
+              <a href="{% url 'supplier_edit' s.pk %}" class="btn btn-edit">Edit</a>
+              <a href="{% url 'supplier_delete' s.pk %}" class="btn btn-delete">Delete</a>
+            </td>
+          </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
   {% else %}
-    <p>No suppliers found.</p>
+    <div class="empty-state">
+      <p>No suppliers found.</p>
+    </div>
   {% endif %}
 
   <div class="actions">
