@@ -17,32 +17,28 @@
       <table class="list-table">
         <thead>
           <tr>
-            <th>PO #</th>
-            <th>Supplier</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th style="white-space: nowrap;">Actions</th>
+            <th scope="col">Name</th>
+            <th scope="col">PO #</th>
+            <th scope="col">Supplier</th>
+            <th scope="col">Date</th>
+            <th scope="col">Status</th>
+            <th scope="col" class="col-actions">Actions</th>
           </tr>
         </thead>
         <tbody>
           {% for order in orders %}
-            <tr>
-              <td data-label="PO #">PO-{{ order.pk }}</td>
-              <td data-label="Supplier">
-                <a class="list-link" href="{% url 'purchase_order_detail' order.pk %}">
-                  {{ order.supplier.name }}
-                </a>
-              </td>
-              <td data-label="Date">{{ order.order_date|date:"M d, Y" }}</td>
-              <td data-label="Status">{{ order.get_status_display }}</td>
-              <td data-label="Actions">
-                <a href="{% url 'purchase_order_detail' order.pk %}" class="btn btn-view">View</a>
-                <a href="{% url 'purchase_order_edit' order.pk %}" class="btn btn-edit">Edit</a>
-                <a href="{% url 'purchase_order_delete' order.pk %}" class="btn btn-delete">
-                  Delete
-                </a>
-              </td>
-            </tr>
+          <tr>
+            <td data-label="Name">{{ order.name|default:"—" }}</td>
+            <td data-label="PO #">PO-{{ order.pk }}</td>
+            <td data-label="Supplier">{{ order.supplier.name }}</td>
+            <td data-label="Date">{{ order.order_date|date:"M d, Y" }}</td>
+            <td data-label="Status">{{ order.get_status_display }}</td>
+            <td data-label="Actions" class="col-actions">
+              <a href="{% url 'purchase_order_detail' order.pk %}" class="btn btn-view">View</a>
+              <a href="{% url 'purchase_order_edit' order.pk %}" class="btn btn-edit">Edit</a>
+              <a href="{% url 'purchase_order_delete' order.pk %}" class="btn btn-delete">Delete</a>
+            </td>
+          </tr>
           {% endfor %}
         </tbody>
       </table>
@@ -52,7 +48,7 @@
   {% endif %}
 
   <div class="actions">
-    <a class="btn btn-add" href="{% url 'purchase_order_create' %}">+ New Purchase Order</a>
+    <a href="{% url 'purchase_order_create' %}" class="btn btn-add">+ New Purchase Order</a>
   </div>
 </div>
 {% endblock %}
