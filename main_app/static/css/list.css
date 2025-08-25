@@ -177,6 +177,19 @@ body {
   }
 }
 
+/* Empty state (when no records are found) */
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  background: var(--accent-2);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  color: var(--bg);
+  font-size: 1.2rem;
+  font-style: bold;
+  margin: 1rem 0;
+}
+
 @media (max-width: 480px) {
   .list-container {
     background: var(--surface);
