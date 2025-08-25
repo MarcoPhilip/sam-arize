@@ -25,13 +25,10 @@
         <tbody>
           {% for category in categories %}
             <tr>
-              <td data-label="Name">
-                <a href="{% url 'category_detail' category.pk %}" class="list-link">
-                  {{ category.name }}
-                </a>
-              </td>
+              <td data-label="Name">{{ category.name }}</td>
               <td data-label="Description">{{ category.description|default:"—" }}</td>
               <td data-label="Actions">
+                <a href="{% url 'category_detail' category.pk %}" class="btn btn-view">View</a>
                 <a href="{% url 'category_edit' category.pk %}" class="btn btn-edit">Edit</a>
                 <a href="{% url 'category_delete' category.pk %}" class="btn btn-delete">
                   Delete
