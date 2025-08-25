@@ -1,13 +1,27 @@
 {% extends "base.html" %}
+
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/details.css' %}">
+{% endblock %}
+
 {% block content %}
 <div class="container">
-  <h2>PO #{{ order.pk }}</h2>
+
+  <h1>PO #{{ order.id }}</h1>
+  <p><strong>ID:</strong> p{{ order.id }}</p>
   <p><strong>Supplier:</strong> {{ order.supplier.name }}</p>
   <p><strong>Order Date:</strong> {{ order.order_date }}</p>
   <p><strong>Status:</strong> {{ order.get_status_display }}</p>
-
+  {% if order.owner %}
+    <p><strong>Added By:</strong> {{ order.owner.username }}</p>
+  {% else %}
+    <p><strong>Added By:</strong> Unknown</p>
+  {% endif %}
+  <div>
   <a class="btn btn-warning" href="{% url 'purchase_order_edit' order.pk %}">Edit</a>
   <a class="btn btn-danger" href="{% url 'purchase_order_delete' order.pk %}">Delete</a>
   <a class="btn btn-secondary" href="{% url 'purchase_order_list' %}">Back to list</a>
+  </div>
 </div>
 {% endblock %}

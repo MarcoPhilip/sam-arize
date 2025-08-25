@@ -290,7 +290,7 @@ def inventory_add(request):
             return redirect('inventory_list')
     else:
         form = InventoryForm()
-    return render(request, 'inventory/inventory_form.html', {'form': form, 'title': 'Edit Inventory'})
+    return render(request, 'inventory/inventory_form.html', {'form': form, 'title': 'Add Inventory'})
 
 # Edit inventory
 @login_required
