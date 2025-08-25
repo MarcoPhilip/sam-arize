@@ -6,16 +6,17 @@ Assets · SAM-ARIZE
 {% endblock %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/asset/asset_list.css' %}">
+<link rel="stylesheet" href="{% static 'css/list.css' %}">
+<link rel="stylesheet" href="{% static 'css/button.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="asset-list-container">
+<div class="list-container">
   <h2>Assets</h2>
 
   {% if assets %}
   <div class="table-wrap">
-    <table class="asset-table">
+    <table class="list-table">
       <thead>
         <tr>
           <th>ID</th>
@@ -28,11 +29,11 @@ Assets · SAM-ARIZE
       <tbody>
         {% for asset in assets %}
           <tr>
-            <td>{{ asset.id }}</td>
-            <td>{{ asset.name }}</td>
-            <td>{{ asset.owner|default:"—" }}</td>
-            <td>{{ asset.status }}</td>
-            <td>
+            <td data-label="ID">{{ asset.id }}</td>
+            <td data-label="Name">{{ asset.name }}</td>
+            <td data-label="Added By">{{ asset.owner|default:"—" }}</td>
+            <td data-label="Status">{{ asset.status }}</td>
+            <td data-label="Actions">
               <a href="{% url 'asset_detail' asset.id %}" class="btn btn-info">View</a>
               <a href="{% url 'asset_update' asset.id %}" class="btn btn-warning">Edit</a>
               <a href="{% url 'asset_delete' asset.id %}" class="btn btn-danger">
@@ -49,7 +50,7 @@ Assets · SAM-ARIZE
   {% endif %}
 
   <div class="actions">
-    <a href="{% url 'asset_create' %}" class="btn btn-primary">+ Add Asset</a>
+    <a href="{% url 'asset_create' %}" class="btn btn-add">+ Add Asset</a>
   </div>
 </div>
 {% endblock %}

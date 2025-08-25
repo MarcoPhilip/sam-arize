@@ -1,97 +1,153 @@
+:root {
+  --bg: #1f1f1f;
+  --surface: #2c2c2c;
+  --border: #3a3a3a;
+  --text: #f3f3f3;
+  --muted: #cfcfcf;
+  --accent: #ff5a09;
+  --accent-2: #ec7f37;
+}
+
+/* Page body background */
 body {
-    background-color: #333;
-
-
-}
-.container {
-    max-width: 900px;
-    margin: 40px auto;
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  background: var(--surface);
+  color: var(--text);
 }
 
-.container h1 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
+/* ===== Container ===== */
+.list-container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: var(--text);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(255, 90, 9, .5);
+  color: #121212;
+  overflow-x: auto;
 }
 
-.container .btn-primary {
-    background-color: #f2b263;
+/* ===== Title ===== */
+.list-container h2 {
+  margin: 0 0 1.5rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--accent);
+}
+
+/* ===== Table ===== */
+.list-table {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  color: #121212;
+  border: 2px solid #000;
+  box-shadow: 0 4px 14px rgba(0,0,0,.25);
+}
+
+/* Table Head */
+.list-table thead th {
+  background: rgba(236, 127, 55, 0.8);
+  color: #121212;
+  text-align: center;
+  font-weight: 700;
+  padding: 12px 14px;
+  font-size: 1.4rem;
+  border-bottom: 2px solid #000;
+  white-space: nowrap;
+}
+
+/* Table Body */
+.list-table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #000;
+  font-size: 1.4rem;
+  text-align: center;
+}
+.list-table tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+.list-table tbody tr:hover {
+  background: inherit;
+}
+
+/* Links inside list */
+.list-link {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+.list-link:hover {
+  text-decoration: underline;
+}
+
+/* ===== Actions (Add button wrapper) ===== */
+.actions {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 992px) {
+  .list-table {
+    max-width: 90%;
+    font-size: 1.2rem;
+  }
+  .list-table thead th,
+  .list-table tbody td {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .list-container {
+    padding: 1rem;
+    background-color: var(--border); /* softer bg on mobile */
+  }
+  .list-table {
+    max-width: 100%;
+    font-size: 1rem;
     border: none;
-    font-weight: 500;
-    border-radius: 10px;
-    padding: 8px 16px;
-    transition: all 0.2s ease-in-out;
-}
-
-.container .btn-primary:hover {
-    background-color: #e09a42;
-}
-
-.table {
+  }
+  .list-table thead {
+    display: none; /* hide headers */
+  }
+  .list-table,
+  .list-table tbody,
+  .list-table tr,
+  .list-table td {
+    display: block;
     width: 100%;
-    margin-top: 20px;
-    border-collapse: separate;
-    border-spacing: 0;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.table thead {
-    background-color: #f2b263;
-    color: #fff;
-}
-
-.table th {
-    font-weight: 600;
-    padding: 12px;
-    text-align: left;
-}
-
-.table td {
-    padding: 12px;
-    vertical-align: middle;
-    color: #444;
-}
-
-.table-striped tbody tr:nth-child(odd) {
-    background-color: #fafafa;
-}
-
-.table .btn {
+  }
+  .list-table tr {
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
     border-radius: 8px;
-    font-size: 0.85rem;
-    padding: 6px 12px;
-    font-weight: 500;
-}
-
-.table .btn-warning {
-    background-color: #ffc107;
+    padding: .5rem;
+    background: #fff;
+  }
+  .list-table td {
+    text-align: left;
+    padding: 8px;
     border: none;
-    color: #fff;
+    position: relative;
+  }
+  .list-table td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+    color: var(--accent);
+  }
 }
 
-.table .btn-warning:hover {
-    background-color: #e0a800;
-}
-
-.table .btn-danger {
-    background-color: #dc3545;
-    border: none;
-    color: #fff;
-}
-
-.table .btn-danger:hover {
-    background-color: #bd2130;
-}
-
-.table td[colspan="3"] {
-    text-align: center;
-    font-style: italic;
-    color: #777;
+@media (max-width: 480px) {
+  .list-container h2 {
+    font-size: 1.6rem;
+  }
 }
