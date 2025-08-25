@@ -9,8 +9,8 @@
   <h1>{{ category.name }}</h1>
   <p><strong>Description:</strong> {{ category.description }}</p>
 
-  {% if category.created_by %}
-    <p><strong>Added By:</strong> {{ category.created_by.username }}</p>
+  {% if category.owner %}
+    <p><strong>Added By:</strong> {{ category.owner.username }}</p>
   {% else %}
     <p><strong>Added By:</strong> Unknown</p>
   {% endif %}
