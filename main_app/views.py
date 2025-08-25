@@ -102,12 +102,6 @@ def dashboard(request):
         "pos_delivered": PurchaseOrder.objects.filter(status="delivered").count(),
     }
 
-    
-    
-
- 
-
-
     # Tables
     recent_pos = PurchaseOrder.objects.select_related("supplier").order_by("-order_date", "-id")[:5]
     low_stock  = Inventory.objects.order_by("quantity")[:5] 
@@ -116,18 +110,14 @@ def dashboard(request):
         "kpi": kpi,
         "recent_pos": recent_pos,
         "low_stock": low_stock,
-
-
     }
     return render(request, "dashboard.html", context)
 
-#
-
+# Asset List
 @login_required
 def asset_index(request):
     assets = Asset.objects.all()
     return render(request, "asset/asset_list.html", {'assets': assets})
-
 
 # List category
 @login_required
