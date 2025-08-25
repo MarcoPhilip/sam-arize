@@ -66,7 +66,9 @@ def home(request):
 # View reports
 @login_required
 @groups_required("Manager", "Owner" ,"Staff")
+# Define the reports view function
 def reports_view(request):
+    # Render and return the "reports.html" template to the browser
     return render(request, "reports.html")
 
 # View purchase order list
@@ -167,78 +169,123 @@ def asset_index(request):
 
 # List category
 @login_required
+# Define the function that will list all categories
 def category_list(request):
+    # Query the database to get all Category objects
     categories = Category.objects.all()
+    # Render the category template
+    # Pass the list of categories into the template as context
     return render(request, 'category/category_list.html', {'categories': categories})
 
 
 # Detail for category
 @login_required
+# Define the function to display details of a single category
+# It takes the request object and the primary key (pk) of the category
 def category_detail(request, pk):
+    # Fetch the category object with given pk form db
     category = get_object_or_404(Category, pk=pk)
+    # render the category template
     return render(request, "category/category_detail.html", {"category": category})
 
 # Add category
 @login_required
+# Authorization of groups
 @groups_required("Manager", "Owner" ,"Staff")
+# Define the function to add a new category
 def category_add(request):
+    # Check if the request method is POST (form submission)
     if request.method == 'POST':
+        # Bind the submitted POST data to the CategoryForm
         form = CategoryForm(request.POST)
+        # Check if the form data is valid
         if form.is_valid():
-            # Don't save yet
+            # Don't save yet just create an unsaved category
             category = form.save(commit=False)
-            # Set the created_by field
-            category.created_by = request.user
-            # Now save to DB
+            # Set the created by field and assign the logged-in user
+            category.owner = request.user
+            # Save to DB
             category.save()
             return redirect('category_list')
+    # If the request is GET (or form is invalid), create an empty form
     else:
-        form = CategoryForm()
+            form = CategoryForm()
+    # Render the category form template
     return render(request, 'category/category_form.html', {'form': form, 'title': 'Add Category'})
 
+# Inventory Details
 @login_required
 def inventory_detail(request, pk):
+    # Fetch the inventory object with given pk form db
     inventory = get_object_or_404(Inventory, pk=pk)
+    # Render the template
     return render(request, "inventory/inventory_detail.html", {"inventory": inventory})
 
 # Edit category
 @login_required
+# Authorization of groups
 @groups_required("Manager", "Owner")
 def category_edit(request, pk):
+    # Get the Category object with the given primary key (pk),
     category = get_object_or_404(Category, pk=pk)
+    # Check if the request method is POST
     if request.method == 'POST':
+        # Bind the submitted POST data to the CategoryForm
         form = CategoryForm(request.POST, instance=category)
+        # Validate the form data
         if form.is_valid():
+            # Save the changes to DB
             form.save()
+            # redirect back to category list
             return redirect('category_list')
+    # If the request is not POST or form is invalid:
     else:
+        # Create a form pre-filled with the existing category data
         form = CategoryForm(instance=category)
     return render(request, 'category/category_form.html', {'form': form, 'title': 'Edit Category'})
 
 # Delete category
 @login_required
+# Authorization of groups
 @groups_required("Owner")
 def category_delete(request, pk):
+    # Get the Category object with the given primary key (pk)
     category = get_object_or_404(Category, pk=pk)
+    # Check if the request method is POST
     if request.method == 'POST':
+        # Delete the category from the database
         category.delete()
+        # Redirect back to category list
         return redirect('category_list')
+    # Render the template
     return render(request, 'category/category_confirm_delete.html', {'category': category})
 
 # List inventory
 @login_required
+# Define a function to list all inventory items
 def inventory_list(request):
+    # Fetch all inventory objects from the database
     inventories = Inventory.objects.all()
+    # Render the template
     return render(request, 'inventory/inventory_list.html', {'inventories': inventories})
 
 # Add inventory
 @login_required
+# Authorization of groups
 @groups_required("Manager", "Owner" ,"Staff")
+# Define a function to add inventory items
 def inventory_add(request):
+    # Check if the request method is POST
     if request.method == 'POST':
+        # Bind the submitted POST data to the InventoryForm
         form = InventoryForm(request.POST)
         if form.is_valid():
-            form.save()
+            # Don't save yet 
+            inventory = form.save(commit=False)
+            # Set the created by field and assign to logged in user
+            inventory.owner = request.user
+            # Now save to DB
+            inventory.save()
             return redirect('inventory_list')
     else:
         form = InventoryForm()
@@ -246,40 +293,59 @@ def inventory_add(request):
 
 # Edit inventory
 @login_required
+# Authorization of groups
 @groups_required("Manager", "Owner")
 def inventory_edit(request, pk):
+    # Get the inventory object with the given primary key
     inventory = get_object_or_404(Inventory, pk=pk)
+    # Check if the request method is POST
     if request.method == 'POST':
+        # Bind the submitted POST data
         form = InventoryForm(request.POST, instance=inventory)
+        # Validate the form data
         if form.is_valid():
+            # Save the changes to DB
             form.save()
+            # redirect back to inventory list
             return redirect('inventory_list')
+       # If the request is not POST or form is invalid:
     else:
+        # Create a form pre-filled with the existing inventory data
         form = InventoryForm(instance=inventory)
     return render(request, 'inventory/inventory_form.html', {'form': form, 'title': 'Edit Inventory'})
 
 # Delete inventory
 @login_required
+# Authorization of groups
 @groups_required("Owner")
 def inventory_delete(request, pk):
+    # Get the inventory object with the given primary key (pk)
     item = get_object_or_404(Inventory, pk=pk)
     if request.method == 'POST':
+        # Delete from DB
         item.delete()
+        # Redirect back to inventory list
         return redirect('inventory_list')
+    # Render the template
     return render(request, 'inventory/inventory_delete_confirm.html', {'item': item})
 
 def inventory_report(request, period):
+    # Get today's date
     today = timezone.now().date()
-
+    # Check what period was requested
     if period == "week":
+        # For weekly report: include items from the last 7 days
         start_date = today - timedelta(days=7)
     elif period == "month":
+        # For monthly report: include items from the start of the current month
         start_date = today.replace(day=1)
     elif period == "year":
+        # For yearly report: include items from the start of the current year
         start_date = today.replace(month=1, day=1)
     else:
-        start_date = today  # fallback
-
+        # If an invalid period is passed, fallback to today's date only
+        start_date = today
+     # Fetch inventory records created after the start_date
     inventories = Inventory.objects.filter(created_at__gte=start_date)
 
     return render(request, "inventory/report.html", {
@@ -291,17 +357,27 @@ def inventory_report(request, period):
 @login_required
 @groups_required("Manager", "Owner" ,"Staff")
 def location_list(request):
+    # Fetch all location objects from the database
     locations = Location.objects.all()
+    # Render the template
     return render(request, 'location/location_list.html', {'locations': locations})
 
 # Add a Location
 @login_required
 @groups_required("Manager", "Owner")
 def location_add(request):
+    # Check if the request method is POST
     if request.method == 'POST':
+        # Bind the submitted POST data
         form = LocationForm(request.POST)
         if form.is_valid():
-            form.save()
+            # Don't save yet just create an unsaved location
+            location = form.save(commit=False)
+            # Set the created_by field and assing the logged in user
+            location.owner = request.user
+            # Save to DB 
+            location.save()
+            # Redirect to location list
             return redirect('location_list')
     else:
         form = LocationForm()
@@ -311,18 +387,26 @@ def location_add(request):
 @login_required
 @groups_required("Manager", "Owner" ,"Staff")
 def location_detail(request, pk):
+    # Fetch all location objects from the database
     locations = get_object_or_404(Location, pk=pk)
+    # Render the template
     return render(request, "location/location_detail.html", {"locations": locations})
 
 # Edit a Location
 @login_required
 @groups_required("Manager", "Owner")
 def location_edit(request, pk):
+    # Get the location object with the given primary key (pk),
     location = get_object_or_404(Location, pk=pk)
+    # Check if the request method is POST
     if request.method == 'POST':
+        # Bind the submitted POST data
         form = LocationForm(request.POST, instance=location)
+        # Validate the form data
         if form.is_valid():
+            # Save changes to DB
             form.save()
+            # Return to location list
             return redirect('location_list')
     else:
         form = LocationForm(instance=location)
@@ -332,10 +416,15 @@ def location_edit(request, pk):
 @login_required
 @groups_required("Owner")
 def location_delete(request, pk):
+    # Get the location object with the given primary key (pk),
     location = get_object_or_404(Location, pk=pk)
+    # Check if the request method is POST
     if request.method == 'POST':
+        # Delete from DB
         location.delete()
+        # Return to location list
         return redirect('location_list')
+    # Render the template
     return render(request, 'location/location_confirm_delete.html', {'location': location})
 
 @login_required
@@ -403,7 +492,7 @@ class GroupRequiredMixin:
 
     def dispatch(self, request, *args, **kwargs):
         user = request.user
-
+        # check if user is authenticated 
         if user.is_authenticated:
             # Superuser always allowed
             if user.is_superuser:
