@@ -1,5 +1,9 @@
 {% extends "base.html" %}
-{% block content %}
+{% load static %}
+{% block head %} 
+<link rel="stylesheet" href="{% static 'css/list.css' %}" />
+{% endblock %}
+<!-- {% block content %}
 <style>
   :root {
     --bg-dark: #121212;
@@ -177,7 +181,7 @@
     padding: 2rem;
     color: var(--text-secondary);
   }
-</style>
+</style> -->
 
 <div class="po-header">
   <h2>Purchase Orders</h2>

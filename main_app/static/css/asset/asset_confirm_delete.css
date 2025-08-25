@@ -1,59 +1,82 @@
+:root {
+  --btn-danger-bg: #dc3545;
+  --btn-danger-hover: #bb2d3b;
+  --btn-danger-text: #ffffff;
 
-.container {
+  --btn-secondary-bg: #6c757d;
+  --btn-secondary-hover: #5a6268;
+  --btn-secondary-text: #ffffff;
+}
+
+body {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.asset-delete-container {
   max-width: 600px;
   margin: 60px auto;
   background: #ffffff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 2px solid #000;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
-h1 {
+.asset-delete-container h2 {
   font-size: 2rem;
-  color: #dc3545; /* Bootstrap red */
-  margin-bottom: 20px;
-  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--btn-danger-bg);
 }
 
-p {
+.asset-delete-container p {
   font-size: 1.2rem;
-  margin-bottom: 25px;
-  text-align: center;
-}
-
-strong {
+  margin-bottom: 2rem;
   color: #333;
 }
 
-form {
+.asset-delete-container strong {
+  color: #000;
+}
+
+/* Form */
+.delete-form {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 1rem;
 }
 
+/* Buttons */
 .btn {
-  padding: 10px 20px;
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
   font-size: 1rem;
-  border: none;
-  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.2s ease-in-out;
+  border: none;
+  transition: background 0.2s ease, transform 0.05s ease;
 }
+.btn:active { transform: translateY(1px); }
 
 .btn-danger {
-  background-color: #dc3545;
-  color: white;
+  background: var(--btn-danger-bg);
+  color: var(--btn-danger-text);
 }
-
-.btn-danger:hover {
-  background-color: #c82333;
-}
+.btn-danger:hover { background: var(--btn-danger-hover); }
 
 .btn-secondary {
-  background-color: #6c757d;
-  color: white;
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
 }
+.btn-secondary:hover { background: var(--btn-secondary-hover); }
 
-.btn-secondary:hover {
-  background-color: #5a6268;
+/* Mobile */
+@media (max-width: 640px) {
+  .delete-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn {
+    width: 100%;
+  }
 }

@@ -64,7 +64,7 @@ class AssetForm(forms.ModelForm):
             "quantity":forms.NumberInput(attrs={"class": "form-control", "min": "0"}),
             "serial_number": forms.TextInput(attrs={"class": "form-control"}),
             "status": forms.Select(attrs={"class": "form-select"}),
-            
+            "purchase_date": forms.DateInput(attrs={"type": "date", "class": "form-control"}),
         }
 
 class PurchaseOrderForm(forms.ModelForm):

@@ -146,6 +146,7 @@ def dashboard(request):
         "pos_open": PurchaseOrder.objects.filter(status__in=["pending","confirmed"]).count(),
         "pos_delivered": PurchaseOrder.objects.filter(status="delivered").count(),
     }
+
     # Tables
     recent_pos = PurchaseOrder.objects.select_related("supplier").order_by("-order_date", "-id")[:5]
     low_stock  = Inventory.objects.order_by("quantity")[:5] 
@@ -154,18 +155,17 @@ def dashboard(request):
         "kpi": kpi,
         "recent_pos": recent_pos,
         "low_stock": low_stock,
-
-
     }
     return render(request, "dashboard.html", context)
 
+
+# Asset List
 
 @login_required
 @groups_required("Manager", "Owner" ,"Staff")
 def asset_index(request):
     assets = Asset.objects.all()
     return render(request, "asset/asset_list.html", {'assets': assets})
-
 
 # List category
 @login_required
@@ -274,6 +274,7 @@ def inventory_list(request):
 # Authorization of groups
 @groups_required("Manager", "Owner" ,"Staff")
 # Define a function to add inventory items
+
 def inventory_add(request):
     # Check if the request method is POST
     if request.method == 'POST':
@@ -513,20 +514,31 @@ class AssetCreate(LoginRequiredMixin, GroupRequiredMixin, CreateView):
     groups_required = ["Manager", "Owner", "Staff"]
     success_url = reverse_lazy("asset_index")
 
+
 class AssetDetail(LoginRequiredMixin, GroupRequiredMixin, DetailView):
+
+    # Set user as owner
+    def form_valid(self, form):
+        # ensure the owner is set to the logged-in user
+        if not form.instance.owner_id:
+            form.instance.owner = self.request.user
+        return super().form_valid(form)
     model = Asset
     template_name = "asset/asset_detail.html"
     groups_required = ["Manager", "Owner", "Staff"]
     
 
 class AssetUpdate(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
+
     model = Asset
     form_class = AssetForm
     template_name = "asset/asset_update.html"
     groups_required = ["Manager", "Owner", ]
     success_url = reverse_lazy("asset_index")
 
+
 class AssetDelete(LoginRequiredMixin, GroupRequiredMixin, DeleteView):
+
     model = Asset
     template_name = "asset/asset_confirm_delete.html"
     groups_required = ["Owner"]

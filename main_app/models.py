@@ -90,6 +90,7 @@ class PurchaseOrder(models.Model):
     name = models.CharField(max_length=200, default="Order-Name")
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
     order_date = models.DateField()
+    quantity = models.PositiveIntegerField(default=0)
     status = models.CharField(max_length=30, choices=STATUS_CHOICES)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
