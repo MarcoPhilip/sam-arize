@@ -1,139 +1,86 @@
-/* General container styling */
-body {
-  background-color: #333;
+:root {
+  --bg: #1F1F1F;
+  --surface: #2C2C2C;
+  --border: #3A3A3A;
+  --text: #F3F3F3;
+  --muted: #CFCFCF;
+  --accent: #FF5A09;
+  --accent-2: #EC7F37;
+  /* WCAG-AA colors for inputs */
+  --btn-primary-border: #0A58CA;
 }
-.container {
-    max-width: 650px;
-    margin: 40px auto;
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+/* ===== Page ===== */
+body {
+  background: var(--surface);
+  color: var(--text);
+}
+/* ===== Shared Form Container ===== */
+.form-container {
+  max-width: 760px;
+  margin: 2rem auto;
+  padding: 1.75rem;
+  background: #FFFFFF;
+  color: #121212;
+  border-radius: 12px;
+  border: 2px solid #000;
+  box-shadow: 0 8px 24px rgba(255, 90, 9, .28);
+  font-family:'IBM Plex Serif', serif;
+}
+/* Title */
+.form-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1.25rem;
+  color: var(--accent);
+}
+/* Base form layout */
+.form-base {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.form-base p { margin: 0; }
+.form-base label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #2B2B2B;
+}
+/* Fields */
+.form-base input,
+.form-base select,
+.form-base textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  background: #fff;
+  color: #121212;
+  border: 1px solid #000;
+  border-radius: 10px;
+  transition: border-color .15s ease, box-shadow .15s ease, background .2s ease;
+}
+.form-base input:focus,
+.form-base select:focus,
+.form-base textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 90, 9, .25);
+}
+/* Actions wrapper (buttons handled in button.css) */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 18px;
+}
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  .form-container { max-width: 92%; }
+}
+@media (max-width: 640px) {
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
-  
-  /* Heading */
-  .container h1 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
-  }
-  
-  /* Form labels */
-  .container label {
-    font-weight: 500;
-    margin-bottom: 6px;
-    display: block;
-    color: #444;
-  }
-  
-  /* Form inputs */
-  .container input[type="text"],
-  .container textarea,
-  .container select {
-    width: 100%;
-    padding: 12px 14px;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    outline: none;
-    background-color: #fafafa;
-  }
-  
-  .container input:focus,
-  .container textarea:focus,
-  .container select:focus {
-    border-color: #f2b263; /* brand orange */
-    box-shadow: 0 0 6px rgba(242, 178, 99, 0.5);
-    background-color: #fff;
-  }
-  
-  /* Buttons */
-  .container .btn {
-    padding: 10px 20px;
-    border-radius: 10px;
-    font-weight: 500;
-    transition: all 0.2s ease-in-out;
-  }
-  
-  .container .btn-success {
-    background-color: #f2b263;
-    border: none;
-    color: #fff;
-  }
-  
-  .container .btn-success:hover {
-    background-color: #e09a42;
-  }
-  
-  .container .btn-secondary {
-    background-color: #6c757d;
-    border: none;
-  }
-  
-  .container .btn-secondary:hover {
-    background-color: #5a6268;
-  }
-  
-  /* Space between buttons */
-  .container .btn + .btn {
-    margin-left: 10px;
-  }
-
-  @media (max-width: 768px) {
-    .container {
-      margin: 20px;
-      padding: 20px;
-    }
-  
-    .container h1 {
-      font-size: 1.5rem;
-    }
-  
-    .container label {
-      font-size: 0.95rem;
-    }
-  
-    .container input[type="text"],
-    .container textarea,
-    .container select {
-      font-size: 0.95rem;
-      padding: 10px 12px;
-    }
-  
-    /* Stack buttons on small screens */
-    .container .btn {
-      display: block;
-      width: 100%;
-      margin: 8px 0 0 0; /* top spacing between buttons */
-    }
-  
-    .container .btn + .btn {
-      margin-left: 0; /* reset desktop spacing */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .container {
-      margin: 10px;
-      padding: 15px;
-      border-radius: 12px;
-    }
-  
-    .container h1 {
-      font-size: 1.3rem;
-    }
-  
-    .container label {
-      font-size: 0.9rem;
-    }
-  
-    .container input[type="text"],
-    .container textarea,
-    .container select {
-      font-size: 0.85rem;
-      padding: 8px 10px;
-    }
-  }
+}

@@ -2,11 +2,12 @@
 
 {% load static %}
 {% block head %} 
-<link rel="stylesheet" href="{% static 'css/asset/asset_create.css' %}" />
+<link rel="stylesheet" href="{% static 'css/form.css' %}" />
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="form-container">
+  <h1 class="form-title">{{ title }}</h1>
   <h2>{{ form.instance.pk|yesno:"Edit Purchase Order,New Purchase Order" }}</h2>
   <form method="post">
     {% csrf_token %}
