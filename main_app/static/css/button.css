@@ -1,3 +1,4 @@
+/* ===== Base Button ===== */
 .btn {
   display: inline-block;
   padding: 0.6rem 1.2rem;
@@ -8,7 +9,12 @@
   cursor: pointer;
   border: 1px solid transparent;
   transition: background 0.2s ease, transform 0.1s ease;
+
+  /* Make each button a box */
+  margin: 0.25rem; 
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
+
 .btn:active { transform: scale(0.97); }
 .btn:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
 
@@ -44,18 +50,32 @@
 .btn-edit:hover   { background: var(--btn-warning-hover); }
 .btn-delete:hover { background: var(--btn-danger-hover); }
 
-/* ===== Smartphone Buttons ===== */
+/* ===== Smartphone Buttons (stacked) ===== */
 @media (max-width: 600px) {
   .btn {
-    width: 100%;
+    width: 100%;                     /* full width buttons */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.55rem 0.75rem;
-    font-size: 0.9rem;
-    font-weight: 600;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.95rem;
     border-radius: 8px;
-    transition: transform 0.1s ease;
   }
-  .btn:active { transform: scale(0.98); }
+
+  /* Stack each button inside Actions */
+  .list-table td[data-label="Actions"] {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .list-table td[data-label="Actions"] .btn {
+    margin: 0;   /* remove inline margin on mobile */
+  }
+
+  /* "+ Add" button full width */
+  .actions .btn.btn-add {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
 }
