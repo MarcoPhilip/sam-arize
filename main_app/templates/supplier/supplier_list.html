@@ -193,7 +193,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for s in suppliers %}
+        {% for s in supplier %}
         <tr>
           <td><a href="{% url 'supplier_detail' s.pk %}" class="table-link">{{ s.name }}</a></td>
           <td>{{ s.contact_person }}</td>
