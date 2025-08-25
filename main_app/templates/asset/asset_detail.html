@@ -22,7 +22,7 @@ Asset Details · SAM-ARIZE
     <p><strong>Serial Number:</strong> {{ asset.serial_number }}</p>
     <p><strong>Purchase Date:</strong> {{ asset.purchase_date|date:"Y-m-d" }}</p>
     <p><strong>Status:</strong> {{ asset.status }}</p>
-    <p><strong>Owner:</strong> 
+    <p><strong>Added By:</strong> 
       {% if asset.owner %}
         {% firstof asset.owner.get_full_name asset.owner.username %}
       {% else %}
