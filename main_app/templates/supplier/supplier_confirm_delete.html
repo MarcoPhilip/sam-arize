@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% block title %}Delete Supplier · SAM-ARIZE{% endblock %}
+{% load static %}
+{% block head %} 
+<link rel="stylesheet" href="{% static 'css/confirm_delete.css' %}" />
+{% endblock %}
 {% block content %}
 <div class="container">
   <h2>Delete Supplier</h2>
