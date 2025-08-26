@@ -17,6 +17,45 @@ body{
   font-family:'IBM Plex Serif', serif;
 }
 
+/* For Inventory Report */
+.report {
+  display: flex;
+  justify-content: center;   /* center the row */
+  flex-wrap: wrap;           /* allow wrapping on smaller screens */
+  gap: 0.75rem;              /* space between buttons */
+  margin-bottom: 1.5rem;
+}
+
+.report .btn {
+  padding: 0.7rem 1.1rem;    /* big enough for thumbs */
+  font-size: 0.95rem;
+  border-radius: 8px;
+  min-width: 100px;          /* keeps size consistent */
+  text-align: center;
+}
+
+/* Colors for each inventory report button */
+.report .btn-week   { 
+  background-color: #007bff; 
+}
+.report .btn-week:hover { 
+  background-color: #0056b3; 
+}
+
+.report .btn-month  { 
+  background-color: #28a745; 
+}
+.report .btn-month:hover { 
+  background-color: #1e7e34; 
+}
+
+.report .btn-year   { 
+  background-color: #ff5a09; 
+}
+.report .btn-year:hover { 
+  background-color: #e55300; 
+}
+
 /* ===== Container ===== */
 .list-container{
   max-width:1100px;
@@ -117,6 +156,34 @@ body{
 
 /* ===== Tablet/Mobile: turn rows into cards ===== */
 @media (max-width:768px){
+
+  /* Inventory Report Mobile*/
+  .report {
+    gap: 0.5rem;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+  }
+  .report .btn {
+    flex: 1;
+    min-width: 90px;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.8rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    border: 2px solid #000;   
+    background-color: #007bff; 
+    color: #000;              
+    cursor: pointer;
+  }
+
+  .report .btn:active {
+    background-color: #ff5a09;
+    color: #000;
+  }
+
   .list-container{
     padding:1rem;
     background:var(--surface);
@@ -213,19 +280,6 @@ body{
     margin:0 !important;     /* reset any inline margins */
     text-align:center;
   }
-
-  /* If you want horizontal buttons with space, replace the above block with this:
-  .list-table td.col-actions {
-    display:flex;
-    flex-direction:row;       // side by side
-    justify-content:center;
-    gap:1rem !important;
-  }
-  .list-table td.col-actions .btn {
-    flex:1;                   // equal width
-    max-width:none;
-  }
-  */
 
   /* Add orange divider lines on mobile too */
   .list-table tbody td{
