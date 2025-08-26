@@ -3,14 +3,10 @@
 {% load static %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/details.css' %}">
+<link rel="stylesheet" href="{% static 'css/button.css' %}">
 {% endblock %}
 
 {% block content %}
-
-{% load static %}
-{% block head %} 
-<link rel="stylesheet" href="{% static 'css/list.css' %}" />
-{% endblock %}
 
 <div class="container">
 
@@ -24,10 +20,10 @@
   {% else %}
     <p><strong>Added By:</strong> Unknown</p>
   {% endif %}
-  <div>
-  <a class="btn btn-warning" href="{% url 'purchase_order_edit' order.pk %}">Edit</a>
-  <a class="btn btn-danger" href="{% url 'purchase_order_delete' order.pk %}">Delete</a>
-  <a class="btn btn-secondary" href="{% url 'purchase_order_list' %}">Back to list</a>
+  <div class="actions">
+    <a href="{% url 'purchase_order_edit' order.pk %}" class="btn btn-edit">Edit Order</a>
+    <a href="{% url 'purchase_order_delete' order.pk %}" class="btn btn-delete">Delete Order</a>
+    <a href="{% url 'purchase_order_list' %}" class="btn btn-back">Back to Purchase Orders</a>
   </div>
 </div>
 {% endblock %}

@@ -3,6 +3,7 @@
 {% load static %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/details.css' %}" />
+<link rel="stylesheet" href="{% static 'css/button.css' %}">
 {% endblock %}
 {% block content %}
 <div class="container">
@@ -31,9 +32,9 @@
     <p><strong>Added By:</strong> Unknown</p>
   {% endif %}
   <div class="actions">
-    <a href="{% url 'inventory_edit' inventory.pk %}" class="btn btn-warning">Edit Inventory</a>
-    <a href="{% url 'inventory_delete' inventory.pk %}" class="btn btn-danger">Delete Inventory</a>
-    <a href="{% url 'inventory_list' %}" class="btn btn-secondary">Back to List</a>
+    <a href="{% url 'inventory_edit' inventory.id %}" class="btn btn-edit">Edit</a>
+    <a href="{% url 'inventory_delete' inventory.id %}" class="btn btn-delete">Delete</a>
+    <a href="{% url 'inventory_list' %}" class="btn btn-back">Back to Inventory</a>
   </div>
 </div>
 {% endblock %}

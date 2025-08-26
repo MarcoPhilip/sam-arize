@@ -46,6 +46,17 @@
 }
 .btn-add:hover { background: #218838; }
 
+.btn-back {
+  background: #6c757d;       /* subtle gray */
+  color: #fff;
+  border: 1px solid #545b62;
+}
+
+.btn-back:hover {
+  background: #5a6268;       /* darker on hover */
+  color: #fff;
+}
+
 /* ===== Button Group Spacing ===== */
 .btn-group {
   display: flex;
