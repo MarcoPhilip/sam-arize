@@ -7,9 +7,11 @@ from .views import dashboard, home, signup, asset_index, AssetCreate, AssetUpdat
 
 
 urlpatterns = [
-    # Auth
+    # Home and Dashboard
     path('', home, name='home' ),
+    path('dashboard/', dashboard, name='dashboard'),
 
+    # Auth
     path('signup/', signup, name='signup'),
     path('login/',  LoginView.as_view(template_name='accounts/login.html'), name='login'),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
@@ -20,11 +22,6 @@ urlpatterns = [
     path("purchase/new/", views.purchase_order_create, name="purchase_order_create"),
     path("purchase/<int:pk>/edit/", views.purchase_order_edit, name="purchase_order_edit"),
     path("purchase/<int:pk>/delete/", views.purchase_order_delete, name="purchase_order_delete"),
-
-
-
-    # dashboard
-    path('dashboard/', dashboard, name='dashboard'),
 
     # Asset URLS
     path('assets/', asset_index, name='asset_index'),
@@ -55,6 +52,7 @@ urlpatterns = [
     path('locations/<int:pk>/edit/', views.location_edit, name='location_edit'),
     path('locations/<int:pk>/delete/', views.location_delete, name='location_delete'),
     
+    # Suppliers URLS
     path("suppliers/", views.supplier_list, name="supplier_list"),
     path("suppliers/new/", views.supplier_create, name="supplier_create"),
     path("suppliers/<int:pk>/", views.supplier_detail, name="supplier_detail"),
