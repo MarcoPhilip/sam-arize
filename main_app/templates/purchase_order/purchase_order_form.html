@@ -1,22 +1,36 @@
 {% extends "base.html" %}
-
 {% load static %}
+
 {% block head %} 
 <link rel="stylesheet" href="{% static 'css/form.css' %}" />
+<link rel="stylesheet" href="{% static 'css/button.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="form-container">
   <h1 class="form-title">{{ title }}</h1>
   <h2>{{ form.instance.pk|yesno:"Edit Purchase Order,New Purchase Order" }}</h2>
-  <form method="post">
+
+  <form method="post" class="form-base">
     {% csrf_token %}
-    <div class="mb-3">{{ form.name.label_tag }}{{ form.name }}</div>
-    <div class="mb-3">{{ form.supplier.label_tag }}{{ form.supplier }}</div>
-    <div class="mb-3">{{ form.order_date.label_tag }}{{ form.order_date }}</div>
-    <div class="mb-3">{{ form.status.label_tag }}{{ form.status }}</div>
-    <button class="btn btn-primary" type="submit">Save</button>
-    <a class="btn btn-secondary" href="{% url 'purchase_order_list' %}">Cancel</a>
+
+    <div class="mb-3">
+      {{ form.name.label_tag }}{{ form.name }}
+    </div>
+    <div class="mb-3">
+      {{ form.supplier.label_tag }}{{ form.supplier }}
+    </div>
+    <div class="mb-3">
+      {{ form.order_date.label_tag }}{{ form.order_date }}
+    </div>
+    <div class="mb-3">
+      {{ form.status.label_tag }}{{ form.status }}
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-add">Save</button>
+      <a href="{% url 'purchase_order_list' %}" class="btn btn-back">Cancel</a>
+    </div>
   </form>
 </div>
 {% endblock %}

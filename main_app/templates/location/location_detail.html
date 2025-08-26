@@ -19,9 +19,9 @@
     <p><strong>Added By:</strong> Unknown</p>
   {% endif %}
   <div class="actions">
-    <a href="{% url 'location_edit' locations.pk %}" class="btn btn-warning">Edit Location</a>
-    <a href="{% url 'location_delete' locations.pk %}" class="btn btn-danger">Delete Location</a>
-    <a href="{% url 'location_list' %}" class="btn btn-secondary">Back to List</a>
+    <a href="{% url 'location_edit' locations.pk %}" class="btn btn-edit">Edit Location</a>
+    <a href="{% url 'location_delete' locations.pk %}" class="btn btn-delete">Delete Location</a>
+    <a href="{% url 'location_list' %}" class="btn btn-back">Back to Locations</a>
   </div>
 </div>
 {% endblock %}

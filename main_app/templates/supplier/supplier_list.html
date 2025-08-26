@@ -32,10 +32,12 @@
             <td data-label="Email">{{ s.email|default:"—" }}</td>
             <td data-label="Phone">{{ s.phone_number|default:"—" }}</td>
             <td data-label="Actions" class="col-actions">
-              <a href="{% url 'supplier_detail' s.pk %}" class="btn btn-view">View</a>
-              <a href="{% url 'supplier_edit' s.pk %}" class="btn btn-edit">Edit</a>
-              <a href="{% url 'supplier_delete' s.pk %}" class="btn btn-delete">Delete</a>
-            </td>
+                <div class="btn-group">
+                  <a href="{% url 'supplier_detail' s.pk %}" class="btn btn-view">View</a>
+                  <a href="{% url 'supplier_edit' s.pk %}" class="btn btn-edit">Edit</a>
+                  <a href="{% url 'supplier_delete' s.pk %}" class="btn btn-delete">Delete</a>
+                </div>
+              </td>
           </tr>
           {% endfor %}
         </tbody>

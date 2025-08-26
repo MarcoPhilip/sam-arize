@@ -3,6 +3,7 @@
 {% load static %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/details.css' %}">
+<link rel="stylesheet" href="{% static 'css/button.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -12,10 +13,10 @@
   <p><strong>Email:</strong> {{ supplier.email }}</p>
   <p><strong>Phone:</strong> {{ supplier.phone_number }}</p>
   <p><strong>Address:</strong> {{ supplier.address }}</p>
-  <div>
-  <a class="btn btn-primary" href="{% url 'supplier_edit' supplier.pk %}">Edit</a>
-  <a class="btn btn-danger" href="{% url 'supplier_delete' supplier.pk %}">Delete</a>
-  <a class="btn btn-secondary" href="{% url 'supplier_list' %}">Back</a>
+  <div class="actions">
+    <a href="{% url 'supplier_edit' supplier.pk %}" class="btn btn-edit">Edit Supplier</a>
+    <a href="{% url 'supplier_delete' supplier.pk %}" class="btn btn-delete">Delete Supplier</a>
+    <a href="{% url 'supplier_list' %}" class="btn btn-back">Back to Suppliers</a>
   </div>
 </div>
 {% endblock %}
