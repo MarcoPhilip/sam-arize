@@ -1,3 +1,4 @@
+
 :root {
   --bg: #1f1f1f;
   --surface: #2c2c2c;
@@ -6,7 +7,6 @@
   --muted: #cfcfcf;
   --accent: #ff5a09;
   --accent-2: #ec7f37;
-}
 
 /* ===== Page ===== */
 body {

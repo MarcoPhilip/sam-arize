@@ -2,13 +2,14 @@
 {% block title %}{{ category.name }} · SAM-ARIZE{% endblock %}
 {% load static %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/detail.css' %}" />
+<link rel="stylesheet" href="{% static 'css/details.css' %}">
 {% endblock %}
 {% block content %}
 <div class="container">
   <h1>{{ category.name }}</h1>
+  <p><strong>ID:</strong> C{{category.id}}</p>
   <p><strong>Description:</strong> {{ category.description }}</p>
-
+  <p><strong>Created At:</strong> {{ category.created_at|date:"Y-m-d" }}</p>
   {% if category.owner %}
     <p><strong>Added By:</strong> {{ category.owner.username }}</p>
   {% else %}
