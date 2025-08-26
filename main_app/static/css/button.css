@@ -108,3 +108,13 @@
 .list-table .btn-view   { background-color: #5b5c5e !important; color: #fff !important;}
 .list-table .btn-edit   { background-color: #ffc107 !important; color: #000 !important; }
 .list-table .btn-delete { background-color: #dc3545 !important; color: #fff !important; }
+
+.btn-group {
+  gap: 4px;        
+}
+
+@media (max-width: 768px) {
+  .btn-group {
+    gap: 0.5rem; 
+  }
+}

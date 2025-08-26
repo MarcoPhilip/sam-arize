@@ -35,9 +35,11 @@
             <td data-label="Date">{{ order.order_date|date:"M d, Y" }}</td>
             <td data-label="Status">{{ order.get_status_display }}</td>
             <td data-label="Actions" class="col-actions">
-              <a href="{% url 'purchase_order_detail' order.pk %}" class="btn btn-view">View</a>
-              <a href="{% url 'purchase_order_edit' order.pk %}" class="btn btn-edit">Edit</a>
-              <a href="{% url 'purchase_order_delete' order.pk %}" class="btn btn-delete">Delete</a>
+              <div class="btn-group">
+                <a href="{% url 'purchase_order_detail' order.pk %}" class="btn btn-view">View</a>
+                <a href="{% url 'purchase_order_edit' order.pk %}" class="btn btn-edit">Edit</a>
+                <a href="{% url 'purchase_order_delete' order.pk %}" class="btn btn-delete">Delete</a>
+              </div>
             </td>
           </tr>
           {% endfor %}
