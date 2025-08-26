@@ -4,6 +4,7 @@
 
 ## Overview
 Welcome to the SAM-ARIZE App, where asset and inventory management made simpler.
+SAM-ARIZE is a Django-based inventory and procurement management system designed to help teams track assets, suppliers, purchase orders, and categories. It provides a clean dashboard view with KPIs, charts, and tables to support decision-making.
 
 
 ## 🎮 Features
