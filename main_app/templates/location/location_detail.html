@@ -3,6 +3,7 @@
 {% load static %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/details.css' %}" />
+<link rel="stylesheet" href="{% static 'css/button.css' %}">
 {% endblock %}
 {% block content %}
 <div class="container">
@@ -19,8 +20,8 @@
     <p><strong>Added By:</strong> Unknown</p>
   {% endif %}
   <div class="actions">
-    <a href="{% url 'location_edit' locations.pk %}" class="btn btn-edit">Edit Location</a>
-    <a href="{% url 'location_delete' locations.pk %}" class="btn btn-delete">Delete Location</a>
+    <a href="{% url 'location_edit' locations.pk %}" class="btn btn-edit">Edit</a>
+    <a href="{% url 'location_delete' locations.pk %}" class="btn btn-delete">Delete </a>
     <a href="{% url 'location_list' %}" class="btn btn-back">Back to Locations</a>
   </div>
 </div>
