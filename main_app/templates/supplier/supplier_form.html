@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="{% static 'css/form.css' %}" />
 {% endblock %}
 {% block content %}
-<div class="container">
+<div class="form-container">
+  <h1 class="form-title">{{ title }}</h1>
   <h2>{% if mode == "edit" %}Edit{% else %}Create{% endif %} Supplier</h2>
   <form method="post">
     {% csrf_token %}
