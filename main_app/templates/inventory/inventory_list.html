@@ -11,7 +11,11 @@
 {% block content %}
 <div class="list-container">
   <h2>Inventory</h2>
-
+  <div class="mb-3 text-center">
+    <a href="{% url 'inventory_report' 'week' %}" class="btn btn-outline-primary">This Week</a>
+    <a href="{% url 'inventory_report' 'month' %}" class="btn btn-outline-primary">This Month</a>
+    <a href="{% url 'inventory_report' 'year' %}" class="btn btn-outline-primary">This Year</a>
+  </div>
   {% if inventories %}
     <div class="table-wrap">
       <table class="list-table">

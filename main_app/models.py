@@ -43,9 +43,9 @@ class Supplier(models.Model):
 # Asset Model
 class Asset(models.Model):
     STATUS_CHOICES = [
-        ('available', 'Available'),
-        ('unavailable', 'Unavailable'),
-        ('discontinued', 'Discontinued')
+        ('available', '✅ Available'),
+        ('unavailable', '❌ Unavailable'),
+        ('discontinued', '🛑 Discontinued')
     ]
 
     name = models.CharField(max_length=100)
