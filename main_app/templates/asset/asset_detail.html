@@ -5,17 +5,15 @@
 Asset Details · SAM-ARIZE
 {% endblock %}
 
+
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/asset/asset_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/details.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="asset-detail-container">
-  <h2>Asset Detail</h2>
-
-  <div class="asset-card">
-    <p><strong>ID:</strong> {{ asset.id }}</p>
-    <p><strong>Name:</strong> {{ asset.name }}</p>
+<div class="container">
+  <h1>{{asset.name}}</h1>
+    <p><strong>ID:</strong> A{{ asset.id }}</p>
     <p><strong>Category:</strong> {{ asset.category }}</p>
     <p><strong>Location:</strong> {{ asset.location }}</p>
     <p><strong>Quantity:</strong> {{ asset.quantity }}</p>
@@ -29,9 +27,9 @@ Asset Details · SAM-ARIZE
         — 
       {% endif %}
     </p>
-    <p><strong>Created At:</strong> {{ asset.created_at|date:"Y-m-d H:i" }}</p>
-    <p><strong>Updated At:</strong> {{ asset.updated_at|date:"Y-m-d H:i" }}</p>
-  </div>
+    <p><strong>Created At:</strong> {{ asset.created_at|date:"Y-m-d" }}</p>
+    <p><strong>Updated At:</strong> {{ asset.updated_at|date:"Y-m-d" }}</p>
+ 
 
   <div class="actions">
     <a href="{% url 'asset_update' asset.id %}" class="btn btn-warning">Edit</a>

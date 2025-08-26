@@ -1,14 +1,21 @@
 {% extends "base.html" %}
+
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/details.css' %}">
+{% endblock %}
+
 {% block content %}
 <div class="container">
-  <h2>{{ supplier.name }}</h2>
-  <p><b>Contact:</b> {{ supplier.contact_person }}</p>
-  <p><b>Email:</b> {{ supplier.email }}</p>
-  <p><b>Phone:</b> {{ supplier.phone_number }}</p>
-  <p><b>Address:</b> {{ supplier.address }}</p>
-
+  <h1>{{ supplier.name }}</h1>
+  <p><strong>Contact:</strong> {{ supplier.contact_person }}</p>
+  <p><strong>Email:</strong> {{ supplier.email }}</p>
+  <p><strong>Phone:</strong> {{ supplier.phone_number }}</p>
+  <p><strong>Address:</strong> {{ supplier.address }}</p>
+  <div>
   <a class="btn btn-primary" href="{% url 'supplier_edit' supplier.pk %}">Edit</a>
   <a class="btn btn-danger" href="{% url 'supplier_delete' supplier.pk %}">Delete</a>
   <a class="btn btn-secondary" href="{% url 'supplier_list' %}">Back</a>
+  </div>
 </div>
 {% endblock %}

@@ -1,0 +1,83 @@
+/* Reset / Base */
+body {
+    background-color: #333;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    margin: 0;
+    color: #333;
+  }
+  
+  /* Main container */
+  .container {
+    max-width: 720px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-top: 6px solid #ff5a09;
+  }
+  
+  /* Headings */
+  .container h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 28px;
+    color: #222;
+    text-align: center;
+  }
+  
+  /* Paragraph rows */
+  .container p {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 12px 0;
+    margin: 0;
+    border-bottom: 1px solid #eee;
+    line-height: 1.5;
+  }
+  
+  .container p:last-child {
+    border-bottom: none;
+  }
+  
+  /* Labels */
+  .container p strong {
+    color: #444;
+    font-weight: 600;
+    min-width: 140px;
+    flex-shrink: 0;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .container {
+      padding: 24px;
+      margin: 24px 16px;
+    }
+  
+    .container h1 {
+      font-size: 1.6rem;
+    }
+  
+    .container p {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+  
+    .container p strong {
+      min-width: 0;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .container {
+      padding: 18px;
+      margin: 14px;
+    }
+  
+    .container h1 {
+      font-size: 1.4rem;
+    }
+  }
