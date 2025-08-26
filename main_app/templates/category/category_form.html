@@ -1,13 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block title %}{{ title }} · SAM-ARIZE{% endblock %}
+
 {% block head %} 
 <link rel="stylesheet" href="{% static 'css/form.css' %}" />
+<link rel="stylesheet" href="{% static 'css/button.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="form-container">
   <h1 class="form-title">{{ title }}</h1>
-  <form method="post">{% csrf_token %}
+  <form method="post">
+    {% csrf_token %}
     {{ form.non_field_errors }}
     <div class="mb-3">
       <label>Name</label>
@@ -17,8 +22,10 @@
       <label>Description</label>
       {{ form.description }}
     </div>
-    <button type="submit" class="btn btn-success">Save</button>
-    <a href="{% url 'category_list' %}" class="btn btn-secondary">Cancel</a>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-add">Save</button>
+      <a href="{% url 'category_list' %}" class="btn btn-back">Cancel</a>
+    </div>
   </form>
 </div>
 {% endblock %}

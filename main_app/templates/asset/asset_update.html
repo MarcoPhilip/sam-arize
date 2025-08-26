@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block title %}
 Edit Asset · SAM-ARIZE
 {% endblock %}
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
 <link rel="stylesheet" href="{% static 'css/button.css' %}">
 {% endblock %}
+
 {% block content %}
 <div class="form-container">
   <h2 class="form-title">Edit Asset: {{ asset.name }}</h2>
@@ -14,8 +17,8 @@ Edit Asset · SAM-ARIZE
     {% csrf_token %}
     {{ form.as_p }}
     <div class="form-actions">
-      <button type="submit" class="btn btn-success">Update Asset</button>
-      <a href="{% url 'asset_index' %}" class="btn btn-secondary">Cancel</a>
+      <button type="submit" class="btn btn-add">Update Asset</button>
+      <a href="{% url 'asset_index' %}" class="btn btn-back">Cancel</a>
     </div>
   </form>
 </div>
