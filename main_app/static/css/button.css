@@ -9,8 +9,6 @@
   cursor: pointer;
   border: 1px solid transparent;
   transition: background 0.2s ease, transform 0.1s ease;
-
-  /* Make each button a box */
   margin: 0.25rem; 
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
@@ -18,40 +16,28 @@
 .btn:active { transform: scale(0.97); }
 .btn:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
 
-/* ===== Custom Variants ===== */
-
-/* View (blue) */
+/* ===== Variants ===== */
 .btn-view {
   background: #0d6efd;
   color: #fff;
   border: 1px solid #0a58ca;
 }
-.btn-view:hover {
-  background: #0b5ed7;
-}
+.btn-view:hover { background: #0b5ed7; }
 
-/* Edit (yellow) */
 .btn-edit {
   background: #ffc107;
   color: #000;
   border: 1px solid #e0a800;
 }
-.btn-edit:hover {
-  background: #e0a800;
-  color: #111;
-}
+.btn-edit:hover { background: #e0a800; color: #111; }
 
-/* Delete (red) */
 .btn-delete {
   background: #dc3545;
   color: #fff;
   border: 1px solid #b02a37;
 }
-.btn-delete:hover {
-  background: #bb2d3b;
-}
+.btn-delete:hover { background: #bb2d3b; }
 
-/* Add (dark gray) */
 .btn-add {
   background: #28a745;
   color: #fff;
@@ -60,28 +46,29 @@
 }
 .btn-add:hover { background: #218838; }
 
-/* ===== Aliases ===== */
-.btn-view   { background: var(--btn-info-bg);    color: var(--btn-info-text);    border: 1px solid var(--btn-info-border); }
-.btn-edit   { background: var(--btn-warning-bg); color: var(--btn-warning-text); border: 1px solid var(--btn-warning-border); }
-.btn-delete { background: var(--btn-danger-bg);  color: var(--btn-danger-text);  border: 1px solid var(--btn-danger-border); }
-.btn-view:hover   { background: var(--btn-info-hover); }
-.btn-edit:hover   { background: var(--btn-warning-hover); }
-.btn-delete:hover { background: var(--btn-danger-hover); }
+/* ===== Button Group Spacing ===== */
+.btn-group {
+  display: flex;
+  gap: 4px;
+}
 
-/* ===== Smartphone Buttons (stacked) ===== */
+@media (max-width: 768px) {
+  .btn-group { gap: 0.5rem; }
+}
+
+/* ===== Smartphone (stacked buttons) ===== */
 @media (max-width: 600px) {
   .btn {
-    width: 100%;                     /* full width buttons */
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0.65rem 0.9rem;
     font-size: 0.95rem;
     border-radius: 8px;
-    margin: 5px;
+    margin: 5px 0;
   }
 
-  /* Stack each button inside Actions */
   .list-table td[data-label="Actions"] {
     display: flex;
     flex-direction: column;
@@ -89,32 +76,15 @@
   }
 
   .list-table td[data-label="Actions"] .btn {
-    margin: 0;   /* remove inline margin on mobile */
+    margin: 0; 
   }
 
-  /* "+ Add" button full width */
   .actions .btn.btn-add {
     width: 100%;
     margin-top: 0.5rem;
   }
-  .btn-warning btn-edit {
-    margin: 1px 1px;
-  }
 }
 
-.list-table .btn {
-  background-color: inherit; /* or keep explicit variant colors */
-}
-.list-table .btn-view   { background-color: #5b5c5e !important; color: #fff !important;}
+.list-table .btn-view   { background-color: #5b5c5e !important; color: #fff !important; }
 .list-table .btn-edit   { background-color: #ffc107 !important; color: #000 !important; }
 .list-table .btn-delete { background-color: #dc3545 !important; color: #fff !important; }
-
-.btn-group {
-  gap: 4px;        
-}
-
-@media (max-width: 768px) {
-  .btn-group {
-    gap: 0.5rem; 
-  }
-}
