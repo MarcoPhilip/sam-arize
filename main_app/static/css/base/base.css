@@ -64,6 +64,8 @@ header{
   font-weight:700;
   color:var(--accent)!important;
   text-transform:uppercase;
+  margin-left: 3rem;
+  margin-right: 2rem;
 }
 .navbar-nav .logout-btn:hover{
   color:var(--accent-2)!important;
@@ -108,6 +110,12 @@ header{
   .navbar-nav .nav-item{ width:100%; }
   .navbar-nav .nav-link,
   .navbar-nav .btn{ width:100%; text-align:center; }
+
+  .navbar-nav .logout-btn {
+    margin-left: 0;     
+    display: block;     
+    text-align: center; 
+  }
 }
 
 /* ========== Footer ========== */

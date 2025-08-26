@@ -433,7 +433,7 @@ def location_delete(request, pk):
 def supplier_list(request):
     query = request.GET.get('q')
     if query:
-        suppliers = Supplier.objects.filter(
+        supplier = Supplier.objects.filter(
             name__icontains=query
         ) | Supplier.objects.filter(
             contact_person__icontains=query

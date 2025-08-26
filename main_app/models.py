@@ -87,7 +87,7 @@ class PurchaseOrder(models.Model):
         ('delivered', 'Delivered')
     ]
 
-    name = models.CharField(max_length=200, default="Order-Name")
+    name = models.CharField(max_length=200)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
     order_date = models.DateField()
     quantity = models.PositiveIntegerField(default=0)

@@ -5,8 +5,8 @@
 <link rel="stylesheet" href="{% static 'css/form.css' %}" />
 {% endblock %}
 {% block content %}
-<div class="container">
-  <h1>{{ title }}</h1>
+<div class="form-container">
+  <h1 class="form-title">{{ title }}</h1>
   <form method="post">{% csrf_token %}
     {{ form.non_field_errors }}
     <div class="mb-3">

@@ -1,147 +1,240 @@
+
+:root {
+  --bg: #1f1f1f;
+  --surface: #2c2c2c;
+  --border: #3a3a3a;
+  --text: #f3f3f3;
+  --muted: #cfcfcf;
+  --accent: #ff5a09;
+  --accent-2: #ec7f37;
+
+/* ===== Page ===== */
 body {
-    background-color: #333;
-}
-.container {
-    max-width: 900px;
-    margin: 40px auto;
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  background: var(--surface);
+  color: var(--text);
 }
 
-.container h1 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
+/* ===== Container ===== */
+.list-container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: var(--text);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(255, 90, 9, .5);
+  color: #121212;
+  overflow-x: auto;
+  font-family: 'IBM Plex Serif', serif;
 }
 
-.container .btn-primary {
-    background-color: #f2b263;
-    border: none;
-    font-weight: 500;
-    border-radius: 10px;
-    padding: 8px 16px;
-    transition: all 0.2s ease-in-out;
+/* Title */
+.list-container h2 {
+  margin: 0 0 1.5rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--bg);
+  text-transform: uppercase;
 }
 
-.container .btn-primary:hover {
-    background-color: #e09a42;
+/* ===== Table (desktop / large screens) ===== */
+.list-table {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  color: #121212;
+  border: 2px solid #000;
+  box-shadow: 0 4px 14px rgba(0,0,0,.25);
 }
 
-.table {
+/* Header cells */
+.list-table thead th {
+  background: rgba(236, 127, 55, 0.8);
+  color: #121212;
+  text-align: center;
+  font-weight: 700;
+  padding: 12px 14px;
+  font-size: 1.4rem;
+  border-bottom: 2px solid #000;
+  white-space: nowrap;
+}
+
+/* Body cells */
+.list-table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #000;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+/* ===== Rows / Cards ALWAYS white ===== */
+.list-table tbody tr {
+  background: #fff !important;
+}
+.list-table tbody tr:hover,
+.list-table tbody tr:active,
+.list-table tbody tr:focus {
+  background: #fff !important;
+}
+
+/* Links */
+.list-link {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+.list-link:hover { text-decoration: underline; }
+
+/* Add-button wrapper */
+.actions {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* ===== Medium screens ===== */
+@media (max-width: 992px) {
+  .list-table {
+    max-width: 90%;
+    font-size: 1.2rem;
+  }
+  .list-table th, .list-table td { padding: 10px; }
+}
+
+/* ===== Stack rows into cards on tablet/mobile ===== */
+@media (max-width: 768px) {
+  .list-container {
+    padding: 1rem;
+    background: var(--border);
+  }
+
+
+  .table-wrap {
     width: 100%;
-    margin-top: 20px;
+    max-height: 550px;
+    overflow-y: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    -webkit-overflow-scrolling: touch;
+    background: transparent;
+    padding: 0.25rem;
+  }
+
+
+  .list-table {
+    max-width: 100%;
+    font-size: 1rem;
+    border: none;
     border-collapse: separate;
     border-spacing: 0;
-    border-radius: 12px;
-    overflow: hidden;
-}
+    background: transparent;
+  }
+  .list-table thead { display: none; }
 
-.table thead {
-    background-color: #f2b263;
-    color: #fff;
-}
+  .list-table,
+  .list-table tbody,
+  .list-table tr,
+  .list-table td {
+    display: block;
+    width: 100%;
+  }
 
-.table th {
-    font-weight: 600;
-    padding: 12px;
+  .list-table tr {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: .5rem .75rem;
+    background: #fff !important; /* keep cards white */
+    color: #111;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    margin-bottom: 1rem;
+  }
+
+  .list-table td {
     text-align: left;
+    padding: 0.5rem 0;
+    border: 0;
+    position: relative;
+  }
+
+  .list-table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .list-table tr,
+  .list-table td,
+  .list-table a {
+    -webkit-tap-highlight-color: transparent;
+    background: none;
+  }
 }
 
-.table td {
-    padding: 12px;
-    vertical-align: middle;
-    color: #444;
-}
-
-.table-striped tbody tr:nth-child(odd) {
-    background-color: #fafafa;
-}
-
-.table .btn {
-    border-radius: 8px;
-    font-size: 0.85rem;
-    padding: 6px 12px;
-    font-weight: 500;
-}
-
-.table .btn-warning {
-    background-color: #ffc107;
-    border: none;
-    color: #fff;
-}
-
-.table .btn-warning:hover {
-    background-color: #e0a800;
-}
-
-.table .btn-danger {
-    background-color: #dc3545;
-    border: none;
-    color: #fff;
-}
-
-.table .btn-danger:hover {
-    background-color: #bd2130;
-}
-
-.table td[colspan="3"] {
-    text-align: center;
-    font-style: italic;
-    color: #777;
-}
-
-
-@media (max-width: 768px) {
-    .container {
-        margin: 20px;
-        padding: 20px;
-    }
-
-    .container h1 {
-        font-size: 1.5rem;
-    }
-
-    /* Make table horizontally scrollable */
-    .table {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-
-    .table th,
-    .table td {
-        padding: 10px 8px;
-        font-size: 0.9rem;
-    }
-
-    /* Stack buttons vertically on small screens */
-    .table .btn {
-        display: block;
-        width: 100%;
-        margin: 4px 0;
-        text-align: center;
-    }
+/* Empty state (when no records are found) */
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  background: var(--accent-2);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  color: var(--bg);
+  font-size: 1.2rem;
+  font-style: bold;
+  margin: 1rem 0;
 }
 
 @media (max-width: 480px) {
-    .container {
-        margin: 10px;
-        padding: 15px;
-        border-radius: 12px;
-    }
+  .list-container {
+    background: var(--surface);
+    box-shadow: none;
+  }
+  .list-container h2 {
+    font-size: 1.6rem;
+    color: var(--text);
+  }
+}
 
-    .container h1 {
-        font-size: 1.2rem;
-    }
+/* ===== Smartphones only ===== */
+@media (max-width: 600px) {
+  body { font-size: 16px; -webkit-text-size-adjust: 100%; }
 
-    .table th,
-    .table td {
-        padding: 8px 6px;
-        font-size: 0.8rem;
-    }
+  .list-container {
+    margin: 1rem;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .list-container > h2 {
+    font-size: 1.35rem;
+    margin: 0 0 0.75rem 0;
+    text-align: center;
+    color: var(--text);
+  }
+
+  .table-wrap {
+    width: 100%;
+    max-height: 550px;
+    overflow-y: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    -webkit-overflow-scrolling: touch;
+    background: transparent;
+    padding: 0.25rem;
+  }
+
+  /* Enforce white cards on tap as well */
+  .list-table tr,
+  .list-table td,
+  .list-table a {
+    -webkit-tap-highlight-color: transparent;
+    background: none;
+  }
 }

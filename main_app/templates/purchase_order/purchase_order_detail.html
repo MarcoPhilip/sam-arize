@@ -6,6 +6,12 @@
 {% endblock %}
 
 {% block content %}
+
+{% load static %}
+{% block head %} 
+<link rel="stylesheet" href="{% static 'css/list.css' %}" />
+{% endblock %}
+
 <div class="container">
 
   <h1>PO #{{ order.id }}</h1>
