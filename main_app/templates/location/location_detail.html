@@ -2,18 +2,22 @@
 {% block title %}{{ location.name }} · SAM-ARIZE{% endblock %}
 {% load static %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/detail.css' %}" />
+<link rel="stylesheet" href="{% static 'css/details.css' %}" />
 {% endblock %}
 {% block content %}
 <div class="container">
   <h1>{{ locations.name }}</h1>
-
+    <p><strong>ID:</strong> L{{locations.id}}</p>
   {% if locations.address %}
     <p><strong>Address:</strong> {{ locations.address }}</p>
   {% else %}
     <p><strong>Address:</strong> <span class="text-muted">No address provided</span></p>
   {% endif %}
-
+  {% if locations.owner %}
+    <p><strong>Added By:</strong> {{ locations.owner.username }}</p>
+  {% else %}
+    <p><strong>Added By:</strong> Unknown</p>
+  {% endif %}
   <div class="actions">
     <a href="{% url 'location_edit' locations.pk %}" class="btn btn-warning">Edit Location</a>
     <a href="{% url 'location_delete' locations.pk %}" class="btn btn-danger">Delete Location</a>
