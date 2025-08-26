@@ -15,11 +15,10 @@
       Create Supplier
     {% endif %}
   </h2>
-
   <form method="post" class="form-base">
     {% csrf_token %}
     {{ form.as_p }}
-
+    
     <div class="form-actions">
       <button type="submit" class="btn btn-add">
         {% if mode == "edit" %}
