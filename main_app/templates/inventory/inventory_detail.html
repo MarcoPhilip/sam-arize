@@ -2,12 +2,12 @@
 {% block title %}{{ inventory.name }} · SAM-ARIZE{% endblock %}
 {% load static %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/detail.css' %}" />
+<link rel="stylesheet" href="{% static 'css/details.css' %}" />
 {% endblock %}
 {% block content %}
 <div class="container">
   <h1>{{ inventory.name }}</h1>
-  <p><strong>Description:</strong> {{ inventory.description }}</p>
+  <p><strong>ID:</strong> I{{inventory.id}}</p>
   <p><strong>Category:</strong>
     {% if inventory.category %}
       <a href="{% url 'category_detail' inventory.category.pk %}">{{ inventory.category.name }}</a>
@@ -15,7 +15,6 @@
       <span class="text-muted">No category assigned</span>
     {% endif %}
   </p>
-
   <p><strong>Location:</strong>
     {% if inventory.location %}
       <a href="{% url 'location_detail' inventory.location.pk %}">{{ inventory.location.name }}</a>
@@ -23,10 +22,14 @@
       <span class="text-muted">No location assigned</span>
     {% endif %}
   </p>
-
   <p><strong>Quantity:</strong> {{ inventory.quantity }}</p>
   <p><strong>Unit Price:</strong> {{ inventory.unit_price }}</p>
-
+  <p><strong>Created At:</strong> {{ inventory.created_at|date:"Y-m-d" }}</p>
+  {% if inventory.owner %}
+    <p><strong>Added By:</strong> {{ inventory.owner.username }}</p>
+  {% else %}
+    <p><strong>Added By:</strong> Unknown</p>
+  {% endif %}
   <div class="actions">
     <a href="{% url 'inventory_edit' inventory.pk %}" class="btn btn-warning">Edit Inventory</a>
     <a href="{% url 'inventory_delete' inventory.pk %}" class="btn btn-danger">Delete Inventory</a>

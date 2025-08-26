@@ -8,16 +8,16 @@ Delete Asset · SAM-ARIZE
 {% block head %}
 <link
   rel="stylesheet"
-  href="{% static 'css/asset/asset_confirm_delete.css' %}"
+  href="{% static 'css/confirm_delete.css' %}"
 />
 {% endblock %}
 
 {% block content %}
-<div class="asset-delete-container">
+<div class="container">
   <h2>Delete Asset</h2>
   <p>
     Are you sure you want to delete the asset 
-    <strong>{{ object.name }}</strong> (ID: {{ object.id }})?
+    <strong>{{ object.name }}</strong>
   </p>
 
   <form method="post" class="delete-form">

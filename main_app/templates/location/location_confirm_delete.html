@@ -2,12 +2,12 @@
 {% block title %}Delete Location · SAM-ARIZE{% endblock %}
 {% load static %}
 {% block head %} 
-<link rel="stylesheet" href="{% static 'css/form.css' %}" />
+<link rel="stylesheet" href="{% static 'css/confirm_delete.css' %}" />
 {% endblock %}
 {% block content %}
 <div class="container">
   <h1>Delete Location</h1>
-  <p>Are you sure you want to delete "{{ location.name }}"?</p>
+  <p>Are you sure you want to delete <strong>"{{ location.name }}"</strong>?</p>
   <form method="post">
     {% csrf_token %}
     <button type="submit" class="btn btn-success">Yes, Delete</button>
