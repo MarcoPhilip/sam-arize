@@ -20,7 +20,7 @@ SAM-ARIZE is a Django-based inventory and procurement management system designed
 
 
 ## 🌐 Links
-→ [Deployment Link](https://sam-arize-3103ffa01ce3.herokuapp.com/)
+→ [Deployment Link](https://sam-arize.onrender.com/)
 → [GitHub Repo Link](https://github.com/nesaratai/sam-arize)
 → [Notion Planning Link](https://www.notion.so/240ed4d6f92d80d89459d2722eace895?v=240ed4d6f92d80cfa2af000c41552a7a&source=copy_link)
 
